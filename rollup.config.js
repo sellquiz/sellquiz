@@ -13,5 +13,5 @@ export default {
     external: [
         'mathjs'
     ],
-    //plugins: [terser()]
+    plugins: [terser()]
 };

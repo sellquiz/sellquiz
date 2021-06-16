@@ -1,5 +1,5 @@
 {
-  "name": "sell",
+  "name": "sellquiz",
   "type": "module",
   "version": "1.0.0",
   "description": "An open source domain-specific language for online assessment",
@@ -8,13 +8,21 @@
     "build": "rollup -c",
     "test": "node src/test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sellquiz/sellquiz.git"
+  },
   "keywords": [
     "e-learning",
     "domain-specific-language",
     "online-assessment"
   ],
-  "author": "Andreas Schwenk, TH Köln",
+  "author": "Andreas Schwenk <andreas.schwenk@th-koeln.de> (https://sell.f07-its.fh-koeln.de/)",
   "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/sellquiz/sellquiz/issues"
+  },
+  "homepage": "https://github.com/sellquiz/sellquiz#readme",
   "dependencies": {
     "jquery": "^3.6.0",
     "mathjs": "^9.4.2"
