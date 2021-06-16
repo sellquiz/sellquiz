@@ -1,0 +1,246 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 1: Komplexe Zahlen
+
+
+Addition  #simple
+
+	a, b, c, d in { 1, 2, ..., 5 }
+	ee in { -1, 1 }
+	a := a * ee
+	z_1 := a + b * i
+	z_2 := c + d * i
+
+Seien $ "z_1" = z_1 $ und $ "z_2" = z_2 $ komplexe Zahlen.
+
+* Berechnen Sie die folgende __Summe__ und geben Sie das Ergebnis in Normalform an:
+  $ "z_1" + "z_2" = #(z_1 + z_2) $
+
+
+%%%
+
+
+Multiplikation
+
+	a,b,c,d in { 1, 2, ..., 5 }
+	ee in { -1, 1 }
+	a := a * ee
+	z_1 := a + b * i
+	z_2 := c + d * i
+
+Seien $ "z_1" = z_1 $ und $ "z_2" = z_2 $ komplexe Zahlen. 
+
+* Berechnen Sie das folgende __Produkt__ und geben Sie das Ergebnis in Normalform an:
+  $ "z_1" * "z_2" = #(z_1*z_2) $
+
+
+%%%
+
+
+Komplex konjugierte Zahl
+
+	a,b in { 1, 2, ..., 5 }
+	c in { -1, 1 }
+	a := a * c
+	z := a + b * i
+
+Sei $ "z" in CC $ und $ "z" = z $.
+
+	s1 := conj(z)
+
+* Berechnen Sie die zu $ "z" $ __komplex konjugierte__ Zahl:
+  $ bar "z" = #s1 $
+
+	s2 := z * conj(z)   % a*a + b*b
+
+* Berechnen Sie:
+  $ "z" * bar "z" = #s2 $
+
+
+%%%
+
+
+Betrag einer komplexen Zahl
+
+	a, b in { 1, 2, 3 }
+	x := a * a - b * b
+	y := 2 * a * b
+	z := x + y * i
+	res := abs(z)
+
+Sei $ "z" in CC $ und $ "z" = z $.
+
+* Berechnen Sie:
+  $ abs("z") = #res $
+
+
+%%%
+
+
+Inverse einer komplexen Zahl
+
+	a,b in { 2, 3, ..., 5 }
+	c := a^2 + b^2
+	res := a + b*i
+
+Sei $ "z" in CC $ und $ z = a/c - b/c*i $.
+
+* Berechnen Sie:
+  $ 1 / z = #res $
+
+
+%%%
+
+
+Division
+
+	a,b,c,d in { 1, 2, ..., 5 }
+	ee in { -1, 1 }
+	a := a * ee
+	z_2 := a + b * i
+	res := c + d * i
+	z_1 := z_2 * res
+
+Seien $ "z_1" = z_1 $ und $ "z_2" = z_2 $ komplexe Zahlen.
+
+* Berechnen Sie den folgenden __Quotienten__ und geben Sie das Ergebnis in Normalform an:
+  $ "z_1" / "z_2" = #res $
+
+
+%%%
+
+
+Komplexe Terme
+
+	a,b,c,d in { 1, 2, 3 }
+	pow in { 2 }
+	z1 := a + b * i
+	z2 := c + d * i
+	res := z1^pow + z2
+
+* Berechnen Sie den folgenden __komplexen Term__ und geben Sie das Ergebnis in Normalform an:
+  $ (z1)^pow + z2 = #res $
+
+
+%%%
+
+
+Komplexe Folgen
+
+	c in { 2, 3, 4 }
+	z := c * i
+	a1 := z^1
+	a2 := z^2
+	a3 := z^3
+
+Bestimmen Sie die ersten $ 3 $ __Folgenglieder__ der komplexen Folge $ (a_n)_(n in NN) = ((c*i)^n)_(n in NN) $
+
+* $ n=1 $ : $ #a1 $
+* $ n=2 $ : $ #a2 $
+* $ n=3 $ : $ #a3 $
+
+( ) Die Folge ist __konvergent__
+(x) Die Folge ist __divergent__
+
+
+%%%
+
+
+Komplexe Folgen
+
+	c in { 2, 3, 4 }
+	z := 1/c + 1/c * i
+	a1 := z^1
+	a2 := z^2
+
+Bestimmen Sie die ersten $ 2 $ __Folgenglieder__ der komplexen Folge $ (a_n)_(n in NN) = ((1/c+1/c*i)^n)_(n in NN) $
+
+* $ n=1 $ : $ #a1 $
+* $ n=2 $ : $ #a2 $
+
+(x) Die Folge ist __konvergent__
+( ) Die Folge ist __divergent__
+
+
+%%%
+
+
+Komplexe Reihen
+
+	a,b in { 2, 3, ..., 6 }
+
+Ist die folgende geometrische Reihe __absolut konvergent__?
+
+* $ sum_(k=0)^(oo) (1/a + 1/b*i)^k $
+
+(x) ja
+( ) nein
+
+
+%%%
+
+
+Komplexe Nullstellen
+
+	a in { 4, 9, 16, 25, 36, 49, 64 }
+	z1 :=  sqrt(a) * i
+	z2 := -sqrt(a) * i
+	res := { z1, z2 }
+
+Gegeben sei das Polynom $ f(z) = z^2 + a $
+
+* Bestimmen Sie die beiden __Nullstellen__:
+  $ z = #res $
+
+_Hinweis: Geben Sie komplexe Zahlen in der Form $ "a" + "b"i $ ein._
+
+
+%%%
+
+
+Quotienten von Polynomen
+
+Gegeben sei die folgende rationale Funktion:
+
+	a,b,c,d in { 2, 3, ..., 8 }
+	ee in { 4, 9, 16, 25, 36, 49, 64, 81 }
+	A := 0*i
+	B := sqrt(ee)*i
+	C := -sqrt(ee)*i
+	res := { A, B, C }
+
+* $ r(z) = ((a+b*i)*z+c*i+d)/(z*(z^2+ee)) $
+
+Bestimmen Sie den Definitionsbereich $ D_r = CC \\ X $
+
+* $ X = #res $
+
+_Hinweis: Geben Sie komplexe Zahlen in der Form $ "a" + "b"i $ ein._
+
+
+%%%
+
+
+Konvergenzradius
+
+	a,b in { 2, 3, ..., 10 }
+	z1 := a + b*i
+	res := 1
+
+Bestimmen Sie den __Konvergenzradius__ der Potenzreihe $ sum_(k=0)^(oo) k * (z1) * z^k $
+
+* $ R = #res $
+
+
+%%%
+
+
+Komplexe Potenzen
+
+	a in { 1, 2 }
+	c in { 4, 5, ..., 8 }
+	z := a + a*i
+	res := z^c
+
+Berechnen Sie $(z)^c$ unter Verwendung der Exponentialform:
+
+* $ #res $

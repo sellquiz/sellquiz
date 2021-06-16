@@ -1,0 +1,86 @@
+%course Praktische Informatik 1
+%quiz Schlüsselworte
+
+
+Java-Schlüsselworte: Datentypen
+
+Java unterstützt (unter anderem) die folgenden __ganzzahligen__ Datentypen:
+* 1 Byte: #"byte", 2 Bytes: #"short", 4 Bytes: #"int", 8 Bytes: #"long".
+
+Für __Gleitkommazahlen__ nutzt man die Datentypen:
+* 4 Bytes: #"float", 8 Bytes: #"double".
+
+Der __Bool'sche__ Datentyp ist #"boolean".
+* Für "unwahr" schreibt man #"false". Für "wahr" schreibt man #"true".
+
+Ein Datentyp in dem man ein __einzelnes Zeichen__ ablegen kann ist #"char".
+
+
+%%%
+
+
+Java-Schlüsselworte: Bedingte Anweisungen
+
+* Eine __bedingte Anweisung__ beginnt mit dem Schlüsselwort #"if". Programmcode der nur dann ausgeführt wird, die Bedingung falsch war, steht hinter dem Schlüsselwort #"else".
+
+
+%%%
+
+
+Java-Schlüsselworte: Mehrfachauswahl
+
+* Eine __Mehrfachauswahl__ beginnt man mit dem Schlüsselwort #"switch". Dahinter steht ein Ausdruck.
+* Die __Konstanten__, die mit dem Ausdruck verglichen werden, stehen nach dem Schlüsselwort #"case".
+* Man verlässt die Mehrfachauswahl per #"break".
+* Wenn keine der Konstanten (siehe oben) gepasst hat, so wird der Code nach dem Schlüsselwort #"default" ausgeführt.
+
+
+%%%
+
+
+Java-Schlüsselworte: Schleifen
+
+* Eine __kopfgesteuerte Schleife__ in der man üblicherlichweise einen Schleifenzähler nutzt, ist die #"for"-Schleife. Ein anderer kopfgesteuerter Schleifentyp ist die #"while"-Schleife.
+
+* Eine __fußgesteuerte Schleife__ wird in Java mit dem Schlüsselwort #"do" eingeleitet.
+
+* Möchte man innerhalb einer Schleife __zur nächsten Iteration springen__, so schreibt man #"continue". 
+* Der __Abbruch__ der innersten Schleife erfolgt über #"break".
+
+
+%%%
+
+
+Java-Schlüsselworte: Methoden
+
+* Hat eine Methode __keinen Rückgabetyp__, so schreibt man stattdessen #"void".
+
+* Man __verlässt__ eine Methode mit dem Schlüsselwort #"return".
+
+
+%%%
+
+
+Java-Schlüsselworte: Objekte und Klassen
+
+* Eine __Klassedefinition__ leitet man mit dem Schlüsselwort #"class" ein.
+
+* Attribute/Methoden die __nach außen hin sichtbar__ sein sollen, kennzeichent mit #"public". Andernfalls schreibt man #"private". _(Das Thema "Vererbung" wird später behandelt. Dann werden wir zusätzlich noch das Schlüsselwort `protected` kennelernen)_
+
+* Zur __Ereugung__ von neuen Objekten gibt es das Schlüsselwort #"new". 
+* Um einem Objekt __keine Referenz__ zuzuweisen schreibt man auf die rechte Seite einer Zuweisung #"null".
+
+* Auf die __Referenz des aktuellen Obejekts__ greift man per #"this" zu.
+
+* __Klassenbezogene Attribute und Methoden__ kennzeichnet man mit dem Schlüsselwort #"static".
+
+
+
+STOP
+
+%%% 
+
+
+Java-Schlüsselworte: Sonstiges
+
+* Eine Javaklasse aus einer anderen Datei kann durch #"import" innerhalb der aktuellen Datei verfügbar gemacht werden.

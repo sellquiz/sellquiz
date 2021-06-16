@@ -1,0 +1,357 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 4: Funktionen von mehreren Variablen
+
+
+Komponentenfunktionen
+
+	a, b, c, d, e, fx, g, h, ix in { 0, 1 }
+
+	f_1(x,y,z) := a*x + b*y + c*z
+	f_2(x,y,z) := d*x + e*y + fx*z
+	f_3(x,y,z) := g*x + h*y + ix*z
+
+Sei $ f : RR^3 -> RR^3 $; $ f(x,y,z) = (f_1,f_2,f_3) $ ein Vektorfeld.
+
+Bestimmen Sie die __Komponentenfunktionen__ von $f$:
+
+* $ "f_1"(x,y,z) = #f_1 $
+* $ "f_2"(x,y,z) = #f_2 $
+* $ "f_3"(x,y,z) = #f_3 $
+
+
+%%%
+
+
+Partielle Ableitungen
+
+	a, b, c, d, e in { 2, 3, ..., 5}
+
+	f(x,y) := a*x^b + c*x^d*y^e
+	fx(x,y) := diff(f, x)
+	fy(x,y) := diff(f, y)
+
+Sei $ "f"(x,y) = f $. Bestimmen Sie die __partiellen Ableitungen__:
+* $ (del "f") / (del x) = #fx $
+* $ (del "f") / (del y) = #fy $
+
+
+%%%
+
+
+Partielle Ableitungen
+
+	a in { 0, 1 }
+	b := 1 - a
+	c in { 4, 5, ..., 8}
+
+	f(x,y) := c / (a*x^2 + b*y^2)
+	fx(x,y) := diff(f, x)
+	fy(x,y) := diff(f, y)
+
+Sei $ "f"(x,y) = f $. Bestimmen Sie die __partiellen Ableitungen__:
+* $ (del "f") / (del x) = #fx $
+* $ (del "f") / (del y) = #fy $
+
+% TODO:
+%	fx00 := fx(0,0)
+%
+%Gegeben Sie $"f"(0,0)$ an:
+%* $ "f"(0,0) = #fx00 $
+
+
+%%%
+
+
+Gradient
+
+	a, b in { 0, 1 }
+	c in { 2, 3, ..., 5}
+
+	f(x,y) := - x^3 - a*y^3 + b*c*x*y
+	fx(x,y) := diff(f, x)
+	fy(x,y) := diff(f, y)
+
+Gegeben sei eine Funktion $ "f"(x,y) = f $.
+Bestimmen Sie den __Gradienten__:
+* $ grad "f" = ( #fx, #fy ) $
+
+
+%%%
+
+
+Gradient
+
+	c in { 2, 3, ..., 5}
+
+	f(u,v) := u^2 / v^2 + c
+	fu(u,v) := diff(f, u)
+	fv(u,v) := diff(f, v)
+
+Gegeben sei eine Funktion $ "f"(u,v) = f $.
+Bestimmen Sie den __Gradienten__:
+* $ grad "f" = ( #fu, #fv ) $
+
+
+%%%
+
+
+Gradient
+
+	a in { 0, 1 }
+	b := 1 - a
+	c, d in { 2, 3, ..., 5}
+
+	f(x,y) := exp(c*x) * (a*sin(d*y) + b*cos(d*y))
+	fx(x,y) := diff(f, x)
+	fy(x,y) := diff(f, y)
+
+Gegeben sei eine Funktion $ "f"(x,y) = f $.
+Bestimmen Sie den __Gradienten__:
+* $ grad "f" = ( #fx, #fy ) $
+
+_Hinweis: geben Sie die Exponentialfunktion in der Form `exp(x)` an._
+
+
+
+% %%%    TODO
+%
+%
+%Jacobi-Matrix
+%
+%	a in { 0, 1 }
+%	b := 1 - a
+%	c in { -1, 1 }
+%	d in { 1, 2, ..., 5}
+%	f1(x,y) := a * x * y * sin(x) + b * x * y * cos(x)
+%	f2(x,y) := x^2 + c * y^2 + d
+%	J(x,y) := [ [ diff(f1,x), diff(f1,y) ], [ diff(f2,x), diff(f2,y) ] ]
+%
+%Sei $f(x,y) = ( f1, f2 )$.
+%Bestimmen Sie die __Jacobi-Matrix__:
+%* $ "J_f" = #J $
+
+
+%%%
+
+
+Rotation und Divergenz
+
+	a, b in { 0, 1 }
+	c := 1 - a
+	d := 1 - b
+	ee in { 2, 3, ..., 9 }
+	f1(x,y,z) := a * x + c * z
+	f2(x,y,z) := b * sin(pi*y) + d * cos(pi*x)
+	f3(x,y,z) := x^3 + ee * z^2
+
+Sei $f(x,y) = ( f1, f2, f3 )$.
+Bestimmen Sie __Rotation__ und __Divergenz__ des Vektorfeldes.
+
+	rx(x,y,z) := diff(f3,y) - diff(f2,z)
+	ry(x,y,z) := diff(f1,z) - diff(f3,x)
+	rz(x,y,z) := diff(f2,x) - diff(f1,y)
+
+* rot$(f) = ( #rx, #ry, #rz )$
+
+	d(x,y,z) := diff(f1,x) + diff(f2,y) + diff(f3,z)
+
+* div$(f) = #d$
+
+
+%%%
+
+
+Höhere partielle Ableitungen
+
+	a in { 0, 1 }
+	b := 1 - a
+	c, d in { 3, 4 }
+	f(x,y) := c * x^d * y + x^(d-1)
+	dxx(x,y) := diff( diff(f,x), x)
+	dxy(x,y) := diff( diff(f,x), y)
+	dyy(x,y) := diff( diff(f,y), y)
+
+Sei $"f"(x,y) = f$. Bestimmen Sie die folgenden __höheren partiellen Ableitungen__:
+* $ (del^2 "f") / (del x^2) = #dxx $
+* $ (del^2 "f") / (del x del y) = #dxy $
+* $ (del^2 "f") / (del y^2) = #dyy $
+
+
+%%%
+
+
+Stationäre Stellen
+
+	a, b in { 2, 3, ..., 8}
+	f(x,y) := a*x^2 - b*y^2
+	fx(x,y) := diff(f, x)
+	fy(x,y) := diff(f, y)
+	sx := 0
+	sy := 0
+
+Gegeben sei eine Funktion $ "f"(x,y) = f $.
+
+* Bestimmen Sie zunächst den __Gradienten__:
+  $ grad "f" = ( #fx, #fy ) $
+
+* Geben Sie die (einzige) __stationäre Stelle__ an:
+  $ ( #sx, #sy ) $
+
+
+STOP
+
+
+%%%
+
+
+Definitheit
+
+	a, b, c in { -1, 1, 2 }
+	A := [[a,0,0],[0,b,0],[0,0,c]]
+	s := { a, b, c }
+	p1 := min(s) > 0
+	p2 := max(s) < 0
+	p3 := not (p1 or p2)
+
+Sei $ "A" = A $ eine Matrix über $ RR $.
+Welche der folgenden Aussagen ist korrekt?
+[p1] $"A"$ ist __positiv definit__
+[p2] $"A"$ ist __negativ definit__
+[p3] $"A"$ ist __indefinit__
+
+
+%%%
+
+
+Definitheit
+
+	a := { 1, 2, 4 }
+	A := MM(2 x 2 | a, invertible, symmetric)
+	s = eigenvalues_sym(A)
+	p1 := min(s) > 0
+	p2 := max(s) < 0
+	p3 := not (p1 or p2)
+
+Sei $ "A" = A $ eine Matrix über $ RR $.
+Welche der folgenden Aussagen ist korrekt?
+[p1] $"A"$ ist __positiv definit__
+[p2] $"A"$ ist __negativ definit__
+[p3] $"A"$ ist __indefinit__
+
+
+%%%
+
+
+Hesse-Matrix
+
+	a in { 2, 3, ..., 8 }
+	b in { 2, 3, 4 }
+	f(x,y) := a * x^b * y^(b+1)
+	h11 := diff( diff(f,x), x)
+	h12 := diff( diff(f,x), y)
+	h21 := diff( diff(f,y), x)
+	h22 := diff( diff(f,y), y)
+	H := [ [ h11, h12 ], [ h21, h22 ] ]
+
+Sei $"f"(x,y) = f$.
+Bestimmen Sie die __Hesse-Matrix__:
+* $ "H" "f" = #H $
+
+
+%%%
+
+
+Hesse-Matrix
+
+	a, b in { 0, 1 }
+	c := 1 - a
+	d := 1 - b
+	e in { 2, 3, ..., 8 }
+	f(x,y) := exp(a*x+c*y) + e * x^2 + y^2 + b*cos(y) + d*sin(y)
+	h11 := diff( diff(f,x), x)
+	h12 := diff( diff(f,x), y)
+	h21 := diff( diff(f,y), x)
+	h22 := diff( diff(f,y), y)
+	H := [ [ h11, h12 ], [ h21, h22 ] ]
+
+Sei $"f"(x,y) = f$.
+Bestimmen Sie die __Hesse-Matrix__:
+* $ "H" "f" = #H $
+
+_Hinweis: geben Sie die Exponentialfunktion in der Form `exp(x)` an._
+
+
+%%%
+
+Extremwerte
+
+	%f(x,y) := -x^3 - y^3 + 3*x*y
+	w1 in { 0, 1 }
+	w2 := 1 - w1
+	w3, w4, w5, w6, w7, w8, w9, w10 in { 2, 3 }
+	f(x,y) := w4*x^w5*y^w6 + w7*x^w8 + w9*y^w10
+	h11 := diff( diff(f,x), x)
+	h12 := diff( diff(f,x), y)
+	h21 := diff( diff(f,y), x)
+	h22 := diff( diff(f,y), y)
+	H := [ [ h11, h12 ], [ h21, h22 ] ]
+	ax := 0
+	ay := 0
+	A := [ [ h11(ax,ay), h12(ax,ay) ], [ h21(ax,ay), h22(ax,ay) ] ]
+	lambda := eigenvalues_sym(A)
+	p1 := min(lambda) > 0
+	p2 := max(lambda) < 0
+	p3 := not (p1 or p2)
+
+Sei $"f"(x,y) = f$.
+Bestimmen Sie die __Hesse-Matrix__:
+* $ "H" "f" = #H $
+
+%* _Hinweis: geben Sie die Exponentialfunktion in der Form `exp(x)` an._
+
+Betrachten Sie die potentielle Extremstelle $ a=(ax,ay) $ und berechnen Sie die Eigenwerte von $ ("H" "f")(a) $:
+* $ "lambda" = #lambda $
+
+Welche der folgenden Aussagen ist korrekt?
+[p1] $"f"$ besitzt bei $a$ ein __lokales Minimum__
+[p2] $"f"$ besitzt bei $a$ ein __lokales Maximum__
+[p3] $"f"$ besitzt bei $a$ einen __Sattelpunkt__
+
+%%%
+
+Fehlerfortpflanzung
+
+	a, b, c, vx, vy in { 2, 3, 4 }
+	f(x,y) := a*x^b * y^c + x*y
+	ex := diff(f, x)
+	ey := diff(f, y)
+	delta := 0.1
+	zmax := abs(ex(vx,vy))*delta + abs(ey(vx,vy))*delta
+
+Sei $"f"(x,y) = f$.
+
+Bestimmen Sie die __maximale Messunsicherheit__ bei __linearer Fehlerfortpflanzung__:
+* $ (Delta z)_{max} = abs("a") Delta "x" + abs("b") Delta "y" $; $ "a" = #ex $, $ "b" = #ey $
+
+Seien nun $x=vx$, $y=vy$ und $Delta x = Delta y = delta$.
+Berechnen Sie die folgende Fehlergröße:
+* $ (Delta z)_{max} = #zmax $
+
+% TODO:
+%Bestimmen Sie nun die __maximale Messunsicherheit__ bei __GauÃŸ'scher Fehlerfortpflanzung__:
+%* $ (Delta z)_{max} = |#ex| Delta x + |#ey| Delta y $
+
+
+%%%
+
+
+Implizite Funktion
+	w1 in { 0, 1 }
+	w2 := 1 - w1
+	w3, w4 in { 2, 3, 4 }
+	F(x,y) := w3*x^w4 + w1*cos(x*y) + w2*sin(x*y)
+	res := - diff(F, x) / diff(F, y)
+
+Sei $ "F"(x,y) = F = 0 $ und $a = (a_1, a_2)$.
+Bestimmen Sie die __Ableitung__ der __implizit definierten Funktion__ $y = f(x)$.
+* $ f'(a_1) = #res (a_1, a_2) $

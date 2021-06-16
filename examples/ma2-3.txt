@@ -1,0 +1,514 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 3: Lineare Algebra
+
+
+Matrizenoperationen
+
+	a := { 1, 2, 3 }
+	A, B in MM(3 x 3 | a )
+	C := A - B
+	input rows := resizable
+	input cols := resizable
+
+Berechne $ A - B = #C $
+
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Matrizenoperationen
+
+	a in { 2, 3, ..., 5 }
+	A in MM(3 x 3 | { 1, 2, 3 } )
+	B := a * A
+	input rows := resizable
+	input cols := resizable
+
+Berechne $ a * A = #B $
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Transponierte Matrix
+
+	A in MM(3 x 2 | { 1, 2, 3 } )
+	B := A^T
+	input rows := resizable
+	input cols := resizable
+
+Berechne $ A^T = #B $
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Matrizenoperationen
+
+	A, B in MM(2 x 2 | { 1, 2, 3 } )
+	C := A * B
+	input rows := resizable
+	input cols := resizable
+
+Berechne $ A*B = #C $
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Matrizenoperationen
+
+	a := { 1, 2, 3 }
+	A in MM( 2 x 1 | a )
+	B in MM( 2 x 2 | a )
+	C in MM( 2 x 1 | a )
+	D := (A + B^T * C)^T
+	input rows := resizable
+	input cols := resizable
+
+Berechne $ (A + B^T * C)^T = #D $
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Restklassen
+
+Geben Sie jeweils den __Standardrepräsentaten__ an:
+
+	a, b, c in { 10, 11, ..., 20 }
+	a2, b2, c2, c3 in { 2, 3, ..., 5 }
+	sa := a mod a2
+	b := - b
+	sb := b mod b2
+	sc := c2*c3 mod c2
+
+* $ ZZ_c2 $ : $ c2*c3 equiv #sc mod c2 $
+* $ ZZ_a2 $ : $ a equiv #sa mod a2 $
+* $ ZZ_b2 $ : $ b equiv #sb mod b2 $
+
+
+%%%
+
+
+Körper
+
+Welche der folgenden Restklassen sind __Körper__?
+
+[x] $ ZZ_3 $
+[ ] $ ZZ_4 $
+[x] $ ZZ_7 $
+[ ] $ ZZ_10 $
+
+
+%%%
+
+
+Multiplikativ inverses Element
+
+	n in { 3, 5, 7 }
+	b in { 1, 2, ..., 7 }
+	c := b + 1
+	b := b mod (n-1) + 1
+	c := c mod (n-1) + 1
+
+	s1 := xgcd(b, n, 2) mod n    % 2 := get 2nd parameter of xgcd
+	%TODO: enable solution hints again... Hinweis: $(b * x) mod n equiv 1 $. Bitte geben Sie den Standardrepräsentaten an.
+
+	s2 := xgcd(c, n, 2) mod n
+	%TODO: enable solution hints again... %Hinweis: $(c * x) mod n equiv 1 $. Bitte geben Sie den Standardrepräsentaten an.
+
+Geben Sie die __multiplikativ inversen Elemente__ für den Körper $GF(n)$ an:
+
+* $b^(-1) equiv #s1 mod n$
+* $c^(-1) equiv #s2 mod n$
+
+
+%%%
+
+
+Untervektorräume
+
+Welche der folgenden Mengen sind Untervektorräume des $RR^2$?
+
+	a,b,c,d in {1, 2, ..., 5}
+
+[ ] $ M_1 = { [[a],[b]] } $
+[x] $ M_2 = { [[0],[0]] } $
+[ ] $ M_3 = { mu * [[c],[d]] | mu in ZZ } $
+
+
+%%%
+
+
+Untervektorräume
+
+Welche der folgenden Mengen sind Untervektorräume des $GF(2)^2$?
+[ ] $ M_1 = { [[1],[1]] } $
+	%TODO:	$ 0 in K, u in U $ -> $ 0 * u notin U$
+[x] $ M_2 = { [[0],[0]] } $
+%[ ] $ M_3 = { [[0],[1]]  ,  [[1],[0]] } $    % TODO!!!!!
+[x] $ M_4 = { lambda * [[0],[1]] | lambda in GF(2) } $
+
+
+%%%
+
+
+Erzeugendensysteme
+
+	% TODO: vector operations...
+
+	a, b, c, d, ee, f in { 0, 1 }
+	a := 1
+	d := 0
+	ee := 1
+	l1 := 0
+	l2 := 1
+	l3 := 1
+	l4 := 1
+
+	g := (a*l1 + d*l2) mod 2
+	h := (b*l1 + ee*l2) mod 2
+	i_ := (c*l1 + f*l2) mod 2
+
+	j_ := (a*l3 + d*l4) mod 2
+	k := (b*l3 + ee*l4) mod 2
+	l := (c*l3 + f*l4) mod 2
+
+Seien $ v_1 = [[a],[b],[c]] $, $ v_2 = [[d],[ee],[f]] $ Vektoren im $ GF(2)^3 $ und $ U = lt v_1, v_2 gt $.
+
+Welche der folgenden Antworten sind richtig?
+
+[x] $ w_1 = [[g],[h],[i_]] in U $
+[x] $ w_2 = [[j_],[k],[l]] in U $
+
+
+%%%
+
+
+Matrizenoperationen
+
+Berechnen Sie den folgenden Term über $GF(2)$.
+
+	a := { 0, 1 }
+	A in MM( 2 x 1 | a )
+	B in MM( 2 x 2 | a )
+	C in MM( 2 x 1 | a )
+	term := (A + B^T * C)^T mod 2
+	input rows := resizable
+	input cols := resizable
+
+
+* $ (A + B^T * C)^T = #term $
+
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Matrix-Vektor Multiplikation
+
+	a := { 1, 2, ..., 4 }
+	A in MM( 2 x 2 | a )
+	x in MM( 2 x 1 | a )
+	Ax := A * x
+	input rows := resizable
+	input cols := resizable
+
+Seien $ "A" = A $ und $ "x" = x $. 
+Berechnen Sie:
+
+* $ f("x") = "A" * "x" = #Ax $
+
+_Hinweis: Dimensionieren Sie zunächst die Ergebnismatrix._
+
+
+%%%
+
+
+Determinante
+
+	a := { -5, -4, ..., 5 }
+	A in MM( 3 x 3 | a )
+	A[1,1] := 0
+	A[1,2] := 0
+	d := det(A)
+
+Sei $ "A" = A $ eine 3 x 3 Matrix über $ K = RR $.
+Berechnen Sie die __Determinante__:
+
+* $ det("A") = #d $
+
+
+%%%
+
+
+Rang
+
+	a := { 0, 1, 2 }
+	A in MM( 3 x 3 | a )
+	r := rank(A)
+
+Sei $ "A" = A $ eine 3 x 3 Matrix über $ K = RR $.
+Bestimmen Sie den __Rang__:
+
+* $ rg("A") = #r $
+
+
+%%%
+
+
+Inverse Matrix
+
+	a := { 0, 1, 2 }
+	A in MM( 3 x 3 | a, invertible )
+	iA := inv(A)
+
+Berechnen Sie die __inverse__ Matrix:
+
+* $ A^(-1) = #iA $
+
+
+%%%
+
+
+Lineare Abbildungen
+
+	a, b, c, d in { 2, 3, ..., 9 }
+
+Ist $ f : RR^2 -> RR^2 $, $ f(x_1, x_2) = (a x_1 + b x_2, c x_1 + d) $ eine __lineare Abbildung__?
+
+( ) ja
+(x) nein
+
+%		Achten Sie auf die Konstante $ d $
+% TODO: solution-hints for single-choice is not yet implemented...
+
+
+%%%
+
+
+Lineare Abbildungen
+
+Sei die folgende __lineare Abbildung__ gegeben:
+
+	a, b, c, d, e in { 2, 3, ..., 9 }
+	A := [[a,0,b],[e,c,d]]
+
+* $ f : RR^3 -> RR^2 = (a*x_1 + b*x_3, c*x_2 + d*x_3 + e*x_1) $
+
+Geben Sie die zugehörige Abbildungsmatrix $ "A" $ an:
+
+* $ "A" = #A $
+
+
+%%%
+
+
+Zusammengesetzte lineare Abbildungen
+
+	a, b, c, d, e, f, g, h, i in { 0, 1 }
+	A := [[a,b],[c,d]]
+	B := [[e,f],[g,h]]
+	AB = (A * B) mod 2
+
+Seien die beiden linearen Abbildungen $ "f", "g" : GF(2)^2 -> GF(2)^2 $ gegeben:
+
+% TODO: show x_i conditionally!
+
+* $ "f"(x_1, x_2) = ( a * x_1 + b * x_2, c * x_1 + d * x_2 ) $
+* $ "g"(x_1, x_2) = ( e * x_1 + f * x_2, g * x_1 + h * x_2 ) $
+
+Bestimmen Sie zunächst die __lineare Abbildung__ $"f"$ und geben Sie die Lösung als Matrix an:
+
+* $ "A" = #A $
+
+Bestimmen Sie weiterhin die __lineare Abbildung__ $"g"$:
+
+* $ "B" = #B $
+
+Bestimmen Sie nun die __zusammengesetzte Abbildung__ $ "f" circ "g" $.
+
+* $ "AB" = #AB $
+
+
+%%%
+
+
+Lineare Unabhängigkeit
+
+	a, b, c, d, e, f, g, h, _i in { 0, 1 }
+
+	v1 := [[a],[b]]
+	v2 := [[c],[d]]
+	A := [[a,c],[b,d]]     % TODO: concatenate vectors v1 and v2
+	q1 := (det(A) mod 2) != 0
+
+	a := (a + 1) mod 2
+	v3 := [[a],[b]]
+	v4 := [[c],[d]]
+	A := [[a,c],[b,d]]     % TODO: concatenate vectors v3 and v4
+	q2 := (det(A) mod 2) != 0
+
+	v5 := [[a],[b],[c]]
+	v6 := [[d],[e],[f]]
+	v7 := [[g],[h],[_i]]
+	A := [[a,d,g],[b,e,h],[c,f,_i]]
+	q3 := (det(A) mod 2) != 0
+
+Welche der unten stehenden Vektoren über dem $ GF(2) $ sind __linear unabhängig__?
+
+[q1] $ v1, v2 $
+[q2] $ v3, v4 $
+[q3] $ v5, v6, v7 $
+
+
+%%%
+
+
+Basen
+
+Bilden die folgenden Vektoren eine __Basis__ des $ RR^3 $?
+_Hinweis: Bestimmen Sie zunächst die Determinante._
+
+	a := { 0, 1, ..., 4 }
+	A in MM( 3 x 3 | a, invertible )
+	q1 := true
+
+	b := { 0, 1, 2 }
+	B in MM( 3 x 3 | b )
+	B[3,3] := 0
+	q2 := det(B) != 0
+
+[q1] $ A[:,1], A[:,2], A[:,3] $
+[q2] $ B[:,1], B[:,2], B[:,3] $
+
+
+%%%
+
+
+Orthonormalbasis
+
+Bestimmen Sie $c_1 in RR$, sodass die folgenden beiden Vektoren eine __Orthogonalbasis__ des $RR^2$ bilden:
+
+	a in { -1, -2, 1, 2 }
+	b := a + 1
+	x := a * a - b * b
+	y := 2 * a * b
+	c1 := -y
+
+* $ "b_1" = [[x],[y]] $   $ "b_2" = [[c_1],[x]] $
+* $ c_1 = #c1 $
+
+Bestimmen Sie nun $c_2 in RR$, sodass die Basis $ { c_2 * "b_1", c_2 * "b_2" } $ eine __Orthonormalbasis__ ist.
+
+	c2 := 1 / sqrt(x^2+y^2)
+
+* $ c_2 = #c2 $
+
+
+%%%
+
+
+Orthogonale Matrizen
+
+	E2 := eye(2)
+
+	a := { 0, 1 }
+	A, B, C, D in MM(2 x 2 | a)
+
+	A[1,1] = 0
+	B[1,1] = 1                   % TODO: matrix indices on RHS
+	C[2,1] = 0
+	D[2,1] = 1
+	qa := (A * A^T) == E2
+	qb := (B * B^T) == E2
+	qc := (C * C^T) == E2
+	qd := (D * D^T) == E2
+
+Welche der folgenden Matrizen über $RR$ sind __orthogonal__?
+
+[qa] $A$
+[qb] $B$
+[qc] $C$
+[qd] $D$
+
+
+%%%
+
+
+Orthogonale Matrizen
+
+Bestimmen Sie $a, b in RR$, sodass die folgende Matrix über $ RR $ __orthogonal__ ist:
+
+	c in { -2, -3, -4 }
+	d in { 2, 3, 4 }
+	a := c^2 + d^2
+	b := -c
+
+* $ 1/sqrt("a") [[c,d],[d,"b"]] $
+
+$ "a" = #a $ $ "b" = #b $
+
+
+%%%
+
+
+Eigenwerte
+
+	a in { 1, 2, ..., 5 }
+	b in { -8, -7, ..., -2 }
+	lambda := { a, b }
+
+Sei $ A = [[a,0],[0,b]] $.
+
+Geben Sie die __Eigenwerte__ von $A$ an:
+
+* $ "lambda" = #lambda $
+
+
+%%%
+
+
+Eigenwerte
+
+	A in MM(2 x 2 | { 1, 2, 4 }, invertible, symmetric)
+	lambda = eigenvalues_sym(A)
+
+Sei $ "A" = A $.
+
+Geben Sie die __Eigenwerte__ von $"A"$ an:
+
+* $ "lambda" = #lambda $
+
+_Hinweis: Geben Sie bei Bedarf `sqrt(x)` für $ sqrt(x) $ an._
+
+
+
+%%%
+
+
+Eigenwerte
+
+	a := { -10, -9, ..., 10 }
+	x1, x2, x3, x4 in a
+	A in MM(4 x 4 | a)
+	A := triu(A)
+	A[1,1] := x1
+	A[2,2] := x2
+	A[3,3] := x3
+	A[4,4] := x4              % TODO: allow syntax "A[4,4] in a"
+	lambda := { x1, x2, x3, x4 }
+
+Sei $ "A" = A $.
+
+Geben Sie die __Eigenwerte__ von $"A"$ an:
+
+* $ "lambda" = #lambda $

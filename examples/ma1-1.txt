@@ -1,0 +1,226 @@
+%course Mathematik 1 - Knospe, Randerath
+%quiz 1: Grundlagen
+
+
+Mengen
+
+	a in { 1, 2, ..., 10 }
+	b, c in { 1, 2, 3 }
+	x = a+b+c+4
+	A := { a, a+b, a+b+c }
+
+Gegeben Sei die Menge $ "A" = A $. Welche der folgenden Aussagen sind wahr?
+
+[x] $ a in "A" $
+[x] $ x notin "A" $
+
+
+%%%
+
+
+Mengen
+
+	a in { 2, 3, ..., 5 }
+	B = { a*1, a*2, a*3 }
+
+Gegeben Sei die Menge $ "B" = { k in NN | k=a*n text( und ) n <= 3 } $. Geben Sie die Menge __explizit__ an:
+$ "B" = #B $
+
+
+%%%
+
+
+Summe
+
+	a in { 2, 3, 4 }
+	n in { 3, 4, 5 }
+	s := a * n
+
+Berechnen Sie $ sum_(i=1)^n a $:
+* $ #s $
+
+
+%%%
+
+
+Produkt
+
+	a in { 2, 3, 4 }
+	n in { 3, 4, 5 }
+	s := a^n
+
+Berechnen Sie $ prod_(i=1)^n a $:
+* $ #s $
+
+
+%%%
+
+
+Fakultät
+
+	a in { 3, 4, 5, 6}
+	f := a!
+
+Geben Sie $ a! $ wertmäßig an:
+* $ #f $
+
+
+%%%
+
+
+Binomialkoeffizient
+
+	n in { 3, 4, 5 }
+	k in { 0, 1, ..., n }
+	b := binomial(n, k)
+
+Bestimmen Sie den Binomialkoeffizienten $ ((n),(k)) $ mit Hilfe des __Pascalschen Dreiecks__:
+
+* $ #b $
+
+
+%%%
+
+
+Intervalle reeller Zahlen
+
+Seien $ a, b in RR $.
+Wählen Sie die richtigen Antworten aus:
+
+[x] $ [a, b] $ ist ein geschlossenes Intervall
+[x] $ [a, b[ $ ist ein halboffenes Intervall
+[ ] $ ]a, b[ $ ist ein geschlossenes Intervall
+[x] $ ]a, b] $ ist ein halboffenes Intervall
+
+
+%%%
+
+
+Beschränkte Mengen
+
+	a in { -5, -4, ..., -2 }
+	b := a + 3
+	x, y in { 1, 2, 3 }
+	c := b + x
+	d := c + y
+	m := a
+	M := d
+
+Sei $ X = [a, c[ uu [b, d[ $.
+Bestimmen Sie:
+* Infimum m = inf $ (X) = #m $
+* Supremum M = sup $ (X) = #M $
+
+Wählen Sie die richtigen Antworten aus:
+[x] Das Minimum von X existiert
+[ ] Das Maximum von X existiert
+
+
+%%%
+
+
+Betrag
+
+	a in { -10, -9, ..., -1 }
+	b := abs(a)                 % TODO:  b := |a|
+
+$ |a| = #b $
+
+Wählen Sie die richtigen Antworten aus:
+[x]   $ |xy| = |x| |y| $
+[ ]   $ |xy| = |x * y| $
+[x]   $ |x+y| <= |x| + |y| $
+[ ]   $ |x+y| >= |x + y| $
+
+
+%%%
+
+
+Aussagenlogik
+
+Welche der folgenden Aussagen sind wahr?
+[ ]   $ EE x in RR \  x < x  $
+[x]   $ AA y in ZZ \  y^2 >= 0 $
+[ ]   $ AA z in RR \  (z <= 0  ^^  z > 0) $
+[x]   $ AA z in RR \  (z <= 0  vv  z > 0) $
+
+
+%%%
+
+
+Injektivität, Surjektivität, Bijektivität
+
+	a in { 2, 3, ..., 10 }
+
+Betrachten Sie die folgende Abbildung und wählen Sie die richtigen Antworten aus:
+$ f : RR -> [a,oo[, \  f(x) = x^2 + a $            % TODO (parser): oo -> infinity
+
+[ ] $f$ ist injektiv.
+[x] $f$ ist surjektiv.
+[ ] $f$ ist bijektiv.
+
+
+%%%
+
+
+Verkettung von Funktionen
+
+	a, b, c in { 2, 3, 4, 5 }
+
+Sei  $ f : RR -> RR, f(x) = a*x + b $ und $ g : RR -> RR, g(x) = x^c $.
+
+Wählen Sie die richtige Antwort aus:
+(x) $ (g @ f)(x) = (a*x + b)^c $
+( ) $ (g @ f)(x) = a*x^c + b $
+
+
+%%%
+
+
+Gerade und ungerade Funktionen
+
+Welche der nachfolgenen Funktionen sind __gerade__?
+
+[x] $ f(x) = x^2 $
+[ ] $ f(x) = x^3 $
+[x] $ f(x) = x^4 + 3 x^2 + 7 $
+[ ] $ f(x) = 2 x^5 - 2 x^2 + 4 $
+
+
+%%%
+
+
+Beschränktheit
+
+	a in { 2, 3, 4, 5 }
+
+Sei $ f : RR -> RR, x |-> (x+a)^2 $.
+
+Wählen Sie die richtigen Antworten aus:
+[x] $f$ ist nach __unten beschränkt__.
+[ ] $f$ ist nach __oben beschränkt__.
+
+
+%%%
+
+
+Monotonie
+
+	a, b, c, d in { 2, 3, 4, 5 }
+
+Wählen Sie die richtigen Antworten aus:
+[ ] $ f : RR -> RR, f(x)=a $ ist __monoton wachsend__.
+[x] $ f : RR -> RR, f(x)=b x + c $ ist __streng monoton wachsend__.
+[ ] $ f : RR -> RR, f(x)=|x| $ ist __streng monoton wachsend__.
+[x] $ f : RR -> RR, f(x)=-x^3-x-d $ ist __streng monoton fallend__.
+
+
+%%%
+
+
+Umkehrabbildung
+
+Eine Funktion $f$ besitzt genau dann eine Umkehrfunktion, wenn folgendes gilt:
+[x] $f$ ist injektiv.
+[x] $f$ ist surjektiv.
+[x] $f$ ist bijektiv.

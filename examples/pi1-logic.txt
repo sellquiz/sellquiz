@@ -1,0 +1,26 @@
+%course Praktische Informatik 1
+%quiz Aussagenlogische Operationen
+
+
+Logische Ausdrücke
+
+Welche der folgenden logischen Ausdrücke werden als __wahr__ ausgewertet?
+[x] `true && (true||false)`
+[x] `false || true`
+[x] `(true && false) || true`
+[ ] `true && false`
+
+
+%%%
+
+
+Bitoperatoren
+
+Welchen Wert hat Variable `a` nach Ausführung von `int a = 3 | 4;`?
+* $ #7 $
+
+Welchen Wert hat Variable `b` nach Ausführung von `int b = 3 & 4;`?
+* $ #0 $
+
+Welchen Wert hat Variable `c` nach Ausführung von `int c = 2 ^ 4;`?
+* $ #6 $

@@ -1,0 +1,8 @@
+Multiple Choice Test
+
+[x] correct answer
+[ ] incorrect answer
+[x] another correct answer
+[ ] another incorrect answer
+
+Code test `i++;`

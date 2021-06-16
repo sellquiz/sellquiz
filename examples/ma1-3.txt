@@ -1,0 +1,236 @@
+%course Mathematik 1 - Knospe, Randerath
+%quiz 3: Folgen, Reihen und Stetigkeit
+
+
+Reelle Folgen
+
+    x in { 2, 3, 4, 5}
+    a1 := x/2
+    a2 := 2*x/3
+    a3 := 3*x/4
+
+Bestimme die ersten drei Glieder der reellen Folge $ (a_n)_(n in NN) = ( (x*n)/(n+1) )_(n in NN) $
+
+* $ n=1 : #a1 $
+* $ n=2 : #a2 $
+* $ n=3 : #a3 $
+
+
+%%%
+
+
+Rekursiv definierte Folgen
+
+    x, y, z in { 2, 3, 4, 5}
+    a1 := z
+    a2 := x*a1 + y 
+    a3 := x*a2 + y
+
+Bestimme die ersten drei Glieder der _rekursiv_ definierten Folge $ (a_n)_(n in NN) $ mit $ a_1 = z, a_(n+1) = x*a_n + y $
+
+* $ n=1 : #a1 $
+* $ n=2 : #a2 $
+* $ n=3 : #a3 $
+
+
+%%%
+
+
+Konvergenz von Folgen
+
+    x, y, z in { 2, 3, 4, 5}
+    u, v, w in { 2, 3, 4, 5}
+    res1 := 0
+    res2 := x / y
+    res3 := x / u
+
+Bestimme:
+* $ lim_(n -> oo) x/n = #res1 $
+* $ lim_(n -> oo) (x*n)/(y*n+z) = #res2 $
+* $ lim_(n -> oo) (x*n^2 + y*n + z)/(u*n^2 + v*n + w) = #res3 $
+
+
+%%%
+
+
+Konvergenz von Folgen
+
+Sei $ (a_n)_(n in NN) $ eine konvergente Folge. Dann ist die Folge $ (a_n) $
+[x] beschränkt
+[ ] unbeschränkt
+
+
+%%%
+
+
+Häufungspunkte
+
+    x, y, z in { 2, 3, 4, 5}
+
+Welche der Folgen besitzt __zwei Häufungspunkte__?
+
+[x] $ (a_n)_(n in NN) $ mit $ a_n = (-1)^n (n^2-x)/(n^2-y) $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = 1^n (n^2-x)/(n^2-y) $
+
+
+%%%
+
+
+Konvergente Folgen
+
+    x, y, z, w in { 2, 3, 4, 5}
+
+Welche der folgenden Folgen sind __konvergent__?
+
+[x] $ (a_n)_(n in NN) $ mit $ a_n = x $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = x * n $
+[x] $ (a_n)_(n in NN) $ mit $ a_n = (x*n^10 + y*n^2)/(z*n^10 + w*n^4) $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = (-1)^n * x $
+
+
+%%%
+
+
+Bestimmt divergent
+
+    x, y, z, w in { 2, 3, 4, 5}
+
+Welche der folgenden Folgen sind __bestimmt divergent__?
+
+[x] $ (a_n)_(n in NN) $ mit $ a_n = x*n $
+[x] $ (a_n)_(n in NN) $ mit $ a_n = (x*n^5+y*n)/(z*n^4+w) $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = (-1)^n * x + y $
+
+
+%%%
+
+
+Unbestimmt divergent
+
+    x, y, z, w, u in { 2, 3, 4, 5}
+
+Welche der folgenden Folgen sind __unbestimmt divergent__?
+
+[x] $ (a_n)_(n in NN) $ mit $ a_n = (-1)^n * x $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = | x - (y*n)/(x*n+z) | $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = (x*n^3+w*n)/(y*n^3+u) $
+
+
+%%%
+
+
+Geometrische Reihe
+
+    x in { 2, 3, 4, 5 }
+    q := 1/x
+    res := 1/(1-q)
+
+Bestimme $ sum_(k=0)^(oo) (1/x)^k $
+* $ #res $
+
+
+%%%
+
+
+Geometrische Reihe
+
+    x in { 2, 3, 4, 5 }
+    q := 1/x
+    res := 1/(1-q) - 1 - q
+
+Bestimme $ sum_(k=2)^(oo) (1/x)^k $
+* $ #res $
+
+
+%%%
+
+
+Potenzreihe
+
+    a, b in { 2, 3, 4 }
+    x := 1/b
+    k0 := 1 / 0! * (a*x)^0
+    k1 := 1 / 1! * (a*x)^1
+    k2 := 1 / 2! * (a*x)^2
+
+Geben Sie die ersten __drei Summanden der Potenzreihe__ von $ e^(a * "x") $ an. Weiterhin sei $ "x" = 1/b $:
+* $ k=0 $ : $ #k0 $
+* $ k=1 $ : $ #k1 $
+* $ k=2 $ : $ #k2 $
+
+
+%%%
+
+
+Konvergenzradius
+
+    a in { 3, 4, ..., 8}
+    r := 1/a
+
+Bestimmen Sie den Konvergenzradius $R$ der Potenzreihe $ sum_(k=0)^(oo) a^k * x^k $:
+* $R = #r $
+
+
+%%%
+
+
+Grenzwerte
+
+    a, b, c in { 3, 4, ..., 8 }
+    u, v in { 2, 3, 4 }
+    res1 := a
+    res2 := 0
+    res3 := u^v
+
+Bestimme die folgenden Grenzwerte:
+* $ lim_(x -> oo) (a*x-b)/x = #res1 $
+* $ lim_(x -> -oo) e^(c*x) = #res2 $
+* $ lim_(x -> oo) ( (u*x^2+a)/(x^2+x+b) )^v = #res3 $
+
+
+%%%
+
+
+Stetigkeit
+
+Welche der folgenden Funktionen sind auf ganz $RR$ stetig?
+
+    a1, b1, c1, d1 in { 3, 4, ..., 8}
+    a2, b2 in { 3, 4, ..., 8}
+    a3 in { 3, 4, ..., 8}
+    a4, b4, c4 in { 3, 4, ..., 8}
+    a5, b5 in { 3, 4, ..., 8}
+    a6, b6 in { 3, 4, ..., 8}
+    a7, b7 in { 2, 3, 4 }
+    c7 in { 5, 6, 7 }
+
+[x] $f(x) = a1*x^3 + b1*x^2 + c1*x + d1$
+[x] $f(x) = a2*sin(b2*x)$
+[x] $f(x)= (a3*x^2)/(x)$
+[x] $f(x)= a4*e^(b4*x+c4)$
+[ ] $f(x)= a5*sqrt(b5*x)$
+[x] $f(x)= ( (x-a6) * (x-b6) )/(x-a6)$
+[ ] $f(x)= ( (x-a7) * (x-b7) )/(x-c7)$
+
+
+%%%
+
+
+Stetigkeit
+
+    a, b in { 2, 3, 4, 5 }
+    c in { 6, 7, 8 }
+
+An welcher Stelle $x_0 in RR$ ist $f(x)=( (x-a)*(x-b) )/(x-c)$ __unstetig__?
+* $ x_0 = #c $
+
+
+%%%
+
+
+Asymptote
+
+    m, b, c, d in { 2, 3, ..., 8 }
+
+Bestimmen Sie die Asymptote $ y = "m"*x+"b" $, welche die Funktion $ f(x) = m*x + b - (c*x)/(d*x^2) $ für $x->oo$ annährt:
+* $"m"=#m $ und $ "b"=#b $.

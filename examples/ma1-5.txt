@@ -1,0 +1,275 @@
+%course Mathematik 1 - Knospe, Randerath
+%quiz 5: Integralrechnung
+
+
+Riemann Integral
+
+Zur Bestimmung des __Riemann-Integrals__ einer Funktion $f:[a,b]->RR$ unterteilt man [a,b] in "kleine" Teilintervalle und bestimmt für diese Intervalle jeweils den kleinsten und größten Funktionswert. Die Summation der vorzeichenbehafteten Flächen mit dem größten Funktionswert liefert die
+(x) __Obersumme__
+( ) __Untersumme__
+
+
+%%%
+
+
+Begriffe
+
+Sei $ int_a^b f(x) dx$. Finden Sie die richtigen __Begriffe__:
+* $a$ und $b$ heißen #"Integrationsgrenzen".
+* $x$ heißt #"Integrationsvariable".
+* $f(x)$ heißt #"Integrand".
+* $dx$ heißt #"Differential".
+
+
+%%%
+
+
+Grenzen
+
+    a in { 3, 4, ..., 8 }
+
+Bestimme $ int_a^a f(x) dx = #0 $.
+
+
+%%%
+
+
+Eigenschaften des Riemann-Integrals
+
+Seien $a<b<c$ und $f:[a,c]->RR$ eine Funktion die auf dem Intervall $[a,c]$ Riemann-integrierbar ist.
+
+Wählen Sie die korrekten Aussagen:
+[x] $ int_a^c f(x) dx = int_a^b f(x) dx + int_b^c f(x) dx $
+[x] $ int_b^a f(x) dx = - int_a^b f(x) dx $
+[ ] $ int_b^a f(x) dx = int_a^b f(x) dx $
+
+
+%%%
+
+
+Integrierbarkeit
+
+Seien $a,b in RR, a < b$:
+[x] Jede __stetige__ Funktion $f:[a,b]->RR$ ist integrierbar.
+[x] Jede __monotone__ Funktion $f:[a,b]->RR$ ist integrierbar.
+
+
+%%%
+
+
+Bestimmtes Integral
+
+    a in { 0, 1 }
+    b in { 4, 5 }
+    u in { 3, 4, ..., 8 }
+    f(x) := u
+    f_int := integrate(f, x, a, b)
+
+Bestimme das folgende __bestimmte__ Integral:
+* $ int_a^b f dx = #f_int $
+
+
+%%%
+
+
+Unbestimmte Integrale
+
+    u1, u2 in { 2, 4, ..., 9 }
+    f(x) := u1
+    g(y) := u2
+
+Bestimme die folgenden __unbestimmten__ Integrale:
+* $ int f dx =  #[diff x]f  + C     \ \ (C in RR)$
+* $ int g dy =  #[diff y]g  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Stammfunktion
+
+    u in { 3, 4, ..., 8 }
+    f(x) := u * x
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Stammfunktion
+
+    u, v in { 3, 4, ..., 8 }
+    f(x) := u + v * x
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Stammfunktion
+
+    u in { 3, 4, ..., 8 }
+    f(x) := u * x^2
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Stammfunktion
+
+    f(x) := cos(x)
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Stammfunktion
+
+    a in { 2, 3, 4 }
+    f(x) := a * sin(x)
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Uneigentliches Integral
+
+    a in { 3, 4, ..., 8 }
+    f(x) = a / x^2
+
+Bestimme das folgende uneigentliche Integral:
+$ int_1^(oo) f dx = #a $
+
+
+%%%
+
+
+Uneigentliche Integrale
+
+    a, b, c, d, e in { 3, 4, 4}
+
+Welche der folgenden Integrale sind __konvergent__?
+[ ] $int_0^(oo) a x^2 + b dx$
+[ ] $int_0^c d/x dx $
+[x] $int_1^c e/x dx $
+
+
+%%%
+
+
+Partielle Integration
+
+    f(x) = x * exp(x)
+
+Bestimme durch __partielle Integration:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+_Hinweis: Schreiben Sie $e^x$ als $exp(x)$._
+
+
+%%%
+
+
+Partielle Integration
+
+    f(x) = x * sin(x)
+
+Bestimme durch __partielle Integration:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Partielle Integration
+
+    f(x) = (x+1) / exp(x)
+
+Bestimme durch __partielle Integration:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+_Hinweis: Schreiben Sie $e^x$ als $exp(x)$._
+
+
+%%%
+
+
+Substitutionsregel
+
+    f(x) = (x+1)^2
+
+Bestimme durch __Substitution:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Substitutionsregel
+
+    f(x) = exp(3*x-1)
+
+Bestimme durch __Substitution:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+_Hinweis: Schreiben Sie $e^x$ als $exp(x)$._
+
+
+%%%
+
+
+Substitutionsregel
+
+    f(x) = 3*x * sin(x^2+1)
+
+Bestimme durch __Substitution:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Partialbruchzerlegung
+
+    a, b in { 3, 4, 5 }
+
+Das folgende Integral soll gelöst werden:
+* $int b / (x (x-a)^2) dx$
+Welcher ist der richtige __Ansatz__?
+
+(x) $ (A)/(x) + (B_1)/(x-a) + (B_2)/((x-a)^2)$
+( ) $ (A)/(x) + (B)/((x-a)^2)$
+( ) $ (A)/((x-a)^2)$
+( ) $ (A)/(x-a) + (B)/((x-a)^2)$
+
+
+%%%
+
+
+Partialbruchzerlegung
+
+    a, b in { 2, 3, 4, 5 }
+    c := 2*a
+    d := a^2+b
+
+Das folgende Integral soll gelöst werden:
+* $int 1 / (x^2 + c x + d) dx$
+Welcher ist der richtige __Ansatz__?
+
+(x) $ (A)/((x+a)^2+b)$
+( ) $ (A)/(x-a)$
+( ) $ (A)/(x-a) + (B)/(x-a)^2$
+( ) $ (A)/(x-c)^2 + (B)/(x-d)$

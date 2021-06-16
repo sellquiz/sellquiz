@@ -1,0 +1,213 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz Kapitel 3 - Wiederholung
+
+
+Restklassen
+
+Geben Sie jeweils den __Standardrepräsentaten__ an:
+
+	a, b, c in { 10, 11, ..., 20 }
+	a2, b2, c2, c3 in { 2, 3, ..., 5 }
+	ax := a mod a2
+	b := - b
+	bx := b mod b2
+	cx := c2*c3 mod c2
+
+* $ ZZ_c2 $ : $ c2*c3 equiv #cx mod c2 $
+* $ ZZ_a2 $ : $ a equiv #ax mod a2 $
+* $ ZZ_b2 $ : $ b equiv #bx mod b2 $
+
+
+%%%
+
+
+Erzeugendensysteme
+
+	a, b, c, d, e, f in { 0, 1 }
+	a := 1
+	d := 0
+	e := 1
+	l1 := 0
+	l2 := 1
+	l3 := 1
+	l4 := 1
+
+	g := (a*l1 + d*l2) mod 2
+	h := (b*l1 + e*l2) mod 2
+	i_ := (c*l1 + f*l2) mod 2
+
+	j_ := (a*l3 + d*l4) mod 2
+	k := (b*l3 + e*l4) mod 2
+	l := (c*l3 + f*l4) mod 2
+
+Seien $ v_1 = [[a],[b],[c]] $, $ v_2 = [[d],[e],[f]] $ Vektoren im $ GF(2)^3 $ und $ U = lt v_1, v_2 gt $.
+
+Welche der folgenden Antworten sind richtig?
+
+[x] $ w_1 = [[g],[h],[i_]] in U $
+[x] $ w_2 = [[j_],[k],[l]] in U $
+
+
+%%%
+
+
+Determinante
+
+	a := { -5, -4, ..., 5 }
+	A in MM( 3 x 3 | a )
+	A[1,1] := 0
+	A[1,2] := 0
+	d := det(A)
+
+Sei $ "A" = A $ eine 3 x 3 Matrix über $ K = RR $.
+Berechnen Sie die __Determinante__:
+
+* $ det("A") = #d $
+
+
+%%%
+
+
+Rang
+
+	a := { 0, 1, 2 }
+	A in MM( 3 x 3 | a )
+	r := rank(A)
+
+Sei $ "A" = A $ eine 3 x 3 Matrix über $ K = RR $.
+Bestimmen Sie den __Rang__:
+
+* $ rg("A") = #r $
+
+
+%%%
+
+
+Lineare Abbildungen
+
+Sei die folgende __lineare Abbildung__ gegeben:
+
+	a, b, c, d, e in { 2, 3, ..., 9 }
+	A := [[a,0,b],[e,c,d]]
+
+* $ f : RR^3 -> RR^2 = (a*x_1 + b*x_3, c*x_2 + d*x_3 + e*x_1) $
+
+Geben Sie die zugehörige Abbildungsmatrix $ "A" $ an:
+
+* $ "A" = #A $
+
+
+%%%
+
+
+Lineare Unabhängigkeit
+
+	a, b, c, d, e, f, g, h, i in { 0, 1 }
+
+	v1 := [[a],[b]]
+	v2 := [[c],[d]]
+	A := [[a,c],[b,d]]     % TODO: concatenate vectors
+	q1 := (det(A) mod 2) != 0
+
+	a := (a + 1) mod 2
+	v3 := [[a],[b]]
+	v4 := [[c],[d]]
+	A := [[a,c],[b,d]]     % TODO: concatenate vectors
+	q2 := (det(A) mod 2) != 0
+
+	v5 := [[a],[b],[c]]
+	v6 := [[d],[e],[f]]
+	v7 := [[g],[h],[i]]
+	A := [[a,d,g],[b,e,h],[c,f,i]]
+	q3 := (det(A) mod 2) != 0
+
+Welche der unten stehenden Vektoren über dem $ GF(2) $ sind __linear unabhängig__?
+
+[q1] $ v1, v2 $
+[q2] $ v3, v4 $
+[q3] $ v5, v6, v7 $
+
+
+%%%
+
+
+Orthogonale Matrizen
+
+Bestimmen Sie $a, b in RR$, sodass die folgende Matrix über $ RR $ __orthogonal__ ist:
+
+	c in { -2, -3, -4 }
+	d in { 2, 3, 4 }
+	a := c^2 + d^2
+	b := -c
+
+* $ 1/sqrt("a") [[c,d],[d,"b"]] $
+
+$ "a" = #a $ $ "b" = #b $
+
+
+%%%
+
+
+
+
+
+
+
+
+
+
+
+Eigenwerte
+
+	a := { 1, 2, 4 }
+	A := MM(2 x 2 | a, invertible, symmetric)
+	lambda = eigenvalues_sym(A)
+
+Sei $ "A" = A $.
+
+Geben Sie die __Eigenwerte__ von $"A"$ an:
+
+* $ "lambda" = #lambda: $
+
+_Hinweis: Geben Sie bei Bedarf `sqrt(x)` für $ sqrt(x) $ an._
+
+
+%%%
+
+
+Eigenvektoren
+
+	a in { 1, 2, ..., 5 }
+	b in { -8, -7, ..., -2}
+	v = [[0],[1]]
+
+Sei $ A = [[a,0],[0,b]] $.
+
+Geben Sie den __Eigenvektor__ $ "v_1" $ zum Eigenwert $lambda = b$ an:
+
+* $ "v_1" = #v*c in RR^(2 x 1) $
+
+% TODO: ambiguity in grammar: solution properties vs continued term!
+% idea: "solution. * c " for rendering "[    ] * c"
+
+
+%%%
+
+
+Basiswechsel
+
+	a in { -1, -2, -3 }
+	d := a - 1
+	c, b in { 10, 11, 12 }
+	A := [[a,b],[c,d]]
+	x := (a+d)/2
+	test := x^2 + b*c - a*d
+	y := sqrt(x^2 + b*c - a*d)
+	lambda = { x+y, x-y }
+
+Sei $"A"=A$ eine __Abbildungsmatrix__ von $f$ bezüglich der Standardeinheitsbasis $B_1$.
+* $"A"$ besitze eine Basis $B_2=(v_1,v_2)$ aus Eigenvektoren.
+* Stellen Sie $f$ bezüglich $B_2$ durch eine Diagonalmatrix $D=T^(-1)*"A"*T = [["lambda_1",0],[0,"lambda_2"]]$ dar.
+* $ "lambda" = #lambda $
+
+_Hinweis: Geben Sie bei Bedarf `sqrt(x)` für $sqrt("x")$ an._

@@ -1,0 +1,56 @@
+%course Praktische Informatik 1
+%quiz Methoden
+
+
+Methoden
+
+Gegeben sei die folgende Methode in Java:
+```public static int f(int x) {
+    if(x == 0) {
+        return 1;
+    }
+    return x * x;
+}
+```
+
+Der Rückgabetyp ist #"int". Der Methodenname lautet #"f".
+
+Welchen Wert gibt die Methode beim Aufruf von `f(3)` zurück?
+* $#9$
+
+Wählen Sie die richtigen Antworten aus:
+[ ] Der Bezeichner `x` ist eine __lokale Variable__.
+[x] Der Bezeichner `x` ist ein __formaler Parameter__.
+[x] Die geschweiften Klammern nach `if(x == 0)` dürfen weggelassen werden.
+
+
+%%%
+
+
+Wertaufruf, Referenzaufruf
+
+```public static void methode(int a, String b, int[] c, double d) {
+    ...
+}```
+Für welche Parameter erfolgt beim Aufruf von `methode` eine __Referenzübergabe__?
+[ ] `a`
+[x] `b`
+[x] `c`
+[ ] `d`
+
+
+%%%
+
+
+Überladen
+
+
+```public static void f1(int a, int b) { ... }
+public static void f1(int x, int y) { ... }
+public static void f2(String x, String y) { ... }
+public static void f2(String x, int y) { ... }
+```
+
+Welche Methode(n) sind __korrekt überladen__ (d.h. wo erhält man keinen Fehler)?
+[ ] `f1`
+[x] `f2`

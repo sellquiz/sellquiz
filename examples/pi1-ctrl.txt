@@ -1,0 +1,113 @@
+%course Praktische Informatik 1
+%quiz Kontrollstrukturen
+
+
+If-Anweisung
+
+Gegeben sei der folgende Java-Programmausschnitt:
+
+```int x=3, y=5, z=8;
+if(x > 1) {
+    z = 1;
+    y = 10;
+}
+else if(y <= 7) {
+    z = 2;
+}```
+
+Welchen Wert enthält Variable `z` nach Ausführung des Programmausschnitts?
+* $ #1 $
+
+
+%%%
+
+
+Schleifen
+
+Gegeben sei der folgende Java-Programmausschnitt:
+
+```int a = 3, b = 0;
+for(int i=0; i<5; i++)
+    b += a;
+System.out.println(b);```
+
+Welche Ausgabe erhalten Sie nach Ausführung?
+* $#15$
+
+Der Schleifenkopf könnte alternativ auch wie folgt geschrieben werden, ohne dass sich die Ausgabe ändern würde.
+[x] `for(int i=0; i<5; ++i)`
+[x] `for(int k=0; k<5; k+=1)`
+[x] `for(int i=10; i<15; i++)`
+[ ] `for(int i=0; i<=5; i++)`
+[ ] `for(int i=0; i++; i<5)`
+
+
+%%%
+
+
+Schleifen
+
+Gegeben sei der folgende Java-Programmausschnitt:
+
+```int i=0, x=4;
+while(i < 5) {
+    x = x * i;
+}
+System.out.println(x);```
+
+Was passiert?
+(x) Das Programm terminiert nicht.
+( ) Es wird `20` ausgegeben.
+( ) Man erhält (für den gezeigten Ausschnitt)  einen Syntaxfehler.
+
+
+%%%
+
+
+Schleifen
+
+Eine zu programmierende Schleife soll mindestens einmal durchlaufen werden:
+Man verwendet hierzu am besten ...
+[x] ... eine __fußgesteuerte__ Schleife.
+[ ] ... eine __kopfgesteuerte__ Schleife.
+
+
+%%%
+
+
+Schleifen
+
+```int x = 3, y = 0;
+for(int i=0; i<6; i=i+2) {
+    if(x == 2)
+        continue;
+    if(x == 4)
+        break;
+    y ++;
+}```
+
+Welchen Wert enthält Variable `y` nach Ausführung des Programmausschnitts?
+* $ #3 $
+
+
+%%%
+
+
+Mehrfachauswahlen
+
+```int a = 1, b = 0;
+switch(a) {
+    case 0:
+        b = 10;
+        break;
+    case 1:
+        b = 20;
+    default:
+        b = 30;
+        break;
+}```
+
+Welchen Wert enthält Variable `b` nach Ausführung des Programmausschnitts?
+* $ #30 $
+
+_Hinweis: Genau hinschauen!_

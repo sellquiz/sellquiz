@@ -1,0 +1,40 @@
+%course Praktische Informatik 1
+%quiz Expertenaufgaben
+
+
+Profiquiz für Interessierte
+
+Hinweise:
+* In dieser Aufgabe geht es darum herauszufinden, wer das Zeug vom Padawan zum Java-Ritter hat :-)
+* In der Prüfung wird so eine Aufgabe nicht gestellt.
+* Ggf. sollte man vor Bearbeitung herausfinden, welchen "ternären Operator" Java unterstützt.
+
+```class B {
+    private int u=2, v;
+    private static int x;
+    public B(int u) {
+        this.u += u << 2;
+        this.v = u > 3
+            ? this.u + u 
+            : u / this.u;
+        x ++;
+    }
+    public B(char v) {
+        this(v - '0');
+        this.v += x;
+    }
+    public void c() {
+        System.out.println(u + v);
+    }
+}
+
+class Main {
+    public static void main(String argv[]) {
+        B b = new B(2);
+        b = new B('4');
+        b.c();
+    }
+}```
+
+Ausgegeben wird:
+* $ #42 $

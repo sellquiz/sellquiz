@@ -1,0 +1,8 @@
+
+Umkehrfunktion
+
+	a, b in { 2, 3, 4 }
+	y(x) = 1/a*x - b/a
+
+Bestimme die Umkehrfunktion von $ f : RR -> RR, f(x)=a*x+b $:
+* $ f^(-1) = #y $

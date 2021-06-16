@@ -1,0 +1,31 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 3.4 bis 3.6: Lineare Abbildungen, Lineare Unabhängigkeit, Basis, Dimension, Rang
+
+
+
+
+
+STOP
+
+
+%%%
+
+
+TODO:
+
+Kern und Bild
+
+	a := { 1, 2, 4 }
+	A := MM( 2 x 3 | a )
+	A[2,1] := 0
+	im := 0
+	ker := ker(A)
+
+Gegeben sei die lineare Abbildung $ f : RR^3 -> RR^2 $ durch $ f(x) = A * x $.
+%Dabei sei $ "A" = A $.
+
+* Bestimmen Sie das __Bild__:
+  $ im(f) = #im $
+
+* Bestimmen Sie den __Kern__ und geben Sie das Ergebnis in aufzählender Schreibweise an.
+  $ ker(f) = #ker $

@@ -1,0 +1,373 @@
+%course Mathematik 1 - Knospe, Randerath
+%quiz 7: Zusammenfassendes Quiz
+
+
+Beschränkte Mengen
+
+	a in { -5, -4, ..., -2 }
+	b := a + 3
+	x, y in { 1, 2, 3 }
+	c := b + x
+	d := c + y
+	m := a
+	M := d
+
+Sei $ X = [a, c[ uu [b, d[ $.
+Bestimmen Sie:
+* Infimum m = inf $ (X) = #m $
+* Supremum M = sup $ (X) = #M $
+
+Wählen Sie die richtigen Antworten aus:
+[x] Das Minimum von X existiert
+[ ] Das Maximum von X existiert
+
+
+%%%
+
+
+Injektivität, Surjektivität, Bijektivität
+
+	a in { 2, 3, ..., 10 }
+
+Betrachten Sie die folgende Abbildung und wählen Sie die richtigen Antworten aus:
+$ f : RR -> [a,oo[, \  f(x) = x^2 + a $            % TODO (parser): oo -> infinity
+
+[ ] $f$ ist injektiv.
+[x] $f$ ist surjektiv.
+[ ] $f$ ist bijektiv.
+
+
+%%%
+
+
+Exponentialfunktion
+
+    a, b in { 2, 3, ..., 8 }
+
+Gegeben sei die Funktion $ f : RR -> RR, x |-> e^(-a*x+b) $.
+
+Welche der folgenden Aussagen sind wahr?
+[ ] $f$ ist streng monoton steigend
+[x] $f$ ist streng monoton fallend
+[x] $f$ besitzt den Wertebereich $ ]0, oo[ $
+[ ] $f$ besitzt den Wertebereich $ ]b, oo[ $
+
+
+%%%
+
+
+Konvergenz von Folgen
+
+    x, y, z in { 2, 3, 4, 5}
+    u, v, w in { 2, 3, 4, 5}
+    res1 := 0
+    res2 := x / y
+    res3 := x / u
+
+Bestimme:
+* $ lim_(n -> oo) x/n = #res1 $
+* $ lim_(n -> oo) (x*n)/(y*n+z) = #res2 $
+* $ lim_(n -> oo) (x*n^2 + y*n + z)/(u*n^2 + v*n + w) = #res3 $
+
+
+%%%
+
+
+Konvergente Folgen
+
+    x, y, z, w in { 2, 3, 4, 5}
+
+Welche der folgenden Folgen sind __konvergent__?
+
+[x] $ (a_n)_(n in NN) $ mit $ a_n = x $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = x * n $
+[x] $ (a_n)_(n in NN) $ mit $ a_n = (x*n^10 + y*n^2)/(z*n^10 + w*n^4) $
+[ ] $ (a_n)_(n in NN) $ mit $ a_n = (-1)^n * x $
+
+
+%%%
+
+
+Potenzreihe
+
+    a, b in { 2, 3, 4 }
+    x := 1/b
+    k0 := 1 / 0! * (a*x)^0
+    k1 := 1 / 1! * (a*x)^1
+    k2 := 1 / 2! * (a*x)^2
+
+Geben Sie die ersten __drei Summanden der Potenzreihe__ von $ e^(a * "x") $ an. Weiterhin sei $ "x" = 1/b $:
+* $ k=0 $ : $ #k0 $
+* $ k=1 $ : $ #k1 $
+* $ k=2 $ : $ #k2 $
+
+
+%%%
+
+
+Ableitungen
+
+    a, b, c, d in { 2, 3, 4 }
+    f1(x) := (a*x^3 + b*x) * (c*x + d)
+    f1_deriv(x) := diff(f1, x)
+
+$ f(x) = f1 $
+$ f'(x) = #f1_deriv $
+
+
+%%%
+
+
+Ableitungen
+
+    a, b, c in { 3, 4, ..., 8 }
+    f1(x) := sin(a * x^2 + b*x + c)
+    f1_deriv(x) := diff(f1, x)
+
+$ f(x) = f1 $
+$ f'(x) = #f1_deriv $
+
+
+%%%
+
+
+Höhere Ableitungen
+
+    a in { 3, 4, ..., 8 }
+    f1(x) = a * x * exp(x)
+    f1_deriv_1(x) := diff(f1, x)
+    f1_deriv_2(x) := diff(f1_deriv_1, x)
+    f1_deriv_3(x) := diff(f1_deriv_2, x)
+
+$ f(x) = f1 $
+$ f'(x) = #f1_deriv_1 $
+$ f''(x) = #f1_deriv_2 $
+$ f'''(x) = #f1_deriv_3 $
+
+
+%%%
+
+
+Stationäre Stellen
+
+    a, b in { 3, 4, 5 }
+    f1(x) = a * x^2 + b
+    f1_deriv_1(x) = diff(f1, x)
+    f1_deriv_2(x) = diff(f1_deriv_1, x)
+    s = 0
+
+Sei $ f(x) = f1 $. Bestimme die stationäre Stelle: $ x_0 = #s $.
+Dann besitzt $f$ in $x_0$:
+( ) ein lokales Maximum
+(x) ein lokales Minimum
+
+
+%%%
+
+
+Taylorpolynom
+
+    f(x) := exp(x)
+    x0 := 0
+    f1(x) := diff(f, x)
+    f2(x) := diff(f1, x)
+    p0(x) := f(x0) / 0! * (x - x0)^0
+    p1(x) := f1(x0) / 1! * (x - x0)^1
+    p2(x) := f2(x0) / 2! * (x - x0)^2
+
+Bestimme das zweite Taylorpolynom $p_2(x) = sum_(k=0)^2 ( "f"^(k)(x) ) / ( k ) (x-x_0)^k $ für $"f"(x)=f$ und $x_0=0$:
+* $ p_0(x) = #p0 $
+* $ p_1(x) = #p1 $
+* $ p_2(x) = #p2 $
+
+
+%%%
+
+
+Stammfunktion
+
+    a in { 2, 3, 4 }
+    f(x) := a * sin(x)
+
+Bestimme die Stammfunktion zu $"f"(x) = f $
+$ F(x) = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Uneigentliche Integrale
+
+    a, b, c, d, e in { 3, 4, 4}
+
+Welche der folgenden Integrale sind __konvergent__?
+[ ] $int_0^(oo) a x^2 + b dx$
+[ ] $int_0^c d/x dx $
+[x] $int_1^c e/x dx $
+
+
+%%%
+
+
+Partielle Integration
+
+    f(x) = (x+1) / exp(x)
+
+Bestimme durch __partielle Integration:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+_Hinweis: Schreiben Sie $e^x$ als $exp(x)$._
+
+
+%%%
+
+
+Substitutionsregel
+
+    f(x) = 3*x * sin(x^2+1)
+
+Bestimme durch __Substitution:__
+$ int f dx = #[diff x]f  + C     \ \ (C in RR)$
+
+
+%%%
+
+
+Partialbruchzerlegung
+
+    a, b in { 2, 3, 4, 5 }
+    c := 2*a
+    d := a^2+b
+
+Das folgende Integral soll gelöst werden:
+* $int 1 / (x^2 + c x + d) dx$
+Welcher ist der richtige __Ansatz__?
+
+(x) $ (A)/((x+a)^2+b)$
+( ) $ (A)/(x-a)$
+( ) $ (A)/(x-a) + (B)/(x-a)^2$
+( ) $ (A)/(x-c)^2 + (B)/(x-d)$
+
+
+%%%
+
+
+Kollinear
+
+    a, b in { -4, -3, -2, 2, 3, 4 }
+
+    ux, uy in { -3, -2, -1, 1, 2, 3 }
+    u1 := [[ux],[uy]]
+    v1 := a * u1
+
+    ux, uy in { -3, -2, -1, 1, 2, 3 }
+    u2 := [[ux],[uy]]
+    v2 := [[ux*b],[uy*(-b)]]
+
+Welche der folgenden Ortsvektoren sind __kollinear__?
+[x] $ u=u1 $ und $ v=v1 $
+[ ] $ u=u2 $ und $ v=v2 $
+
+
+%%%
+
+
+Orthogonale Vektoren
+
+    u, v, w, x, y, z in MM(2 x 1 | {-1,0,1})
+    uv := dot(u,v) == 0
+    wx := dot(w,x) == 0
+    yz := dot(y,z) == 0
+
+Welche der folgenden Vektoren im $RR^2$ sind __orthogonal__?
+[uv] $u$ und $v$
+[wx] $w$ und $x$
+[yz] $y$ und $z$
+
+
+%%%
+
+
+
+Vektorprodukt
+
+    set := { -2, -1, 0, 1, 2 }
+    u, v in MM(3 x 1 | set )
+    uxv := cross(u, v)
+    input rows := resizable
+
+Gegeben sind die beiden Vektoren $"u"=u$ und $"v"=v$ im $RR^3$. Bestimme das Vektorprodukt von $"u"$ und $"v"$:
+* $"u" xx "v" = #uxv$
+
+
+%%%
+
+
+Matrizenoperationen
+
+	a := { 1, 2, 3 }
+	A in MM( 2 x 1 | a )
+	B in MM( 2 x 2 | a )
+	C in MM( 2 x 1 | a )
+	D := (A + B^T * C)^T
+    input rows := resizable
+    input cols := resizable
+
+Berechne $ (A + B^T * C)^T = #D $
+
+
+%%%
+
+
+Lösungsmenge
+
+Ein lineares Gleichungssytem ist durch den Gaußalgorithmus bereits in Dreiecksform gebracht worden. Die erweiterte Koeffizienenmatrix sieht folgendermaßen aus:
+
+    a := { -3, -2, -1, 1, 2, 3 }
+    A in MM(3 x 3 | a )
+    b in MM(3 x 1 | a )
+    A := triu(A)
+    A[3,3] := 0
+    b[3,1] := 0
+
+$ augmented(A,b) $
+
+Welche Aussage über die __Lösungsmenge__ ist korrekt?
+( ) Es gibt eine eindeutige Lösung $x in RR^n$.
+( ) Es gibt keine Lösung.
+(x) Die Lösungsmenge kann mit einer freien Variable beschrieben werden.
+
+
+%%%
+
+
+Gaußalgorithmus
+
+Lösen Sie das folgende lineare Gleichungssystem mit Hilfe des __Gaußalgorithmus__:
+
+    a := { 1, 2, 4 }
+    A in MM(3 x 3 | a, invertible )
+    b in MM(3 x 1 | a )
+    x := linsolve(A,b)
+
+$ augmented(A,b) $
+
+Lösungsvektor: $"x"=#x$
+
+
+%%%
+
+
+
+Determinante
+
+	a := { -5, -4, ..., 5 }
+	A in MM( 3 x 3 | a )
+	A[1,1] := 0
+	A[1,2] := 0
+	d := det(A)
+
+Sei $ "A" = A $ eine 3 x 3 Matrix über $ RR $.
+Berechnen Sie die __Determinante__:
+
+* $ det("A") = #d $

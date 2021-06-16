@@ -1,0 +1,109 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 3.8 bis 3.9: Eigenwerte und Eigenvektoren, Koordinaten und Basiswechsel
+
+
+
+Eigenvektoren
+
+	a in { 1, 2, ..., 5 }
+	b in { -8, -7, ..., -2}
+	v = [[0],[1]]
+
+Sei $ A = [[a,0],[0,b]] $.
+
+Geben Sie den __Eigenvektor__ $ "v_1" $ zum Eigenwert $lambda = b$ an:
+
+* $ "v_1" = #v*c in RR^(2 x 1) $
+
+% TODO: ambiguity in grammar: solution properties vs continued term!
+% idea: "solution. * c " for rendering "[    ] * c"
+
+
+%%%
+
+
+Eigenwerte und Eigenvektoren
+
+	x := 1
+	y in { 9, 16, 25, 36, 49 }     % TODO:  "y in { x^2 | x in NN, x <= 7 } "
+	A := [[0,x],[y,0]]
+	l := { -sqrt(x*y), sqrt(x*y) }
+	v := [[1],[sqrt(x*y)]]
+
+Sei $ "A" = A $.
+
+Geben Sie die __Eigenwerte__ von $"A"$ an:
+
+* $ lambda = #l $
+
+Bestimmen Sie nun den __Eigenraum__ $ lt "v" gt$ zu dem wertmäßig __größeren__ der beiden Eigenwerte:
+
+* $ "v" = #v * c in RR^(2 x 1) $
+
+
+%%%
+
+
+Koordinaten
+
+	a,b in { 1, 2, ..., 10 }
+	v := [[a],[b]]
+
+Sei $ "v" = v $. Geben Sie die kartesischen Koordinaten von $ "v" $ bezüglich der Standardbasis $B_1 = { e_1, e_2 }$ an:
+* $( #a, #b )$
+
+
+%%%
+
+
+Basiswechsel
+
+	e_1 := [[1],[0]]
+	e_2 := [[0],[1]]
+	a in { 2, 4 }
+	b in { 2, 4 }
+	b_1 := [[a],[b]]
+	b_2 := [[-b],[a]]
+	T_ := [[a,-b],[b,a]]
+
+Seien die folgenden beiden __Basen__ gegeben:
+* $ B_1 = { e_1, e_2 } $
+* $ B_2 = { b_1, b_2 } $
+
+Bestimmen Sie die __Abbildungsmatrix__ $ T $ für die lineare Abbildung $f$, die die Basis $ B_1 $ in die Basis $ B_2 $ abbildet:
+* $ T = #T_ $
+
+	Tinv := inv(T_)        % TODO: also allow syntax $ T^(-1) $
+
+Berechnen Sie nun die __inverse Matrix__ $T^(-1)$:
+* $ T^(-1) = #Tinv $
+
+	w1, w2 in { -1, -2, 1, 2}
+	w := [[w1],[w2]]
+	v := Tinv * w
+
+Sei der Vektor $"w"=w$ mit den Koordinaten bezüglich $B_1$ gegeben.
+Berechnen Sie den Koordinatenvektor $"v"$ bezüglich $B_2$:
+* $ "v" = #v $
+
+
+%%%
+
+
+Basiswechsel
+
+	a in { -1, -2, -3 }
+	d := a - 1
+	c, b in { 10, 11, 12 }
+	A := [[a,b],[c,d]]
+	x := (a+d)/2
+	test := x^2 + b*c - a*d
+	y := sqrt(x^2 + b*c - a*d)
+	lambda = { x+y, x-y }
+
+Sei $"A"=A$ eine __Abbildungsmatrix__ von $f$ bezüglich der Standardeinheitsbasis $B_1$.
+* $"A"$ besitze eine Basis $B_2=(v_1,v_2)$ aus Eigenvektoren.
+* Stellen Sie $f$ bezüglich $B_2$ durch eine Diagonalmatrix $D=T^(-1)*"A"*T = [["lambda_1",0],[0,"lambda_2"]]$ dar.
+* $ "lambda" = #lambda $
+
+_Hinweis: Geben Sie bei Bedarf `sqrt(x)` für $sqrt("x")$ an._

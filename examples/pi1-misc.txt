@@ -1,0 +1,11 @@
+%course Praktische Informatik 1
+%quiz Verschiedenes
+
+
+Syntaxfehler
+
+Im folgenden Programmausschnitt war der "Fehlerteufel" aktiv:
+```TODO
+```
+Welches Schlüsselwort muss __entfernt__ werden, sodass der Programmausschnitt wieder fehlerlos übersetzt werden kann?
+* #"TODO"

@@ -1,0 +1,15 @@
+Product    #fundamentals   #easy  
+    a, n in { 2, 3, ..., 6 }
+Calculate $ prod_(i=1)^n a = #(a^n) $
+    ? Multiply $a*a*...*a$ ($n$ times).
+
+%%%
+
+Derivations
+
+    a, b in { 3, 4, ..., 8 }
+    f1(x) := a * exp(b*x)
+    f1_deriv(x) := diff(f1, x)
+
+$ f(x) = f1 $
+$ f'(x) = #(f1_deriv) $
