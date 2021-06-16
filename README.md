@@ -1,4 +1,4 @@
-# SELL
+# SELL Quiz
 
 The **Simple E-Learning Language (=: SELL)** is an **open standard for mathematical e-learning questions** with the following objectives:
 * **Simple syntax:** No unneeded overhead. Defining a task/question should be similar to describe the task/question on a blackboard.
