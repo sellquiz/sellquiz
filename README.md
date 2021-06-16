@@ -49,3 +49,8 @@ Visit  https://github.com/sellquiz/sellquiz-standalone
 ### Ilias Plugin:
 
 (work in currently in progress. Please come back later)
+
+
+# Developers
+
+Run `npm install --production=false` to install developer-dependencies.
