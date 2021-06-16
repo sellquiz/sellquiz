@@ -36,14 +36,16 @@ Please calculate:
 You'll find a set of working examples (in German language) [here](https://sell.f07-its.fh-koeln.de/).
 The corresponding SELL-code can be found in this repository in directory `/examples/`
 
-### Usage
+# Usage
 
-Run `npm install sellquiz`
-
-# Website Embedding:
+### Website Embedding:
 
 Visit  https://github.com/sellquiz/sellquiz-standalone
 
-# Moodle Plugin:
+### Moodle Plugin:
 
-(work in progress. please come back later)
+(work in currently in progress. Please come back later)
+
+### Ilias Plugin:
+
+(work in currently in progress. Please come back later)
