@@ -5,7 +5,7 @@ The **Simple E-Learning Language (=: SELL)** is an **open standard for mathemati
 * **Expressive langage:** Programs are short and concise such that the semantics can be grasp quickly. Irrelevant detail is avoided.
 * **Reuse of established standards:** We inherit [AsciiMath](http://asciimath.org) for mathematical expressions and [Markdown]() for text formatting.
 
-Project website: (https://sell.f07-its.fh-koeln.de/)
+Project website: https://sell.f07-its.fh-koeln.de/
 
 Project maintainer: [Andreas Schwenk](https://www.th-koeln.de/personen/andreas.schwenk/) / [TH Köln](https://www.th-koeln.de). 
 
