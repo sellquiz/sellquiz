@@ -33,7 +33,7 @@ Please calculate:
 
 ### More Examples
 
-You'll find a set of working examples (in German language) [here](https://sell.f07-its.fh-koeln.de/).
+You'll find a set of working examples (in German language) [here](https://sell.f07-its.fh-koeln.de/web/examples.php).
 The corresponding SELL-code can be found in this repository in directory `/examples/`
 
 # Usage
