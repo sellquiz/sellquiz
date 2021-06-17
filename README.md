@@ -44,11 +44,11 @@ Visit  https://github.com/sellquiz/sellquiz-standalone
 
 ### Moodle Plugin:
 
-(work in currently in progress. Please come back later)
+(work in progress. Please come back later)
 
 ### Ilias Plugin:
 
-(work in currently in progress. Please come back later)
+(work in progress. Please come back later)
 
 
 # Developers
