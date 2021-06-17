@@ -1,27 +1,3 @@
-/*TODO: remove this comment
-
-import * as math from 'mathjs';
-
-export class SellLinAlg {
-
-    static mat_idx(m, n, i, j) {
-        return i * n + j;
-    }
-
-    square(x) {
-        return x * x;
-    }
-
-    testmathjs() {
-        console.log(math.complex("2+3i"));
-    }
-
-}
-*/
-
-
-
-
 /******************************************************************************
  * SELL - SIMPLE E-LEARNING LANGUAGE                                          *
  *                                                                            *

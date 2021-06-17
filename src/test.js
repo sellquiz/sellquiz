@@ -1,9 +1,3 @@
-/*import * as Sell from './index.js';
-
-let sell = new Sell.Sell();
-sell.hello();
-*/
-
 /******************************************************************************
  * SELL - SIMPLE E-LEARNING LANGUAGE                                          *
  *                                                                            *
