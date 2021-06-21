@@ -278,7 +278,13 @@ Bestimmen Sie die __Hesse-Matrix__:
 _Hinweis: geben Sie die Exponentialfunktion in der Form `exp(x)` an._
 
 
+
+STOP
+
+
 %%%
+
+TODO:
 
 Extremwerte
 
