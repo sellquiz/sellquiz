@@ -35,6 +35,7 @@ const symtype = {
     T_UNKNOWN: "T_UNKNOWN", T_REAL: "T_REAL", T_DOTS: "T_DOTS", T_SET: "T_SET", 
     T_BOOL: "T_BOOL", T_FUNCTION: "T_FUNCTION", T_COMPLEX: "T_COMPLEX", T_COMPLEX_SET: "T_COMPLEX_SET",
     T_MATRIX: "T_MATRIX", T_MATRIX_DEF: "T_MATRIX_DEF", T_MATRIX_TRANSPOSE: "T_MATRIX_TRANSPOSE",
+    T_MATRIX_OF_FUNCTIONS: "T_MATRIX_OF_FUNCTIONS",
     T_STRING: "T_STRING", T_STRING_LIST: "T_STRING_LIST"
 }
 
@@ -72,6 +73,7 @@ class SellSymbol {
                 //s = s.replace("i", "j"); // TODO: must be configurable
                 return s;
             case symtype.T_MATRIX:
+            case symtype.T_MATRIX_OF_FUNCTIONS:
                 s = this.value.toString();
                 s = s.replaceAll("[","(").replaceAll("]",")"); // TODO: must be configurable
                 return s;
@@ -277,7 +279,7 @@ class Sell {
             this.log += e + '\n';
             this.log += 'Error: compilation failed';
             return false;
-        }        
+        }
         if(this.tk !== '§END')
             return this.error('Error: remaining tokens: "' + this.tk + '"...');   
         this.log += '... compilation succeeded!\n';
@@ -936,7 +938,7 @@ class Sell {
         if(this.is('or')) {
             let op = this.tk;
             this.next();
-            parseAnd();
+            this.parseAnd();
             let o2 = this.q.stack.pop();
             let o1 = this.q.stack.pop();
             if(o1.type == symtype.T_BOOL && o2.type == symtype.T_BOOL) {
@@ -953,7 +955,7 @@ class Sell {
         if(this.is('and')) {
             let op = this.tk;
             this.next();
-            parseEqual();
+            this.parseEqual();
             let o2 = this.q.stack.pop();
             let o1 = this.q.stack.pop();
             if(o1.type == symtype.T_BOOL && o2.type == symtype.T_BOOL) {
@@ -1160,6 +1162,7 @@ class Sell {
     //     "-" unary;
     //   | INT
     //   | "true" | "false"
+    //   | "not" unary
     //   | "i" | "j" | "T"
     //   | function_call
     //   | ID
@@ -1186,6 +1189,13 @@ class Sell {
         } else if(this.is("false")) {
             this.next();
             this.q.stack.push(new SellSymbol(symtype.T_BOOL, false));
+        } else if(this.is("not")) {
+            this.next();
+            this.parseUnary();
+            let u = this.q.stack.pop();
+            if(u.type != symtype.T_BOOL)
+                this.err("expected boolean datatype as argument for 'not'");
+            this.q.stack.push(new SellSymbol(symtype.T_BOOL, !u.value));
         } else if(this.is("i") || this.is("j")) {
             this.q.stack.push(new SellSymbol(symtype.T_COMPLEX, math.complex(0,1)));
             this.next();
@@ -1225,6 +1235,7 @@ class Sell {
         let cols = -1;
         let rows = 0;
         let elements = [];
+        let elementsType = null;
         while(this.is('[') || this.is(',')) {
             if(rows > 0)
                 this.terminal(',');
@@ -1235,8 +1246,12 @@ class Sell {
                     this.terminal(',');
                 this.parseExpr();
                 let element = this.q.stack.pop();
-                if(element.type != symtype.T_REAL)
-                    this.err("matrix element must be real valued");
+                if(element.type != symtype.T_REAL && element.type != symtype.T_FUNCTION)
+                    this.err("matrix element must be of type real or function");
+                if(elementsType == null)
+                elementsType = element.type;
+                else if(element.type != elementsType)
+                    this.err("all matrix elements must have same type");
                 elements.push(element.value);
                 col ++;
             }
@@ -1251,14 +1266,20 @@ class Sell {
             this.err('matrix must have at least one row and one column');
         this.terminal(']');
         // create matrix:
-        let matrix = math.zeros(rows, cols);
-        assert(elements.length == rows*cols);
-        for(let i=0; i<rows; i++) {
-            for(let j=0; j<cols; j++) {
-                matrix = LinAlg.SellLinAlg.mat_set_element(matrix, i, j, elements[i*cols+j]);
-            }
+        let matrix = null;
+        let matrixType = elementsType == symtype.T_REAL ? 
+            symtype.T_MATRIX : symtype.T_MATRIX_OF_FUNCTIONS;
+        if(matrixType == symtype.T_MATRIX) {
+            matrix = math.zeros(rows, cols);
+            assert(elements.length == rows*cols);
+            for(let i=0; i<rows; i++)
+                for(let j=0; j<cols; j++)
+                    matrix = LinAlg.SellLinAlg.mat_set_element(matrix, i, j, elements[i*cols+j]);
+        } else { // matrixType == symtype.T_MATRIX_OF_FUNCTIONS
+            matrix = new Symbolic.SellSymTerm_Matrix(rows, cols, elements);
         }
-        this.q.stack.push(new SellSymbol(symtype.T_MATRIX, matrix));
+        this.q.stack.push(
+            new SellSymbol(matrixType, matrix));
     }
 
     isNumberInt(v) {
@@ -1268,7 +1289,8 @@ class Sell {
     getFunctionList() {
         return ['abs','binomial','integrate','conj','sqrt','xgcd','det','rank','inv','eye',
             'eigenvalues_sym','triu','sin','cos','asin','acos','tan','atan','norm2','dot','cross',
-            'linsolve', 'is_zero'];
+            'linsolve', 'is_zero',
+            'min', 'max'];
     }
 
     // function_call = 
@@ -1415,6 +1437,26 @@ class Sell {
             if(p.length != 1 || p[0].type != symtype.T_MATRIX)
                 this.err("signature must be 'is_zero(matrix)'");
             this.pushSym(symtype.T_BOOL, LinAlg.SellLinAlg.mat_is_zero(p[0].value));
+        }
+        else if(functionName === 'min') {
+            if(p.length != 1 || p[0].type != symtype.T_SET)
+                this.err("signature must be 'min(set)'");
+            let v = 1e13;
+            for(let i=0; i<p[0].value.length; i++) {
+                if(p[0].value[i].value < v)
+                    v = p[0].value[i].value;
+            }
+            this.pushSym(symtype.T_REAL, v);
+        }
+        else if(functionName === 'max') {
+            if(p.length != 1 || p[0].type != symtype.T_SET)
+                this.err("signature must be 'max(set)'");
+            let v = -1e13;
+            for(let i=0; i<p[0].value.length; i++) {
+                if(p[0].value[i].value > v)
+                    v = p[0].value[i].value;
+            }
+            this.pushSym(symtype.T_REAL, v);
         }
         else
             this.err("unimplemented function call '" + functionName + "'");
@@ -2102,6 +2144,8 @@ class Sell {
             this.q.solutionSymbolsMustDiffFirst[symId] = diffVar;
         let inputId = 'sell_input_' + this.instanceID + '_' + this.qidx + '_' + symId;
         let inputWidth = 5;
+        let isWideInput = false;
+        let rows = 0, cols = 0, matrixInput = null;
         switch(sym.type) {
             case symtype.T_STRING:
             case symtype.T_STRING_LIST: // list := list of alternatives -> 1 box
@@ -2133,10 +2177,22 @@ class Sell {
                 html += '`}`';
                 break;
             case symtype.T_MATRIX:
-                let rows = this.resizableRows ? 2 : LinAlg.SellLinAlg.mat_get_row_count(sym.value);
-                let cols = this.resizableCols ? 2 : LinAlg.SellLinAlg.mat_get_col_count(sym.value);
-                let matrixInput = new SellMatrixInput(this.environment, this.instanceID, inputId,
-                    rows, cols, false/*wide input*/, this.resizableRows, this.resizableCols);
+                isWideInput = false;
+                rows = this.resizableRows ? 2 : LinAlg.SellLinAlg.mat_get_row_count(sym.value);
+                cols = this.resizableCols ? 2 : LinAlg.SellLinAlg.mat_get_col_count(sym.value);
+                matrixInput = new SellMatrixInput(this.environment, this.instanceID, inputId,
+                    rows, cols, isWideInput, this.resizableRows, this.resizableCols);
+                this.matrixInputs.push(matrixInput);
+                // create only a span here, since matrices are resizable and thus must
+                // be updatable
+                html += '<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="'+inputId+'"></span>';
+                break;
+            case symtype.T_MATRIX_OF_FUNCTIONS:
+                isWideInput = true;
+                rows = this.resizableRows ? 2 : sym.value.m;
+                cols = this.resizableCols ? 2 : sym.value.n;
+                matrixInput = new SellMatrixInput(this.environment, this.instanceID, inputId,
+                    rows, cols, isWideInput, this.resizableRows, this.resizableCols);
                 this.matrixInputs.push(matrixInput);
                 // create only a span here, since matrices are resizable and thus must
                 // be updatable
@@ -2417,7 +2473,59 @@ class Sell {
                             /*TODO if (solution.scaling_allowed)
                                 ok = LinAlg.SellLinAlg.matrices_numerical_equal_by_scaling_factor(solution.value, mat_user);
                             else*/
+                            console.log(solutionSymbol.value)
+                            console.log(mat_user)
                             ok = LinAlg.SellLinAlg.mat_compare_numerically(solutionSymbol.value, mat_user);
+                        }
+                    } else {
+                        switch (this.language) {
+                            case "en":
+                                feedback_additional_text += 'Dimensioned incorrectly!';
+                                break;
+                            case "de":
+                                feedback_additional_text += 'Falsche Dimensionierung!';
+                                break;
+                        }
+                    }
+                    break;
+
+                case symtype.T_MATRIX_OF_FUNCTIONS:
+
+
+console.log('-----yy')
+
+                    matrixInput = null;
+                    for (let k = 0; k < this.matrixInputs.length; k++) {
+                        if (this.matrixInputs[k].id === "sell_input_" + this.instanceID + '_' + qidx + '_' + solutionSymbolId) {
+                            matrixInput = this.matrixInputs[k];
+                            break;
+                        }
+                    }
+                    m = solutionSymbol.value.m;
+                    n = solutionSymbol.value.n;
+                    matrixInput.setUnsetElementsToZero();
+                    if (matrixInput.m == m && matrixInput.n == n) {
+                        ok = true;
+                        for (let i = 0; i < m; i++) {
+                            for (let j = 0; j < n; j++) {
+                                let v_user_text = matrixInput.getElementText(i, j);
+                                v_user_text = v_user_text.replace(',', '.');
+                                if(solutionSymbol.value.elements[i*n+j].compareWithStringTerm(v_user_text) == false) {
+                                    // TODO: report "syntax error", ...
+                                    switch (this.language) {
+                                        case "en":
+                                            feedback_additional_text += 'Hint: Element (' + (i+1) + ',' + (j+1) + ') is incorrect!';;
+                                            break;
+                                        case "de":
+                                            feedback_additional_text += 'Tipp: Element (' + (i+1) + ',' + (j+1) + ') ist noch fehlerhaft!';;
+                                            break;
+                                    }
+                                    ok = false;
+                                    break;
+                                }
+                            }
+                            if(!ok)
+                                break;
                         }
                     } else {
                         switch (this.language) {

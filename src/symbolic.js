@@ -858,3 +858,27 @@ export class SellSymTerm {
         return true;
     }
 }
+
+export class SellSymTerm_Matrix {
+    constructor(m, n, elements=[]) {
+        this.m = m;
+        this.n = n;
+        this.elements = elements; // linear array with m*n entries of type SellSymTerm
+    }
+    toString() {
+        let s = '[';
+        for(let i=0; i<this.m; i++) {
+            if(i > 0)
+                s += ', ';
+            s += '[';
+            for(let j=0; j<this.n; j++) {
+                if(j > 0)
+                    s += ', ';
+                s += this.elements[i*this.n + j].toString();
+            }
+            s += ']';
+        }
+        s += ']';
+        return s;
+    }
+}

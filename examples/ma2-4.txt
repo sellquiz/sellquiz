@@ -198,9 +198,6 @@ Gegeben sei eine Funktion $ "f"(x,y) = f $.
   $ ( #sx, #sy ) $
 
 
-STOP
-
-
 %%%
 
 
@@ -226,7 +223,7 @@ Welche der folgenden Aussagen ist korrekt?
 Definitheit
 
 	a := { 1, 2, 4 }
-	A := MM(2 x 2 | a, invertible, symmetric)
+	A in MM(2 x 2 | a, invertible, symmetric)
 	s = eigenvalues_sym(A)
 	p1 := min(s) > 0
 	p2 := max(s) < 0
@@ -247,10 +244,10 @@ Hesse-Matrix
 	a in { 2, 3, ..., 8 }
 	b in { 2, 3, 4 }
 	f(x,y) := a * x^b * y^(b+1)
-	h11 := diff( diff(f,x), x)
-	h12 := diff( diff(f,x), y)
-	h21 := diff( diff(f,y), x)
-	h22 := diff( diff(f,y), y)
+	h11(x,y) := diff( diff(f,x), x)
+	h12(x,y) := diff( diff(f,x), y)
+	h21(x,y) := diff( diff(f,y), x)
+	h22(x,y) := diff( diff(f,y), y)
 	H := [ [ h11, h12 ], [ h21, h22 ] ]
 
 Sei $"f"(x,y) = f$.
@@ -266,12 +263,12 @@ Hesse-Matrix
 	a, b in { 0, 1 }
 	c := 1 - a
 	d := 1 - b
-	e in { 2, 3, ..., 8 }
-	f(x,y) := exp(a*x+c*y) + e * x^2 + y^2 + b*cos(y) + d*sin(y)
-	h11 := diff( diff(f,x), x)
-	h12 := diff( diff(f,x), y)
-	h21 := diff( diff(f,y), x)
-	h22 := diff( diff(f,y), y)
+	ee in { 2, 3, ..., 8 }
+	f(x,y) := exp(a*x+c*y) + ee * x^2 + y^2 + b*cos(y) + d*sin(y)
+	h11(x,y) := diff( diff(f,x), x)
+	h12(x,y) := diff( diff(f,x), y)
+	h21(x,y) := diff( diff(f,y), x)
+	h22(x,y) := diff( diff(f,y), y)
 	H := [ [ h11, h12 ], [ h21, h22 ] ]
 
 Sei $"f"(x,y) = f$.
@@ -290,10 +287,10 @@ Extremwerte
 	w2 := 1 - w1
 	w3, w4, w5, w6, w7, w8, w9, w10 in { 2, 3 }
 	f(x,y) := w4*x^w5*y^w6 + w7*x^w8 + w9*y^w10
-	h11 := diff( diff(f,x), x)
-	h12 := diff( diff(f,x), y)
-	h21 := diff( diff(f,y), x)
-	h22 := diff( diff(f,y), y)
+	h11(x,y) := diff( diff(f,x), x)
+	h12(x,y) := diff( diff(f,x), y)
+	h21(x,y) := diff( diff(f,y), x)
+	h22(x,y) := diff( diff(f,y), y)
 	H := [ [ h11, h12 ], [ h21, h22 ] ]
 	ax := 0
 	ay := 0
@@ -317,7 +314,12 @@ Welche der folgenden Aussagen ist korrekt?
 [p2] $"f"$ besitzt bei $a$ ein __lokales Maximum__
 [p3] $"f"$ besitzt bei $a$ einen __Sattelpunkt__
 
+
+STOP
+
+
 %%%
+
 
 Fehlerfortpflanzung
 

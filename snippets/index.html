@@ -1,0 +1,30 @@
+<!-- Minimum Working Example (MWE) to embed SELL questions into your website -->
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>SELL-DEV Test Website</title>
+        <meta charset="utf-8">
+        <link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
+        <script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
+        <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
+        <script src="build/js/sell.min.js"></script>
+    </head>
+    <body>
+        <br/>
+        <div id="container" class="container">
+            <div id="sellQuestions"></div>
+        </div>
+    </body>
+    <script>
+        var sellinst = new sell.Sell("en", "sellinst", false, "standalone");
+        let q = `$SELL_CODE$`;
+        ok = sellinst.importQuestions(q);
+        if(!ok)
+            alert.log(sellinst.log);
+        var sellQuestionsDiv = document.getElementById("sellQuestions");
+        sellQuestionsDiv.innerHTML = sellinst.html;
+        sellinst.updateMatrixInputs();
+        setTimeout(function(){ MathJax.typeset(); }, 250);
+    </script>
+</html>
