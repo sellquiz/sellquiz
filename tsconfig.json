@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "es2015",
+        "esModuleInterop": false,
+        "target": "ES2021",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "strict": false,
+        "skipLibCheck": true,
+        
+    },
+    "include": ["src/*.ts"],
+    "lib": []
+}

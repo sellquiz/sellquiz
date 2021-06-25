@@ -1,11 +1,11 @@
 import { terser } from "rollup-plugin-terser";
 
 export default {
-    input: 'src/index.js',
+    input: 'dist/index.js',
     output: {
-        file: 'build/js/sell.min.js',
+        file: 'build/js/sellquiz.min.js',
         format: 'iife',
-        name: 'sell',
+        name: 'sellquiz',
         globals: {
             'mathjs': 'math'
         } 
@@ -13,5 +13,7 @@ export default {
     external: [
         'mathjs'
     ],
-    plugins: [terser()]
+    plugins: [
+        terser()
+    ]
 };

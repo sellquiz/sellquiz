@@ -8,23 +8,66 @@
         <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
         <script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
         <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
-        <script src="build/js/sell.min.js"></script>
+        <script src="build/js/sellquiz.min.js?date=$NOW$"></script>
     </head>
     <body>
         <br/>
         <div id="container" class="container">
+
             <div id="sellQuestions"></div>
+
+            <!--
+            <div id="question">
+                <h3 id="question-title"></h3>
+                <div id="question-body"></div>
+                <hr/>
+                <div id="question-feedback"></div>
+                <hr/>
+                <div id="question-score"></div>
+                <hr/>
+                <button type="button" onclick="evalQuestion();">evaluate</button>
+            </div>
+            -->
+
         </div>
     </body>
     <script>
-        var sellinst = new sell.Sell("en", "sellinst", false, "standalone");
-        let q = `$SELL_CODE$`;
-        ok = sellinst.importQuestions(q);
-        if(!ok)
-            alert.log(sellinst.log);
-        var sellQuestionsDiv = document.getElementById("sellQuestions");
-        sellQuestionsDiv.innerHTML = sellinst.html;
-        sellinst.updateMatrixInputs();
-        setTimeout(function(){ MathJax.typeset(); }, 250);
+
+        // ===== HIGH LEVEL =====
+
+        sellquiz.setLanguage("en");
+
+        let sellQuestionsDiv = document.getElementById("sellQuestions");
+        if(sellquiz.autoCreateQuiz(`$SELL_CODE$`, sellQuestionsDiv) == false)
+            alert(sellquiz.getErrorLog());
+
+        // ===== LOW LEVEL =====
+
+        let q_title = document.getElementById("question-title");
+        let q_body = document.getElementById("question-body");
+        let q_feedback = document.getElementById("question-feedback");
+        let q_score = document.getElementById("question-score");
+
+        /*sellquiz.setLanguage("en");
+        
+        let qID = sellquiz.createQuestion(`$SELL_CODE$`);
+        if(qID < 0)
+            alert.log(sellquiz.getErrorLog());
+        q_title.innerHTML = sellquiz.getQuestionTitle(qID); 
+        q_body.innerHTML = sellquiz.getQuestionBody(qID);
+        sellquiz.setQuestionBodyHtmlElement(q_body);
+        
+        function evalQuestion() {
+            if(sellquiz.evaluateQuestion(qID) == false)
+                console.log("evaluation of question failed");
+            q_feedback.innerHTML = sellquiz.getFeedbackText(qID);
+            sellquiz.disableInputFields(qID);
+            q_score.innerHTML = "your score is " + sellquiz.getScore(qID);
+        }*/
+        
+        //TODO: sellquiz.getInputFields(qID);
+        //TODO: sellquiz.getStudentAnswers(qID);
+        //TODO: let v = sellquiz.getVariables(qID);
+        //TODO: sellquiz.setVariables(qID, v);
     </script>
 </html>

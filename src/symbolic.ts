@@ -4,7 +4,7 @@
  * Copyright (c) 2019-2021 TH Köln                                            *
  * Author: Andreas Schwenk, contact@compiler-construction.com                 *
  *                                                                            *
- * Funded by: Digitale Hochschule NRW                                         *
+ * Partly funded by: Digitale Hochschule NRW                                  *
  * https://www.dh.nrw/kooperationen/hm4mint.nrw-31                            *
  *                                                                            *
  * GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007                         *
@@ -21,28 +21,42 @@
 import * as math from 'mathjs';
 
 export class SellSymTermElement {
-    constructor(type, v) {
-        this.type = type; // "var", "const", "uniop", "binop", "fct1", "fct2"
+
+    type : string;  // "var", "const", "uniop", "binop", "fct1", "fct2";   TUDO: enum!
+    v : any;
+    deriv : SellSymTermElement;
+
+    constructor(type : string, v : any) {
+        this.type = type;
         this.v = v;
         this.deriv = null;
     }
+
 }
 
 export class SellSymTerm {
+
+    symbolIDs : Array<String>;
+    stack : Array<SellSymTermElement>;
+    state : string; // TODO: enum
+    contains_forbidden_ode_subtree : boolean;
+
     constructor(symbolIDs=[]) {
         this.symbolIDs = symbolIDs;
         this.stack = [];
         this.state = ""; // e.g. "syntax-error"
         this.contains_forbidden_ode_subtree = false;
-        //this.symbols = []; // TODO: this is not well implemened yet...
     }
+
     clear() {
         this.stack = [];
     }
-    importMathJsTerm(str) {
+
+    importTerm(str : string) : boolean {
         let n = math.parse(str);
         return this.importMathJsTermJsRecursively(n);
     }
+
     importMathJsTermJsRecursively(node) {
         // TODO: this is incomplete...
         switch (node.type) {
@@ -88,31 +102,38 @@ export class SellSymTerm {
         }
         return true;
     }
+
     pushVariable(id) {
         this.stack.push(new SellSymTermElement("var", id));
     }
+
     pushOdeFunction(f) {
         this.stack.push(new SellSymTermElement("ode_fun", f));
     }
+
     pushConstant(v) {
         v = parseFloat(v)
         this.stack.push(new SellSymTermElement("const", v));
     }
+
     pushSymbolicTerm(st) {
         if (st.stack.length == 0)
             this.stack.push(new SellSymTermElement("const", 0));
         else
             this.stack.push(st.stack[0]);
     }
+
     pushUnaryFunction(name) {
         let param = this.stack.pop();
         this.stack.push(new SellSymTermElement("fct1", [name, param]));
     }
+
     pushBinaryFunction(name) {
         let param2 = this.stack.pop();
         let param1 = this.stack.pop();
         this.stack.push(new SellSymTermElement("fct2", [name, param1, param2]));
     }
+
     pushDiff() {
         // TODO: must check, if following variables are "OK"...
         let diffVar = this.stack.pop();
@@ -123,16 +144,19 @@ export class SellSymTerm {
         let diff = term.derivate(diffVar.v);
         this.pushSymbolicTerm(diff);
     }
+
     pushUnaryOperation(type) {
         let op = this.stack.pop();
         this.stack.push(new SellSymTermElement("uniop", [type, op]))
     }
+
     pushBinaryOperation(type) {
         type = type.replace("add", "+").replace("sub", "-").replace("mul", "*").replace("div", "/").replace("pow", "^");
         let op2 = this.stack.pop();
         let op1 = this.stack.pop();
         if (op1.type == "const" && op2.type == "const") {
-            let res = 0;
+            let res : any;
+            res = 0;
             switch (type) {
                 case "+": res = op1.v + op2.v; break;
                 case "-": res = op1.v - op2.v; break;
@@ -148,6 +172,7 @@ export class SellSymTerm {
             this.stack.push(new SellSymTermElement("binop", [type, op1, op2]));
         }
     }
+
     appendVariableSet(v, v_new) {
         for (let i = 0; i < v_new.length; i++) {
             let found = false;
@@ -162,6 +187,7 @@ export class SellSymTerm {
             }
         }
     }
+
     getVariables(element = null) {
         let v = [], v1, v2;
         if (element == null) {
@@ -203,6 +229,7 @@ export class SellSymTerm {
         }
         return v;
     }
+
     getOdeOrder(element = null) {
         // TODO: does not work for PDE!!
         let o = 0;
@@ -228,6 +255,7 @@ export class SellSymTerm {
         }
         return o;
     }
+
     optimizeOdeConstants(element = null) {
         let root = false;
         let e, e1, e2;
@@ -270,6 +298,7 @@ export class SellSymTerm {
                 break;
         }
     }
+
     searchForForbiddenODESecondOrderSubterms(element = null) {
         let v = [], v1, v2;
         if (element == null) {
@@ -320,12 +349,14 @@ export class SellSymTerm {
         }
         return v;
     }
+
     getOperator(element) {
         let op = "";
         if (element.type == "uniop" || element.type == "binop")
             op = element.v[0];
         return op;
     }
+
     getOperatorPrecedence(op) {
         let p = 0;
         switch (op) {
@@ -340,7 +371,8 @@ export class SellSymTerm {
         }
         return p;
     }
-    toString(element = null) {
+
+    toString(element = null) : string {
         let s = "";
         let root = false;
         if (element == null) {
@@ -383,7 +415,7 @@ export class SellSymTerm {
                 else if (op === "/")
                     c1 = "(" + c1 + ")";
 
-                if (op2_precedence < op_precedence || op2.type == 'uniop')
+                if (op2_precedence < op_precedence /*|| op2.type == 'uniop'*/)
                     c2 = "(" + c2 + ")";
                 else if (c2.startsWith("-"))
                     c2 = "(" + c2 + ")";
@@ -430,6 +462,7 @@ export class SellSymTerm {
         }
         return s;
     }
+
     derivate(variable/*id*/, element = null) {
         let u, v, op, name, p1;
         let isRoot = element == null;
@@ -579,8 +612,10 @@ export class SellSymTerm {
         else
             return null;
     }
+
     eval(var_values/*dict*/, element = null) {
-        let res = 0, u, v, op, name, param, param1, param2;
+        let res : any, u, v, op, name, param, param1, param2;
+        res = 0;
         if (element == null)
             element = this.stack[0];
         switch (element.type) {
@@ -692,6 +727,7 @@ export class SellSymTerm {
         }
         return res;
     }
+
     optimize(element = null) {
         let op, u, v;
         let isRoot = element == null;
@@ -792,9 +828,10 @@ export class SellSymTerm {
         }
         return element;
     }
+
     integrateNumerically(varId, a, b) {
         if(b < a)
-            return -this.integrateNumerically(v, b, a);
+            return - this.integrateNumerically(varId, b, a);
         const steps = 1e6; // TODO: configure
         // TODO: must check if all variables are set!! -> error handling!!
         let h = (b-a) / steps;
@@ -806,6 +843,7 @@ export class SellSymTerm {
         }
         return res;
     }
+
     compareWithStringTerm(t, listOfSymbols = []) {
         // listOfSymbols is an optional list of symbols that could be present in string input t
 
@@ -820,10 +858,10 @@ export class SellSymTerm {
 
         const n = 50 // TODO: configure number of tests
 
-        const l = -10 // TODO: configure lower bound for EACH variable IN SYNTAX
-        const u = 10 // TODO: configure upper bound for EACH variable IN SYNTAX
+        const l = -1 // TODO: configure lower bound for EACH variable IN SYNTAX
+        const u = 1 // TODO: configure upper bound for EACH variable IN SYNTAX
 
-        let epsilon = 1e-9; // TODO: configure espilon
+        let epsilon = 1e-6; // TODO: configure espilon
 
         for (let i = 0; i < n; i++) {
             let scope = {};
@@ -860,11 +898,17 @@ export class SellSymTerm {
 }
 
 export class SellSymTerm_Matrix {
-    constructor(m, n, elements=[]) {
+
+    m : number;
+    n : number;
+    elements : Array<SellSymTerm>;
+
+    constructor(m : number, n : number, elements=[]) {
         this.m = m;
         this.n = n;
-        this.elements = elements; // linear array with m*n entries of type SellSymTerm
+        this.elements = elements;
     }
+
     toString() {
         let s = '[';
         for(let i=0; i<this.m; i++) {
@@ -881,4 +925,5 @@ export class SellSymTerm_Matrix {
         s += ']';
         return s;
     }
+
 }

@@ -330,7 +330,7 @@ Ein lineares Gleichungssytem ist durch den Gaußalgorithmus bereits in Dreiecksf
     A[3,3] := 0
     b[3,1] := 0
 
-$ augmented(A,b) $
+$ augmented(A|b) $
 
 Welche Aussage über die __Lösungsmenge__ ist korrekt?
 ( ) Es gibt eine eindeutige Lösung $x in RR^n$.
@@ -350,7 +350,7 @@ Lösen Sie das folgende lineare Gleichungssystem mit Hilfe des __Gaußalgorithmu
     b in MM(3 x 1 | a )
     x := linsolve(A,b)
 
-$ augmented(A,b) $
+$ augmented(A|b) $
 
 Lösungsvektor: $"x"=#x$
 
