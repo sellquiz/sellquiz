@@ -14,60 +14,57 @@
         <br/>
         <div id="container" class="container">
 
-            <div id="sellQuestions"></div>
-
-            <!--
             <div id="question">
                 <h3 id="question-title"></h3>
+                <hr/>
                 <div id="question-body"></div>
                 <hr/>
+                Feedback / Error-Log: 
                 <div id="question-feedback"></div>
-                <hr/>
-                <div id="question-score"></div>
+                Question score: <span id="question-score">0</div>
                 <hr/>
                 <button type="button" onclick="evalQuestion();">evaluate</button>
             </div>
-            -->
 
         </div>
     </body>
     <script>
 
-        // ===== HIGH LEVEL =====
+        let code = `Addition
 
-        sellquiz.setLanguage("en");
+    x, y in { 2, 3, ..., 10 }
 
-        let sellQuestionsDiv = document.getElementById("sellQuestions");
-        if(sellquiz.autoCreateQuiz(`$SELL_CODE$`, sellQuestionsDiv) == false)
-            alert(sellquiz.getErrorLog());
+Calculate $x + y = #(x + y)$.
+`;
 
-        // ===== LOW LEVEL =====
+        // ===== LOW LEVEL API =====
 
         let q_title = document.getElementById("question-title");
         let q_body = document.getElementById("question-body");
         let q_feedback = document.getElementById("question-feedback");
         let q_score = document.getElementById("question-score");
 
-        /*sellquiz.setLanguage("en");
+        sellquiz.setLanguage("en");
         
-        let qID = sellquiz.createQuestion(`$SELL_CODE$`);
+        let qID = sellquiz.createQuestion(code);
         if(qID < 0)
             alert.log(sellquiz.getErrorLog());
         q_title.innerHTML = sellquiz.getQuestionTitle(qID); 
         q_body.innerHTML = sellquiz.getQuestionBody(qID);
-        sellquiz.setQuestionBodyHtmlElement(q_body);
+        sellquiz.setQuestionBodyHtmlElement(qID, q_body);
         
         function evalQuestion() {
             if(sellquiz.evaluateQuestion(qID) == false)
                 console.log("evaluation of question failed");
             q_feedback.innerHTML = sellquiz.getFeedbackText(qID);
             sellquiz.disableInputFields(qID);
-            q_score.innerHTML = "your score is " + sellquiz.getScore(qID);
-        }*/
+            q_score.innerHTML = sellquiz.getScore(qID);
+        }
         
         //TODO: sellquiz.getInputFields(qID);
         //TODO: sellquiz.getStudentAnswers(qID);
         //TODO: let v = sellquiz.getVariables(qID);
         //TODO: sellquiz.setVariables(qID, v);
+
     </script>
 </html>

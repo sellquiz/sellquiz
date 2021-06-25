@@ -203,6 +203,9 @@ im_input =
 
 Run `npm install --production=false` to install developer-dependencies.
 
+- Open `src/index-highlevel.html` for a demonstration of the high-level API.
+- Open `src/index-lowlevel.html` for a demonstration of the low-level API.
+
 ## Functions
 
 ### autoCreateQuiz

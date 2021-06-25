@@ -36,7 +36,7 @@ sellassert(ok);
 // rebuild package
 exec("npm run build");
 // create HTML document
-let html = fs.readFileSync('snippets/index.html', 'utf8');
+let html = fs.readFileSync('snippets/index-test.html', 'utf8');
 questions = questions.replaceAll('`', '\\`');
 html = html.replaceAll('$SELL_CODE$', questions);
 let timestamp = new Date().getTime();
