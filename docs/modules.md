@@ -45,7 +45,7 @@ success.
 
 #### Defined in
 
-index.ts:31
+[index.ts:31](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L31)
 
 ___
 
@@ -68,7 +68,7 @@ TODO: doc
 
 #### Defined in
 
-index.ts:52
+[index.ts:52](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L52)
 
 ___
 
@@ -92,7 +92,7 @@ Question index or -1 in case of errors.
 
 #### Defined in
 
-index.ts:76
+[index.ts:76](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L76)
 
 ___
 
@@ -116,7 +116,7 @@ success.
 
 #### Defined in
 
-index.ts:178
+[index.ts:178](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L178)
 
 ___
 
@@ -140,7 +140,7 @@ success.
 
 #### Defined in
 
-index.ts:169
+[index.ts:169](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L169)
 
 ___
 
@@ -164,7 +164,7 @@ success.
 
 #### Defined in
 
-index.ts:133
+[index.ts:133](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L133)
 
 ___
 
@@ -182,7 +182,7 @@ Error log.
 
 #### Defined in
 
-index.ts:86
+[index.ts:86](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L86)
 
 ___
 
@@ -206,7 +206,7 @@ success.
 
 #### Defined in
 
-index.ts:148
+[index.ts:148](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L148)
 
 ___
 
@@ -230,7 +230,7 @@ Body as HTML code or an empty string, if the question does not exist.
 
 #### Defined in
 
-index.ts:107
+[index.ts:107](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L107)
 
 ___
 
@@ -254,7 +254,7 @@ Title as HTML code or an empty string, if the question does not exist.
 
 #### Defined in
 
-index.ts:95
+[index.ts:95](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L95)
 
 ___
 
@@ -278,7 +278,7 @@ score in range [0, 1]
 
 #### Defined in
 
-index.ts:160
+[index.ts:160](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L160)
 
 ___
 
@@ -305,7 +305,7 @@ success
 
 #### Defined in
 
-index.ts:199
+[index.ts:199](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L199)
 
 ___
 
@@ -329,7 +329,7 @@ success.
 
 #### Defined in
 
-index.ts:187
+[index.ts:187](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L187)
 
 ___
 
@@ -351,7 +351,7 @@ Sets the language for text outputs. Default is "en" := English.
 
 #### Defined in
 
-index.ts:67
+[index.ts:67](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L67)
 
 ___
 
@@ -376,4 +376,4 @@ success
 
 #### Defined in
 
-index.ts:120
+[index.ts:120](https://github.com/sellquiz/sellquiz/blob/1c09817/src/index.ts#L120)
