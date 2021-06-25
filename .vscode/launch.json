@@ -9,7 +9,6 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/src/test.ts",
-            //"args": ["examples/hello.txt"],
             "args": ["examples/ma2-4.txt"],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"

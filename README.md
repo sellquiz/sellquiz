@@ -201,10 +201,13 @@ im_input =
 
 # Developers
 
-Run `npm install --production=false` to install developer-dependencies.
-
+- Run `npm install --production=false` to install developer-dependencies.
+- Run `npm run build` to build the sellquiz-library.
 - Open `src/index-highlevel.html` for a demonstration of the high-level API.
 - Open `src/index-lowlevel.html` for a demonstration of the low-level API.
+
+We provide a VS Code launch configuration in `.code/launch.json`.
+
 
 ## Functions
 
