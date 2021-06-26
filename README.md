@@ -2,7 +2,7 @@
 
 The **Simple E-Learning Language (=: SELL)** is an **open standard for mathematical e-learning questions** with the following objectives:
 * **Simple syntax:** No unneeded overhead. Defining a task/question should be similar to describe the task/question on a blackboard.
-* **Expressive langage:** Programs are short and concise such that the semantics can be grasp quickly. Irrelevant detail is avoided.
+* **Expressive language:** Programs are short and concise such that the semantics can be grasped quickly. Irrelevant detail is avoided.
 * **Reuse of established standards:** We inherit [AsciiMath](http://asciimath.org) for mathematical expressions and [Markdown]() for text formatting.
 
 Project website: https://sell.f07-its.fh-koeln.de/
@@ -11,7 +11,7 @@ Project maintainer: [Andreas Schwenk](https://www.th-koeln.de/personen/andreas.s
 
 ### Language Definition
 
-SELL is domain-specific langague (DSL). Visit the [official website](https://sell.f07-its.fh-koeln.de/web/) for detailed information.
+SELL is a domain-specific language (DSL). Visit the [official website](https://sell.f07-its.fh-koeln.de/web/) for detailed information.
 
 ### Hello, World!
 
@@ -33,7 +33,7 @@ Please calculate:
 
 ### More Examples
 
-You'll find a set of working examples (in German language) [here](https://sell.f07-its.fh-koeln.de/web/examples.php).
+You'll find a set of working examples (in the German language) [here](https://sell.f07-its.fh-koeln.de/web/examples.php).
 The corresponding SELL-code can be found in this repository in directory `/examples/`
 
 # Usage
