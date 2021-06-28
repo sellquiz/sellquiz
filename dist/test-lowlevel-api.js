@@ -15,7 +15,9 @@
  * This software is distributed on "AS IS" basis, WITHOUT WARRENTY OF ANY     *
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
-// This file demonstrates the low-level API for use in Node.js. 
+// This file demonstrates the low-level API for use in Node.js.
+// PLEASE NOTE THAT THE LOW LEVEL API OF SELLQUIZ IS WORK-IN-PROGRESS
+// AND SOME QUESTION TYPES ARE NOT YET IMPLEMENTED.
 import * as sellquiz from './index.js';
 // ----- (a) create a question -----
 sellquiz.setLanguage("en");
