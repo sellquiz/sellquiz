@@ -16,38 +16,49 @@
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
 
-import * as fs from 'fs';
-import { exec } from 'child_process';
-import { SellQuiz } from './quiz.js';
-import { sellassert } from './sellassert.js';
+import * as sellquiz from './index.js';
 
-if(process.argv.length != 3) {
-    console.log("usage: node test.js SELL_QUESTION_PATH");
+sellquiz.setLanguage("en");
+
+// ----- (a) create a question -----
+
+let questionStr = `Addition
+    x := 3
+    y := 4
+Calculate $x + y = #(x + y)$.
+`;
+
+let qId = sellquiz.createQuestion(questionStr);
+if(qId < 0) {
+    console.log("Failed to import question. Error log:");
+    console.log(sellquiz.getErrorLog());
     process.exit(-1);
 }
-let questions_path = process.argv[2];
 
-let questions = fs.readFileSync(questions_path, 'utf8');
-let debugMode = true;
+let qTitle = sellquiz.getQuestionTitle(qId);
+let qBody = sellquiz.getQuestionBody(qId);
 
-var sell = new SellQuiz(debugMode);
-let ok = sell.importQuestions(questions);
-console.log(sell.log);
-if(ok)
-    console.log(sell.html);
-sellassert(ok);
+console.log("QUESTION:")
+console.log("- title HTML code:\n" + qTitle);
+console.log("- body HTML code:\n" + qBody);
 
-// ----- test in browser -----
+let qBackup = sellquiz.backupQuestion(qId);
+console.log("BACKUP OF QUESTION:\n" + qBackup);
 
-// rebuild package
-exec("npm run build");
 
-// create HTML document
-let html = fs.readFileSync('snippets/index-test.html', 'utf8');
-questions = questions.replaceAll('`', '\\`');
-html = html.replaceAll('$SELL_CODE$', questions);
-let timestamp = new Date().getTime();
-html = html.replaceAll('$NOW$', ''+timestamp);
-fs.writeFileSync('test-sell.html', html);
+// ----- (b) restore a question -----
 
-console.log("--- OPEN FILE  'test-sell.html'  IN YOUR BROWSER ---");
+sellquiz.reset();
+
+qId = sellquiz.createQuestionFromBackup(qBackup);
+let qInputElements = sellquiz.getQuestionInputFields(qId);
+console.log(qInputElements)
+let solutionVariableID = qInputElements[0]["solution_variable_id"];
+if(sellquiz.setStudentAnswerManually(qId, solutionVariableID, "7") == false) {
+    console.log("failed to set student answer");
+    process.exit(-1);
+}
+sellquiz.evaluateQuestion(qId);
+
+qBackup = sellquiz.backupQuestion(qId);
+console.log("BACKUP OF QUESTION:\n" + qBackup);

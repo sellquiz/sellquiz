@@ -39,6 +39,33 @@ export class Evaluate {
         this.p = parent;
     }
 
+    // TODO: replace asserts by error log!!
+
+    setStudentAnswerManually(qidx : number, solutionVariableId : string, answerStr : string) : boolean {
+        let q = this.p.getQuestionByIdx(qidx);
+        if(q == null)
+            return false;
+        let input : SellInput = null;
+        for(let i=0; i<q.inputs.length; i++) {
+            if(q.inputs[i].solutionVariableId == solutionVariableId) {
+                input = q.inputs[i];
+                break;
+            }
+        }
+        if(input == null) {
+            sellassert(false, "setStudentAnswerManually(): could not find input element for given solution variable '" + solutionVariableId + "'");
+        }
+        switch(input.htmlElementInputType) {
+            case SellInputElementType.TEXTFIELD:
+                input.studentAnswer = [ answerStr ];
+                break;
+            default:
+                sellassert(false, "setStudentAnswerManually(): UNIMPLEMENTED!")
+                break;
+        }
+        return true;
+    }
+
     getStudentAnswers(qidx : number) : boolean {
         let q = this.p.getQuestionByIdx(qidx);
         if(q == null)
@@ -156,7 +183,7 @@ export class Evaluate {
             let input = q.inputs[i];
             let v = q.solutionSymbols[input.solutionVariableId];
             sellassert(v != null, "evaluate(): unknown solution symbol " + input.solutionVariableId + " known solution symbols: " + JSON.stringify(q.solutionSymbols));
-            switch(input.solutionVariableMathtype) {
+            switch(v.type) {
                 case symtype.T_BOOL:
                     this.evaluateBool(q, input, v);
                     break;
@@ -179,11 +206,11 @@ export class Evaluate {
                 case symtype.T_MATRIX:
                 case symtype.T_MATRIX_OF_FUNCTIONS:
                     this.evaluateMatrix(
-                        input.solutionVariableMathtype == symtype.T_MATRIX_OF_FUNCTIONS, 
+                        v.type == symtype.T_MATRIX_OF_FUNCTIONS, 
                         q, input, v);
                     break;
                 default:
-                    sellassert(false, "evaluate(): unimplemented math type: " + input.solutionVariableMathtype.toString());
+                    sellassert(false, "evaluate(): unimplemented math type: " + v.type.toString());
             }
         }
         if(this.questionContainsSingleChoice && this.selectedAnySingleChoiceOption == false) {

@@ -113,7 +113,6 @@ export class ParseIM_Input {
         input.htmlElementId = "sellquiz_input_" + symId;
         input.solutionVariableId = symId;
         input.htmlElementId_feedback = "sellquiz_feedback_" + symId;
-        input.solutionVariableMathtype = sym.type;
         this.p.q.inputs.push(input);
 
         switch(sym.type) {

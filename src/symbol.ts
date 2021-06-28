@@ -49,6 +49,30 @@ export class SellSymbol {
         this.precision = precision;
     }
 
+    exportDictionary(symid : string) {
+        let d = {};
+        d["id"] = symid;
+        d["type"] = this.type;
+        d["value"] = this.value.toString();
+        d["precision"] = this.precision;
+        d["hint"] = this.hint_html;
+        return d;
+    }
+
+    importDictionary(d : any) {
+        this.type = symtype[d["type"]];
+        switch(this.type) {
+            case symtype.T_REAL:
+                this.value = parseFloat(d["value"]);
+                break;
+            default:
+                sellassert(false, "SellSymbol:importFromDictionary(): UNIMPLMENTED");
+        }
+        this.precision = d["precision"];
+        this.hint_html = d["hint"];
+    }
+
+
     toAsciiMath() {
         let s = "";
         switch(this.type) {

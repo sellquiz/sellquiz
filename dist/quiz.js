@@ -15,7 +15,7 @@
  * This software is distributed on "AS IS" basis, WITHOUT WARRENTY OF ANY     *
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
-import { symtype, SellSymbol } from './symbol.js';
+import { SellSymbol } from './symbol.js';
 import { SellToken, Lexer } from './lex.js';
 import { ParseText } from './parse-text.js';
 import { ParseCode } from './parse-code.js';
@@ -41,7 +41,7 @@ export class SellInput {
         this.htmlElementInputType = SellInputElementType.UNKNOWN;
         this.htmlElementId_feedback = "";
         this.solutionVariableId = "";
-        this.solutionVariableMathtype = symtype.T_UNKNOWN;
+        //solutionVariableMathtype: symtype = symtype.T_UNKNOWN;
         // linearized input: one element for scalars, n elemens for vectors, m*n elements for matrices (row-major)
         this.studentAnswer = [];
         this.evaluationFeedbackStr = "";
@@ -258,6 +258,102 @@ export class SellQuiz {
         // --- set HTML ---
         this.html += this.q.html + '\n\n';
         return true;
+    }
+    backupQuestion(questionID) {
+        let q = this.getQuestionByIdx(questionID);
+        if (q == null)
+            return null;
+        let backup = {};
+        // source and generated HTML
+        backup["source_code"] = q.src;
+        backup["title_html"] = q.titleHtml;
+        backup["body_html"] = q.bodyHtml;
+        // variables
+        backup["variables"] = [];
+        for (let symid in q.symbols)
+            backup["variables"].push(q.symbols[symid].exportDictionary(symid));
+        backup["solution_variables"] = [];
+        for (let symid in q.solutionSymbols)
+            backup["solution_variables"].push(q.solutionSymbols[symid].exportDictionary(symid));
+        // TODO: mustDiffFrist, ....
+        // input fields
+        backup["input_fields"] = [];
+        for (let i = 0; i < q.inputs.length; i++) {
+            let input = q.inputs[i];
+            let f = {};
+            f["element_type"] = input.htmlElementInputType;
+            f["element_id"] = input.htmlElementId;
+            f["element_id__feedback"] = input.htmlElementId_feedback;
+            f["correct"] = input.correct;
+            f["feedback_message"] = input.evaluationFeedbackStr;
+            f["student_answer_string"] = input.studentAnswer;
+            f["solution_variable_id"] = input.solutionVariableId;
+            backup["input_fields"].push(f);
+        }
+        // global evaluation feedback
+        backup["general_feedback"] = {};
+        backup["general_feedback"]["all_answers_correct"] = q.allAnswersCorrect;
+        backup["general_feedback"]["feedback_message"] = q.generalFeedbackStr;
+        // stringify
+        return JSON.stringify(backup, null, 4);
+    }
+    getQuestionInputFields(questionID) {
+        let inputFields = [];
+        let backupStr = this.backupQuestion(questionID);
+        let backup = JSON.parse(backupStr);
+        for (let i = 0; i < backup["input_fields"].length; i++) {
+            inputFields.push({
+                "element_id": backup["input_fields"][i]["element_id"],
+                "element_type": backup["input_fields"][i]["element_type"],
+                "solution_variable_id": backup["input_fields"][i]["solution_variable_id"]
+            });
+        }
+        return inputFields;
+    }
+    createQuestionFromBackup(backupStr) {
+        let backup = JSON.parse(backupStr);
+        // TODO: check, if backup string is consistent
+        let q = new SellQuestion();
+        q.idx = this.questions.length;
+        // source and generated HTML
+        q.src = backup["source_code"];
+        q.titleHtml = backup["title_html"];
+        q.bodyHtml = backup["body_html"];
+        // variables
+        q.symbols = {};
+        for (let i = 0; i < backup["variables"].length; i++) {
+            let v = backup["variables"][i];
+            let sym = new SellSymbol();
+            sym.importDictionary(v);
+            q.symbols[v["id"]] = sym;
+        }
+        q.solutionSymbols = {};
+        for (let i = 0; i < backup["solution_variables"].length; i++) {
+            let v = backup["solution_variables"][i];
+            let sym = new SellSymbol();
+            sym.importDictionary(v);
+            q.solutionSymbols[v["id"]] = sym;
+        }
+        // input fields
+        q.inputs = [];
+        for (let i = 0; i < backup["input_fields"].length; i++) {
+            let input = new SellInput();
+            let f = backup["input_fields"][i];
+            input.htmlElementInputType = f["element_type"];
+            input.htmlElementId = f["element_id"];
+            input.htmlElementId_feedback = f["element_id__feedback"];
+            input.correct = f["correct"];
+            input.evaluationFeedbackStr = f["feedback_message"];
+            input.studentAnswer = f["student_answer_string"];
+            input.solutionVariableId = f["solution_variable_id"];
+            q.inputs.push(input);
+        }
+        // global evaluation feedback
+        q.allAnswersCorrect = backup["general_feedback"]["all_answers_correct"];
+        q.generalFeedbackStr = backup["general_feedback"]["feedback_message"];
+        // push question and return index
+        this.questions.push(q);
+        return q.idx;
     }
     getElementByIdAndType(id, type) {
         // TODO:!!!!!

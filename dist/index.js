@@ -20,6 +20,12 @@ import { sellassert } from './sellassert.js';
 import { getHtmlChildElementRecursive } from './help.js';
 var sellQuizInst = new quiz.SellQuiz();
 /**
+ * TODO: doc
+ */
+function reset() {
+    sellQuizInst = new quiz.SellQuiz();
+}
+/**
  * Creates a quiz including HTML control elements. This function can be used for a trivial integration of a stand-alone SELL quiz into a website. WARNING: do not mix using this high-level function and low-level functions.
  * @param sellCode SELL source code of one or multiple questions (divided by a line equal to %%%)
  * @param htmlDivElement HTML element that will contain all questions.
@@ -33,7 +39,7 @@ function autoCreateQuiz(sellCode, htmlDivElement) {
         let q = sellQuizInst.questions[i];
         let id = q.idx;
         let questionHtmlElement = getHtmlChildElementRecursive(htmlDivElement, 'sell_question_html_element_' + id);
-        setQuestionBodyHtmlElement(id, questionHtmlElement);
+        setQuestionHtmlElement(id, questionHtmlElement);
         refreshQuestion(id);
     }
     return true;
@@ -72,6 +78,30 @@ function createQuestion(sellCode) {
     return sellQuizInst.qidx;
 }
 /**
+ * TODO: doc
+ * @param questionBackup TODO: doc
+ * @returns Question index or -1 in case of errors.
+ */
+function createQuestionFromBackup(questionBackupStr) {
+    return sellQuizInst.createQuestionFromBackup(questionBackupStr);
+}
+/**
+ * TODO: doc
+ * @param questionID Question Index.
+ * @resturns JSON object with question state or null in case that an error occourred.
+ */
+function backupQuestion(questionID) {
+    return sellQuizInst.backupQuestion(questionID);
+}
+/**
+ * TODO
+ * @param questionID TODO
+ * @returns TODO
+ */
+function getQuestionInputFields(questionID) {
+    return sellQuizInst.getQuestionInputFields(questionID);
+}
+/**
  * Gets the error log for the last created question.
  * @returns Error log.
  */
@@ -101,12 +131,12 @@ function getQuestionBody(questionID) {
     return q.bodyHtml;
 }
 /**
- * Sets the HTML element that contains the question body. This function must be called once before quiz evaluation.
+ * Sets the HTML element that contains the question body (Alternatively, the element can also be a parent element of the question body). This function must be called once before calling "readStudentAnswersFromHtmlElements" or "writeFeedbackToHtmlElements".
  * @param questionID Question index.
  * @param element HTML element that contains the question body.
- * @returns success
+ * @returns Success.
  */
-function setQuestionBodyHtmlElement(questionID, element) {
+function setQuestionHtmlElement(questionID, element) {
     let q = sellQuizInst.getQuestionByIdx(questionID);
     if (q == null)
         return false;
@@ -114,23 +144,43 @@ function setQuestionBodyHtmlElement(questionID, element) {
     return true;
 }
 /**
- * Evaluates the question and updates the question HTML element.
+ * Evaluates the student answers of a question. This function does NOT read and write HTML elements. Also refer to functions "readStudentAnswersFromHtmlElements" and "writeFeedbackToHtmlElements".
  * @param questionID Question index.
- * @returns success.
+ * @returns Success.
  */
 function evaluateQuestion(questionID) {
-    if (sellQuizInst.evaluate.getStudentAnswers(questionID) == false)
-        return false;
-    if (sellQuizInst.evaluate.evaluate(questionID) == false)
-        return false;
-    if (sellQuizInst.evaluate.displayFeedback(questionID) == false)
-        return false;
-    return true;
+    return sellQuizInst.evaluate.evaluate(questionID);
+}
+/**
+ * Reads student answers from HTML elements. Also refer to functions "evaluateQuestion" and "writeFeedbackToHtmlElements".
+ * @param questionID Question index.
+ * @returns Success.
+ */
+function readStudentAnswersFromHtmlElements(questionID) {
+    return sellQuizInst.evaluate.getStudentAnswers(questionID);
+}
+/**
+ * TODO: doc   TOOD: refer to "getInputElements" and "backupQuestion"
+ * @param questionID Question index.
+ * @param htmlElementId TODO: doc
+ * @param answer TODO: doc
+ * @returns Success.
+ */
+function setStudentAnswerManually(questionID, solutionVariableID, answerStr) {
+    return sellQuizInst.evaluate.setStudentAnswerManually(questionID, solutionVariableID, answerStr);
+}
+/**
+ * Writes feedback to HTML elements. Also refer to functions "evaluateQuestion" and "readStudentAnswersFromHtmlElements".
+ * @param questionID Question index.
+ * @returns Success.
+ */
+function writeFeedbackToHtmlElements(questionID) {
+    return sellQuizInst.evaluate.displayFeedback(questionID);
 }
 /**
  * Gets the feedback text of an already evaluated question.
  * @param questionID Question Index.
- * @returns success.
+ * @returns Success.
  */
 function getFeedbackText(questionID) {
     let q = sellQuizInst.getQuestionByIdx(questionID);
@@ -140,8 +190,8 @@ function getFeedbackText(questionID) {
 }
 /**
  * Gets the evaluation score of an already evaluted question.
- * @param questionID Gets
- * @returns score in range [0, 1]
+ * @param questionID Question Index.
+ * @returns Score in range [0, 1]
  */
 function getScore(questionID) {
     return sellQuizInst.evaluate.getScore(questionID);
@@ -149,7 +199,7 @@ function getScore(questionID) {
 /**
  * Enables all input field HTML elements for editing.
  * @param questionID Question index.
- * @returns success.
+ * @returns Success.
  */
 function enableInputFields(questionID) {
     return sellQuizInst.enableInputFields(questionID, false);
@@ -157,7 +207,7 @@ function enableInputFields(questionID) {
 /**
  * Disables all input field HTML elements for editing.
  * @param questionID Question index.
- * @returns success.
+ * @returns Success.
  */
 function disableInputFields(questionID) {
     return sellQuizInst.enableInputFields(questionID, false);
@@ -165,7 +215,7 @@ function disableInputFields(questionID) {
 /**
  * Refreshes the HTML elements of a questions. This is mainly required for matrices that can be resized by students. This function is mainly called internally.
  * @param questionID Question index.
- * @returns success.
+ * @returns Success.
  */
 function refreshQuestion(questionID) {
     return sellQuizInst.updateMatrixInputs(questionID);
@@ -174,12 +224,12 @@ function refreshQuestion(questionID) {
  * Updates the number of rows and columns of a matrix input. Thes function is mainly called internally.
  * @param questionID Question index.
  * @param htmlElementId Identifier of the corresponding matrix input HTML element.
- * @param deltaRows Nnumber of rows added (subtracted).
- * @param deltaCols Nnumber of columns added (subtracted).
- * @returns success
+ * @param deltaRows Number of rows added (subtracted).
+ * @param deltaCols Number of columns added (subtracted).
+ * @returns Success.
  */
 function refreshMatrixDimensions(questionID, matrixId, deltaRows, deltaCols) {
     return sellQuizInst.updateMatrixDims(questionID, matrixId, deltaRows, deltaCols);
 }
-export { autoCreateQuiz, autoEvaluateQuiz, setLanguage, createQuestion, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionBodyHtmlElement, evaluateQuestion, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions };
+export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions };
 //# sourceMappingURL=index.js.map

@@ -176,7 +176,6 @@ export class ParseText {
         input.solutionVariableId = symId;
         input.htmlElementId_feedback = "sellquiz_feedback_" + symId;
         input.htmlElementInputType = SellInputElementType.CHECKBOX;
-        input.solutionVariableMathtype = sym.type;
         this.p.q.inputs.push(input);
 
         let inputType = isSingleChoice ? "radio" : "checkbox";

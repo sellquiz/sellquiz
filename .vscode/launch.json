@@ -12,6 +12,18 @@
             "args": ["examples/ma2-4.txt"],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Run test-lowlevel-api.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/test-lowlevel-api.ts",
+            "args": ["examples/ma2-4.txt"],
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "console": "integratedTerminal"
         }
     ]
 }
