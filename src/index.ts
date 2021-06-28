@@ -178,10 +178,10 @@ function readStudentAnswersFromHtmlElements(questionID : number) : boolean {
 }
 
 /**
- * TODO: doc   TOOD: refer to "getInputElements" and "backupQuestion"
+ * Sets a student answer string manually. Also refer to functions "getInputElements" and "backupQuestion"
  * @param questionID Question index.
- * @param htmlElementId TODO: doc
- * @param answer TODO: doc
+ * @param htmlElementId HTML element identifier.
+ * @param answerStr Answer string in ASCII-math encoding (e.g. "a+bi" for complex numbers, "[a,b,c]" for vectors, "[[a,b],[c,d]]" for matrices).
  * @returns Success.
  */
 function setStudentAnswerManually(questionID : number, solutionVariableID : string, answerStr : string) : boolean {
