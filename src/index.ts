@@ -59,8 +59,10 @@ function autoCreateQuiz(sellCode : string, htmlDivElement : HTMLElement) : boole
 function autoEvaluateQuiz(questionID : number, htmlQuestionElementID : string) : boolean {
     let htmlQuestionElement = document.getElementById(htmlQuestionElementID);
     sellassert(htmlQuestionElement != null, "autoEvaluateQuiz(..): question HTML element is null");
+    readStudentAnswersFromHtmlElements(questionID);
     if(evaluateQuestion(questionID) == false)
         return false;
+    writeFeedbackToHtmlElements(questionID);
     let htmlGeneralFeedbackElement = getHtmlChildElementRecursive(htmlQuestionElement, "general_feedback");
     sellassert(htmlGeneralFeedbackElement != null, "autoEvaluateQuiz(..): feedback HTML element is null");
     htmlGeneralFeedbackElement.innerHTML = getFeedbackText(questionID);

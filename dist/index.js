@@ -20,7 +20,7 @@ import { sellassert } from './sellassert.js';
 import { getHtmlChildElementRecursive } from './help.js';
 var sellQuizInst = new quiz.SellQuiz();
 /**
- * TODO: doc
+ * Remove all questions.
  */
 function reset() {
     sellQuizInst = new quiz.SellQuiz();
@@ -29,7 +29,7 @@ function reset() {
  * Creates a quiz including HTML control elements. This function can be used for a trivial integration of a stand-alone SELL quiz into a website. WARNING: do not mix using this high-level function and low-level functions.
  * @param sellCode SELL source code of one or multiple questions (divided by a line equal to %%%)
  * @param htmlDivElement HTML element that will contain all questions.
- * @returns success.
+ * @returns Success.
  */
 function autoCreateQuiz(sellCode, htmlDivElement) {
     if (sellQuizInst.importQuestions(sellCode) == false)
@@ -45,16 +45,18 @@ function autoCreateQuiz(sellCode, htmlDivElement) {
     return true;
 }
 /**
- * TODO: doc
- * @param questionID
- * @param htmlQuestionElementID
- * @returns
+ * Evaluates a quiz that has been created by autoCreateQuiz(..). This function is called automatically.
+ * @param questionID Question index.
+ * @param htmlQuestionElementID Identifier of the (global) HTML element that contains all questions.
+ * @returns Success.
  */
 function autoEvaluateQuiz(questionID, htmlQuestionElementID) {
     let htmlQuestionElement = document.getElementById(htmlQuestionElementID);
     sellassert(htmlQuestionElement != null, "autoEvaluateQuiz(..): question HTML element is null");
+    readStudentAnswersFromHtmlElements(questionID);
     if (evaluateQuestion(questionID) == false)
         return false;
+    writeFeedbackToHtmlElements(questionID);
     let htmlGeneralFeedbackElement = getHtmlChildElementRecursive(htmlQuestionElement, "general_feedback");
     sellassert(htmlGeneralFeedbackElement != null, "autoEvaluateQuiz(..): feedback HTML element is null");
     htmlGeneralFeedbackElement.innerHTML = getFeedbackText(questionID);
@@ -78,25 +80,25 @@ function createQuestion(sellCode) {
     return sellQuizInst.qidx;
 }
 /**
- * TODO: doc
- * @param questionBackup TODO: doc
+ * Creates a new question from a question backup (refer to function backupQuestion(..)).
+ * @param questionBackup Backup string (stringified JSON).
  * @returns Question index or -1 in case of errors.
  */
 function createQuestionFromBackup(questionBackupStr) {
     return sellQuizInst.createQuestionFromBackup(questionBackupStr);
 }
 /**
- * TODO: doc
- * @param questionID Question Index.
- * @resturns JSON object with question state or null in case that an error occourred.
+ * Creates a backup of a question which includes internal states (for example random variables).
+ * @param questionID Question index.
+ * @resturns Stringified JSON object of the question state or null in case that an error occourred.
  */
 function backupQuestion(questionID) {
     return sellQuizInst.backupQuestion(questionID);
 }
 /**
- * TODO
- * @param questionID TODO
- * @returns TODO
+ * Gets the input fields of a question. *
+ * @param questionID Question index.
+ * @returns Array of dictionaries with entries "element_id" for the HTML element identifier, "element_type" for the HTML element type (refer to enum SellInputElementType in file quiz.js) and "solution_variable_id" the identifier of the corresponding soluion variable.
  */
 function getQuestionInputFields(questionID) {
     return sellQuizInst.getQuestionInputFields(questionID);
@@ -160,10 +162,10 @@ function readStudentAnswersFromHtmlElements(questionID) {
     return sellQuizInst.evaluate.getStudentAnswers(questionID);
 }
 /**
- * TODO: doc   TOOD: refer to "getInputElements" and "backupQuestion"
+ * Sets a student answer string manually. Also refer to functions "getInputElements" and "backupQuestion"
  * @param questionID Question index.
- * @param htmlElementId TODO: doc
- * @param answer TODO: doc
+ * @param htmlElementId HTML element identifier.
+ * @param answerStr Answer string in ASCII-math encoding (e.g. "a+bi" for complex numbers, "[a,b,c]" for vectors, "[[a,b],[c,d]]" for matrices).
  * @returns Success.
  */
 function setStudentAnswerManually(questionID, solutionVariableID, answerStr) {

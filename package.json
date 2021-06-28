@@ -1,12 +1,13 @@
 {
   "name": "sellquiz",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An open source domain-specific language for online assessment",
   "main": "src/index.js",
   "scripts": {
     "build": "tsc && rollup -c",
-    "test": "node src/test.ts"
+    "test": "node src/test.ts",
+    "gendoc": "python3 gen-doc.py"
   },
   "repository": {
     "type": "git",

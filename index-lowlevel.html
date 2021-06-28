@@ -34,7 +34,7 @@
 
     x, y in { 2, 3, ..., 10 }
 
-Calculate $x + y = #(x + y)$.
+Calculate $x + y = #(x + y)$
 `;
 
         // ===== LOW LEVEL API =====
@@ -51,20 +51,17 @@ Calculate $x + y = #(x + y)$.
             alert.log(sellquiz.getErrorLog());
         q_title.innerHTML = sellquiz.getQuestionTitle(qID); 
         q_body.innerHTML = sellquiz.getQuestionBody(qID);
-        sellquiz.setQuestionBodyHtmlElement(qID, q_body);
+        sellquiz.setQuestionHtmlElement(qID, q_body);
         
         function evalQuestion() {
+            sellquiz.readStudentAnswersFromHtmlElements(qID);
             if(sellquiz.evaluateQuestion(qID) == false)
                 console.log("evaluation of question failed");
+            sellquiz.writeFeedbackToHtmlElements(qID);
             q_feedback.innerHTML = sellquiz.getFeedbackText(qID);
             sellquiz.disableInputFields(qID);
             q_score.innerHTML = sellquiz.getScore(qID);
         }
         
-        //TODO: sellquiz.getInputFields(qID);
-        //TODO: sellquiz.getStudentAnswers(qID);
-        //TODO: let v = sellquiz.getVariables(qID);
-        //TODO: sellquiz.setVariables(qID, v);
-
     </script>
 </html>

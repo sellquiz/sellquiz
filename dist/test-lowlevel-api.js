@@ -15,9 +15,10 @@
  * This software is distributed on "AS IS" basis, WITHOUT WARRENTY OF ANY     *
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
+// This file demonstrates the low-level API for use in Node.js. 
 import * as sellquiz from './index.js';
+// ----- (a) create a question -----
 sellquiz.setLanguage("en");
-// (a) create a question
 let questionStr = `Addition
     x := 3
     y := 4
@@ -34,12 +35,10 @@ let qBody = sellquiz.getQuestionBody(qId);
 console.log("QUESTION:");
 console.log("- title HTML code:\n" + qTitle);
 console.log("- body HTML code:\n" + qBody);
-//sellquiz.setStudentAnswerManually(qId, "solID0", "99"); // TODO: e.g. write matrix as ASCII-math
-//sellquiz.evaluateQuestion(qId);
 let qBackup = sellquiz.backupQuestion(qId);
 console.log("BACKUP OF QUESTION:\n" + qBackup);
+// ----- (b) restore a question -----
 sellquiz.reset();
-// (b) restore a question
 qId = sellquiz.createQuestionFromBackup(qBackup);
 let qInputElements = sellquiz.getQuestionInputFields(qId);
 console.log(qInputElements);
