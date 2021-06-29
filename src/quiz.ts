@@ -513,11 +513,11 @@ export class SellQuiz {
         return Lexer.isInteger(this.tk);
     }
 
-    is(s) {
+    is(s : string) {
         return this.tk === s;
     }
 
-    is2(s) {
+    is2(s : string) {
         return this.tk2 === s;
     }
 

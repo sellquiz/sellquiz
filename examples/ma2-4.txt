@@ -278,13 +278,8 @@ Bestimmen Sie die __Hesse-Matrix__:
 _Hinweis: geben Sie die Exponentialfunktion in der Form `exp(x)` an._
 
 
-
-STOP
-
-
 %%%
 
-TODO:
 
 Extremwerte
 
@@ -321,9 +316,6 @@ Welche der folgenden Aussagen ist korrekt?
 [p3] $"f"$ besitzt bei $a$ einen __Sattelpunkt__
 
 
-STOP
-
-
 %%%
 
 
@@ -331,8 +323,8 @@ Fehlerfortpflanzung
 
 	a, b, c, vx, vy in { 2, 3, 4 }
 	f(x,y) := a*x^b * y^c + x*y
-	ex := diff(f, x)
-	ey := diff(f, y)
+	ex(x,y) := diff(f, x)
+	ey(x,y) := diff(f, y)
 	delta := 0.1
 	zmax := abs(ex(vx,vy))*delta + abs(ey(vx,vy))*delta
 
@@ -344,6 +336,10 @@ Bestimmen Sie die __maximale Messunsicherheit__ bei __linearer Fehlerfortpflanzu
 Seien nun $x=vx$, $y=vy$ und $Delta x = Delta y = delta$.
 Berechnen Sie die folgende Fehlergröße:
 * $ (Delta z)_{max} = #zmax $
+
+
+STOP
+
 
 % TODO:
 %Bestimmen Sie nun die __maximale Messunsicherheit__ bei __GauÃŸ'scher Fehlerfortpflanzung__:
@@ -358,7 +354,7 @@ Implizite Funktion
 	w2 := 1 - w1
 	w3, w4 in { 2, 3, 4 }
 	F(x,y) := w3*x^w4 + w1*cos(x*y) + w2*sin(x*y)
-	res := - diff(F, x) / diff(F, y)
+	res(x,y) := - diff(F, x) / diff(F, y)
 
 Sei $ "F"(x,y) = F = 0 $ und $a = (a_1, a_2)$.
 Bestimmen Sie die __Ableitung__ der __implizit definierten Funktion__ $y = f(x)$.

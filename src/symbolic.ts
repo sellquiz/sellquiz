@@ -36,7 +36,7 @@ export class SellSymTermElement {
 
 export class SellSymTerm {
 
-    symbolIDs : Array<String>;
+    symbolIDs : Array<string>;
     stack : Array<SellSymTermElement>;
     state : string; // TODO: enum
     contains_forbidden_ode_subtree : boolean;

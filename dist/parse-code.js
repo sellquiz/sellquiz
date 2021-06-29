@@ -550,12 +550,12 @@ export class ParseCode {
     }
     // unary = (
     //     "-" unary;
-    //   | INT
+    //   | INT [ "." INT ]
     //   | "true" | "false"
     //   | "not" unary
     //   | "i" | "j" | "T"
     //   | function_call
-    //   | ID
+    //   | ID [ "(" add { "," add } ")" ]
     //   | "..."
     //   | matrix
     //   | "(" expr ")"
@@ -573,6 +573,13 @@ export class ParseCode {
         else if (this.p.isInt()) {
             let value = parseInt(this.p.tk);
             this.p.next();
+            if (this.p.is('.')) {
+                this.p.next();
+                if (!Lexer.isInteger(this.p.tk))
+                    this.p.err("expected decimal places after '.'");
+                value = parseFloat("" + value + "." + this.p.tk);
+                this.p.next();
+            }
             this.p.q.stack.push(new SellSymbol(symtype.T_REAL, value));
         }
         else if (this.p.is("true")) {
@@ -607,7 +614,33 @@ export class ParseCode {
             this.p.next();
             if ((id in this.p.q.symbols) == false)
                 this.p.err("unknown identifier '" + id + "'");
-            this.p.q.stack.push(this.p.q.symbols[id]);
+            let sym = this.p.q.symbols[id];
+            if (sym.type == symtype.T_FUNCTION && this.p.is("(")) {
+                this.p.next();
+                this.parseAdd();
+                let args = [this.p.q.stack.pop()];
+                while (this.p.is(",")) {
+                    this.p.next();
+                    this.parseAdd();
+                    args.push(this.p.q.stack.pop());
+                }
+                let term = sym.value;
+                let termSymIDs = term.symbolIDs;
+                if (termSymIDs.length != args.length)
+                    this.p.err("number of arguments does not correspond to function definition");
+                let args_dict = {};
+                for (let i = 0; i < termSymIDs.length; i++) {
+                    if (args[i].type != symtype.T_REAL)
+                        this.p.err("all arguements must be scalar and real valued");
+                    args_dict[termSymIDs[i]] = args[i].value;
+                }
+                let v = term.eval(args_dict);
+                let v_sym = new SellSymbol(symtype.T_REAL, v);
+                this.p.q.stack.push(v_sym);
+                this.p.terminal(')');
+            }
+            else
+                this.p.q.stack.push(sym);
         }
         else if (this.p.is("...")) {
             this.p.next();

@@ -57,7 +57,7 @@ export class Lexer {
 
     // integer = [ "-"], num { num0 };
     static isInteger(str : string) {
-        // TODO: e.g. "0123" must return false
+        // TODO: e.g. "0123" must return false    TODO: parseUnary  uses this function including leading zeros...
         if(str.length == 0)
             return false;
         let startIdx = 0;
