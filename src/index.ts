@@ -78,6 +78,17 @@ function setLanguage(langID : string) : void {
 }
 
 /**
+ * Enable or disable creation of HTML elements for student input fields (default is disabled).
+ * @param enable If true, then getQuestionBody() returns HTML code with 
+ * 
+ *          XXXX TODO
+ */
+function setPutPlaceholdersInsteadOfInputFields(enable : boolean) : void {
+    //sellQuizInst.
+    TODO
+}
+
+/**
  * Creates a new question.
  * @param sellCode SELL source code of a single question.
  * @returns Question index or -1 in case of errors.
@@ -265,6 +276,7 @@ export {
     autoCreateQuiz,
     autoEvaluateQuiz,
     setLanguage, 
+    setPutPlaceholdersInsteadOfInputFields,
     createQuestion,
     createQuestionFromBackup,
     backupQuestion,
