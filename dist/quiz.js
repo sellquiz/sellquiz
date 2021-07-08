@@ -73,11 +73,20 @@ export class SellQuestion {
 }
 export class SellQuiz {
     constructor(debug = false) {
+        // subclases
+        this.evaluate = null;
+        this.textParser = null;
+        this.codeParser = null;
+        this.codeSymParser = null;
+        this.imParser = null;
+        this.imInputParser = null;
         this.ELEMENT_TYPE_INPUT = 'input';
         this.ELEMENT_TYPE_SPAN = 'span';
+        // preferences
         this.debug = false;
         this.log = '';
         this.language = 'en';
+        this.generateInputFieldHtmlCode = true;
         // questions
         this.questions = [];
         this.q = null; // current question

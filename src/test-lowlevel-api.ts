@@ -26,8 +26,7 @@ import * as sellquiz from './index.js';
 // ----- (a) create a question -----
 
 sellquiz.setLanguage("en");
-
-sellquiz.putPlaceholdersInsteadOfInputFields(true);
+sellquiz.setGenerateInputFieldHtmlCode(false);
 
 let questionStr = `Addition
     x := 3

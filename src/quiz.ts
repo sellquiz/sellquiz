@@ -75,20 +75,23 @@ export class SellQuestion {
 
 export class SellQuiz {
 
-    evaluate: Evaluate;
+    // subclases
+    evaluate: Evaluate = null;
 
-    textParser: ParseText;
-    codeParser: ParseCode;
-    codeSymParser: ParseCodeSym;
-    imParser: ParseIM;
-    imInputParser: ParseIM_Input;
+    textParser: ParseText = null;
+    codeParser: ParseCode = null;
+    codeSymParser: ParseCodeSym = null;
+    imParser: ParseIM = null;
+    imInputParser: ParseIM_Input = null;
 
     ELEMENT_TYPE_INPUT: string = 'input';
     ELEMENT_TYPE_SPAN: string = 'span';
 
+    // preferences
     debug: boolean = false;
     log: string = '';
     language: string = 'en';
+    generateInputFieldHtmlCode: boolean = true;
 
     // questions
     questions: Array<SellQuestion> = [];

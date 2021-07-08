@@ -20,7 +20,7 @@ import * as quiz from './quiz.js';
 import { sellassert } from './sellassert.js';
 import { getHtmlChildElementRecursive } from './help.js';
 
-var sellQuizInst = new quiz.SellQuiz();
+var sellQuizInst : quiz.SellQuiz = new quiz.SellQuiz();
 
 /**
  * Remove all questions.
@@ -78,14 +78,11 @@ function setLanguage(langID : string) : void {
 }
 
 /**
- * Enable or disable creation of HTML elements for student input fields (default is disabled).
- * @param enable If true, then getQuestionBody() returns HTML code with 
- * 
- *          XXXX TODO
+ * Enables (or disables) the generation of HTML code for input and feedback element.
+ * @param enable If false, then getQuestionBody() returns HTML code that includes only placeholders for input and feedback fields. Placeholders have the form '$$ID', where ID can be obtained by calling getQuestionInputFields().
  */
-function setPutPlaceholdersInsteadOfInputFields(enable : boolean) : void {
-    //sellQuizInst.
-    TODO
+function setGenerateInputFieldHtmlCode(enable : boolean = true) : void {
+    sellQuizInst.generateInputFieldHtmlCode = enable;
 }
 
 /**
@@ -276,7 +273,7 @@ export {
     autoCreateQuiz,
     autoEvaluateQuiz,
     setLanguage, 
-    setPutPlaceholdersInsteadOfInputFields,
+    setGenerateInputFieldHtmlCode,
     createQuestion,
     createQuestionFromBackup,
     backupQuestion,

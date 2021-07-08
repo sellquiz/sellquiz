@@ -121,8 +121,12 @@ export class ParseIM_Input {
             case symtype.T_STRING_LIST: // list := list of alternatives -> 1 box
                 inputWidth += 10;
                 input.htmlElementInputType = SellInputElementType.TEXTFIELD;
-                html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
-                html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                if(this.p.generateInputFieldHtmlCode == false) {
+                    html += '$$' + input.htmlElementId;
+                } else {
+                    html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                }
                 break;
 
             case symtype.T_REAL:
@@ -130,17 +134,27 @@ export class ParseIM_Input {
                 if(sym.type == symtype.T_FUNCTION)
                     inputWidth += 10;
                 input.htmlElementInputType = SellInputElementType.TEXTFIELD;
-                html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
-                html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                if(this.p.generateInputFieldHtmlCode == false) {
+                    html += ' $$' + input.htmlElementId + ' ';
+                    html += '$$' + input.htmlElementId_feedback + ' ';
+                } else {
+                    html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                }
                 break;
 
             case symtype.T_COMPLEX:
                 input.htmlElementInputType = SellInputElementType.COMPLEX_NUMBER;
-                // -- real part --
-                html += '<input type="text" name="sell_input" value="" id="' + input.htmlElementId + '_real" size="' + inputWidth + '" placeholder=""> `+` ';
-                // -- complex part --
-                html += '<input type="text" name="sell_input" value="" id="' + input.htmlElementId + '_imag" size="' + inputWidth + '" placeholder=""> `i` '; // TODO: make i<->j configurable
-                html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                if(this.p.generateInputFieldHtmlCode == false) {
+                    html += ' $$' + input.htmlElementId + ' ';
+                    html += '$$' + input.htmlElementId_feedback + ' ';
+                } else {
+                    // -- real part --
+                    html += '<input type="text" name="sell_input" value="" id="' + input.htmlElementId + '_real" size="' + inputWidth + '" placeholder=""> `+` ';
+                    // -- complex part --
+                    html += '<input type="text" name="sell_input" value="" id="' + input.htmlElementId + '_imag" size="' + inputWidth + '" placeholder=""> `i` '; // TODO: make i<->j configurable
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                }
                 break;
     
             case symtype.T_SET:
@@ -149,14 +163,19 @@ export class ParseIM_Input {
                     inputWidth += 5;
                 input.htmlElementInputType = SellInputElementType.VECTOR;
                 input.vectorLength = sym.value.length;
-                html += '`{`';
-                for(let i=0; i<sym.value.length; i++) {
-                    if (i > 0)
-                        html += ' , ';
-                    html += ' <input type="text" name="sell_input" value="" id="' + input.htmlElementId  + '_'+ i + '" size="' + inputWidth + '" placeholder=""> ';
+                if(this.p.generateInputFieldHtmlCode == false) {
+                    html += ' $$' + input.htmlElementId + ' ';
+                    html += '$$' + input.htmlElementId_feedback + ' ';
+                } else {
+                    html += '`{`';
+                    for(let i=0; i<sym.value.length; i++) {
+                        if (i > 0)
+                            html += ' , ';
+                        html += ' <input type="text" name="sell_input" value="" id="' + input.htmlElementId  + '_'+ i + '" size="' + inputWidth + '" placeholder=""> ';
+                    }
+                    html += '`}`';
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
-                html += '`}`';
-                html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 break;
 
             case symtype.T_MATRIX:
@@ -174,8 +193,13 @@ export class ParseIM_Input {
                     this.p.q, input, rows, cols, isWideInput, 
                     this.p.resizableRows, this.p.resizableCols);
                 // create only a span here, since matrices are resizable and thus must be updatable
-                html += '<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="' + input.htmlElementId + '"></span>';
-                html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                if(this.p.generateInputFieldHtmlCode == false) {
+                    html += ' $$' + input.htmlElementId + ' ';
+                    html += '$$' + input.htmlElementId_feedback + ' ';
+                } else {
+                    html += '<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="' + input.htmlElementId + '"></span>';
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                }
                 break;
 
             default:

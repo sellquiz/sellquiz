@@ -70,6 +70,13 @@ function setLanguage(langID) {
     sellQuizInst.language = langID;
 }
 /**
+ * Enables (or disables) the generation of HTML code for input and feedback element.
+ * @param enable If false, then getQuestionBody() returns HTML code that includes only placeholders for input and feedback fields. Placeholders have the form '$$ID', where ID can be obtained by calling getQuestionInputFields().
+ */
+function setGenerateInputFieldHtmlCode(enable = true) {
+    sellQuizInst.generateInputFieldHtmlCode = enable;
+}
+/**
  * Creates a new question.
  * @param sellCode SELL source code of a single question.
  * @returns Question index or -1 in case of errors.
@@ -233,5 +240,5 @@ function refreshQuestion(questionID) {
 function refreshMatrixDimensions(questionID, matrixId, deltaRows, deltaCols) {
     return sellQuizInst.updateMatrixDims(questionID, matrixId, deltaRows, deltaCols);
 }
-export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions };
+export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions };
 //# sourceMappingURL=index.js.map

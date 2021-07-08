@@ -30,12 +30,12 @@ pow =
   unary { ("^") unary };
 unary = (
     "-" unary;
-  | INT
+  | INT [ "." INT ]
   | "true" | "false"
   | "not" unary
   | "i" | "j" | "T"
   | function_call
-  | ID
+  | ID [ "(" add { "," add } ")" ]
   | "..."
   | matrix
   | "(" expr ")"
