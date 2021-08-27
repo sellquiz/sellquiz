@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>Training</title>
+        <!-- REFER TO FILES index-highlevel.html and index-lowlevel.html for explanations -->
+        <!-- this file requires a HTTP-server (e.g. run "python3 -m http.server 8001"
+             and open "localhost:8001/index-dynamic.html" in your browser) -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
+        <script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
+        <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
+        <script src="build/js/sellquiz.min.js?v=2.0.3"></script>
+    </head>
+    <body>
+        <div id="container" class="container">
+            <br/>
+            <span id="course-id"></span><br/>
+            <br/><br/>
+            <h1 id="quiz-id"></h1>
+            <h3>Training</h3>
+            <br/>
+            <div class="row">
+                <div class="col-sm">
+                    <div id="sellQuestions" class="p-3"></div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </body>
+    <script>        
+        $( document ).ready(function() {
+            const params = new URLSearchParams(window.location.search);
+            let task = params.get('task');
+            if(task == null)
+                task = "ma2-z.txt";
+            let timestamp = ts = Math.round((new Date()).getTime() / 1000);
+            task = 'examples/' + task + '?time=' + timestamp;
+            $.ajax({
+                url: task,
+                type: 'GET',
+                success: function(data,status,xhr) {
+                    let code = xhr.responseText;
+                    sellquiz.setLanguage("de");
+                    let sellQuestionsDiv = document.getElementById("sellQuestions");
+                    if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv) == false)
+                        alert(sellquiz.getErrorLog());
+                    setTimeout(function(){ MathJax.typeset(); }, 750);
+                },
+                error: function(xhr, status, error) {
+                    alert("ERROR: " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+</html>

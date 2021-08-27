@@ -85,7 +85,7 @@ export class ParseCodeSym {
     //     "(" symbolic_term_expr ")" 
     //   | INT ["!"] 
     //   | FLOAT
-    //   | ("exp"|"sin"|"cos") "(" symbolic_term_expr ")"
+    //   | ("exp"|"sin"|"cos"|"sqrt") "(" symbolic_term_expr ")"
     //   | "diff" "(" symbolic_term_expr "," ID  ")"
     //   | ID 
     //   | ID "(" [ expr { "," epxr } ] ")"
@@ -105,7 +105,7 @@ export class ParseCodeSym {
                 value = math.factorial(value);
             }
             symterm.pushConstant(value);
-        } else if(["exp","sin","cos"].includes(this.p.tk)) {
+        } else if(["exp","sin","cos","sqrt"].includes(this.p.tk)) {
             // functions with 1 parameter
             let fctId = this.p.tk;
             this.p.next();
