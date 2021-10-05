@@ -4,9 +4,57 @@
 
 Mengen
 
+    a, b, c in { 1, 2, 3 }
+    A := { a, a+b, a+b+c }
+    B := { a, a+b+c }
+
+Gegeben sei die Menge $ "A" = A $. Ist die folgende Aussage wahr?
+[x] $ B sub A $
+
+
+%%%
+
+
+Mengen
+
+    a, b, c, d in { 1, 2, 3, 4 }
+    A := { a, a+b, a+b+c, a+b+c+d }
+
+Sei $ "A" = A $. Wie viele Elemente hat die __Potenzmenge__ $P("A")$?
+$ #16 $
+
+
+%%%
+
+
+Mengenoperationen
+
+Seien $A$ und $B$ Mengen. $A cup B$ beschreibt:
+(x) die __Vereinigung__ von $A$ und $B$.
+( ) den __Durchschnitt__ von $A$ und $B$.
+
+
+%%%
+
+
+Menge
+
+    a, b, c in { 1, 2, 3 }
+    b := a + b
+    c := b + c
+
+Wie viele Elemente hat die Menge $ {{a,b},{c}} $?
+$ #2 $
+
+
+%%%
+
+
+Mengen
+
 	a in { 1, 2, ..., 10 }
 	b, c in { 1, 2, 3 }
-	x = a+b+c+4
+	x := a+b+c+4
 	A := { a, a+b, a+b+c }
 
 Gegeben Sei die Menge $ "A" = A $. Welche der folgenden Aussagen sind wahr?
@@ -37,6 +85,19 @@ Summe
 	s := a * n
 
 Berechnen Sie $ sum_(i=1)^n a $:
+* $ #s $
+
+
+%%%
+
+
+Summe
+
+    a in { 2, 3, 4 }
+    n in { 3 }
+    s := a * 6
+
+Berechnen Sie $ sum_(i=1)^n a*i $:
 * $ #s $
 
 
@@ -96,6 +157,18 @@ Wählen Sie die richtigen Antworten aus:
 %%%
 
 
+Supremum, Infimum
+
+Sei $X sub RR$.
+* $M in RR$ heißt __Supremum__ von $X$, falls $M$ eine #"obere" Schranke ist und keine kleinere #"obere" Schranke existiert.
+* $M in RR$ heißt __Infimum__ von $X$, falls $m$ eine #"untere" Schranke ist und keine größere #"untere" Schranke existiert.
+
+Füllen Sie den Lückentext aus.
+
+
+%%%
+
+
 Beschränkte Mengen
 
 	a in { -5, -4, ..., -2 }
@@ -131,6 +204,30 @@ Wählen Sie die richtigen Antworten aus:
 [ ]   $ |xy| = |x * y| $
 [x]   $ |x+y| <= |x| + |y| $
 [ ]   $ |x+y| >= |x + y| $
+
+
+%%%
+
+
+Aussagenlogik
+
+Seien $A$ und $B$ Aussagen. Die __Konjugation__ von $A$ und $B$ wird dargestellt durch:
+(x) $A ^^ B$
+( ) $A vv B$
+
+
+%%%
+
+
+Aussagenlogik
+
+    a, b, c, d in { 3, 4, 5 }
+
+Welche der folgenden Ausdrücke sind __wahre Aussagen__?
+[ ] Die Menge $M={k in NN | k=2 m text( und ) m>3}$ hat 3 Elemente.
+[ ] $a + b * c$.
+[x] $EE x in ZZ \ x < 0$
+[x] Die Gleichung $a x + c = d$ besitzt genau eine Lösung.
 
 
 %%%
