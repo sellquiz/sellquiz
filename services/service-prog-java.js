@@ -76,3 +76,9 @@ if(status != 0) {
 
 // remove temporary path
 fs.rmSync(tmp_path, { recursive: true });
+
+/* TODO: 
+  - temp path is not always removed
+  - output JSON
+  - write service.php
+*/
