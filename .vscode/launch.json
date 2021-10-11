@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "services.tests.Main",
+            "projectName": "sellquiz_422b832f"
+        },
+        {
             "type": "pwa-node",
             "request": "launch",
             "name": "Run test.js",
@@ -9,7 +16,9 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/src/test.ts",
-            "args": ["examples/ma2-4.txt"],
+            "args": [
+                "examples/ma2-4.txt"
+            ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"
         },
@@ -21,7 +30,9 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/src/test-lowlevel-api.ts",
-            "args": ["examples/ma2-4.txt"],
+            "args": [
+                "examples/ma2-4.txt"
+            ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"
         }
