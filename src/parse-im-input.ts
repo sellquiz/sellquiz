@@ -211,6 +211,7 @@ export class ParseIM_Input {
                     html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
                     html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
+                // TODO: USE CODE MIRROR!!!!!
                 break;
 
             default:
