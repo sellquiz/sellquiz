@@ -33,7 +33,8 @@ export enum symtype {
     T_MATRIX_TRANSPOSE = "T_MATRIX_TRANSPOSE",
     T_MATRIX_OF_FUNCTIONS = "T_MATRIX_OF_FUNCTIONS",
     T_STRING = "T_STRING", 
-    T_STRING_LIST = "T_STRING_LIST"
+    T_STRING_LIST = "T_STRING_LIST",
+    T_PROG = "T_PROG"
 }
 
 export class SellSymbol {

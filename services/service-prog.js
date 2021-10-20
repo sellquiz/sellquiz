@@ -23,6 +23,7 @@ import * as fs from "fs";
 import * as os from "os";
 
 import { execSync } from "child_process";
+import { assert } from "console";
 
 if(process.argv.length != 3) {
     console.log("usage: node service-prog.js JSON_INPUT_FILE");
@@ -58,9 +59,10 @@ let input = JSON.parse(inputJson);
 let tmp_path = fs.mkdtempSync(os.tmpdir()).toString();
 
 const JAVA_MAIN_TEMPLATE = `public class Main {
-__METHODS__
+/*__METHODS__*/
 public static void main(String[] args) {
-__MAIN__
+/*__MAIN__*/
+/*__ASSERTS__*/
 }}`;
 
 let cmd="", status="", stdout="", stderr="", java_src="", java_main_src="";
@@ -71,12 +73,10 @@ let output = {"status": "ok", "msg": ""};
 if(output["status"] === "ok") {
     switch(input["type"]) {
         case "JavaBlock":
-            java_src = JAVA_MAIN_TEMPLATE.replace("__MAIN__", input["source"] + "\n");
-            java_src = java_src.replace("__METHODS__", "");
+            java_src = JAVA_MAIN_TEMPLATE.replace("/*__MAIN__*/", input["source"] + "\n");
             break;
         case "JavaMethod":
-            java_src = JAVA_MAIN_TEMPLATE.replace("__MAIN__", "");
-            java_src = java_src.replace("__METHODS__", input["source"] + "\n");
+            java_src = JAVA_MAIN_TEMPLATE.replace("/*__METHODS__*/", input["source"] + "\n");
             break;
         default:
             output["status"] = "devError";
@@ -113,15 +113,11 @@ if(output["status"] === "ok") {
 
 // 2. try to compile code block with asserts
 if(output["status"] === "ok") {
-
-    TODO: XXXXX
-
-    java_main_src = input["source"] + "\n";
+    let asserts = '';
     for(let a of input["asserts"]) {
-        java_main_src += "if(" + a + ") {} else System.exit(-1);\n";
+        asserts += "if(" + a + ") {} else System.exit(-1);\n";
     }
-    java_src = JAVA_MAIN_TEMPLATE.replace("__MAIN__", java_main_src);
-    java_src = java_src.replace("__METHODS__", "");
+    java_src = java_src.replace("/*__ASSERTS__*/", asserts);
     //console.log(java_src);
     fs.writeFileSync(tmp_path + "/Main.java", java_src);
     cmd = JAVA_COMPILER_PATH + " " + tmp_path + "/Main.java";

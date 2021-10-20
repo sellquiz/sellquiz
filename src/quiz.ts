@@ -23,6 +23,7 @@ import { ParseCode } from './parse-code.js';
 import { ParseCodeSym } from './parse-code-sym.js';
 import { ParseIM } from './parse-im.js';
 import { ParseIM_Input } from './parse-im-input.js';
+import { ParseProg } from './parse-prog.js';
 import { Evaluate } from './evaluate.js';
 import { MatrixInput } from './matinput.js';
 import { getHtmlChildElementRecursive } from './help.js';
@@ -83,6 +84,7 @@ export class SellQuiz {
     codeSymParser: ParseCodeSym = null;
     imParser: ParseIM = null;
     imInputParser: ParseIM_Input = null;
+    progParser: ParseProg = null;
 
     ELEMENT_TYPE_INPUT: string = 'input';
     ELEMENT_TYPE_SPAN: string = 'span';
@@ -140,6 +142,7 @@ export class SellQuiz {
         this.codeSymParser = new ParseCodeSym(this);
         this.imParser = new ParseIM(this);
         this.imInputParser = new ParseIM_Input(this);
+        this.progParser = new ParseProg(this);
     }
 
     importQuestions(sellCode : string) : boolean {
@@ -191,16 +194,22 @@ export class SellQuiz {
         this.q.src = src;
         this.questions.push(this.q);
         let lines = src.split('\n');
-        let indent1_last = false;
-        let indent2_last = false;
-        let code_block = false;
+        //let indent1_last = false;
+        //let indent2_last = false;
+        let last_indent = 0;
+        let code_block = false; // inline code (NOT to be confused with SELL-code)
         for (let i = 0; i < lines.length; i++) {
             if (!code_block && lines[i].startsWith('```'))
                 code_block = true;
-            let indent2 = lines[i].startsWith('\t\t') || lines[i].startsWith('        ');
-            let indent1 = lines[i].startsWith('\t') || lines[i].startsWith('    ');
-            if (indent2)
-                indent1 = false;
+            //let indent2 = lines[i].startsWith('\t\t') || lines[i].startsWith('        ');
+            //let indent1 = lines[i].startsWith('\t') || lines[i].startsWith('    ');
+            //if (indent2)
+            //    indent1 = false;
+            let indent = 0;
+            if(lines[i].startsWith('\t\t') || lines[i].startsWith('        '))
+                indent = 2;
+            else if(lines[i].startsWith('\t') || lines[i].startsWith('    '))
+                indent = 1;
             let line_str = lines[i].split('%')[0]; // remove comments
             if (line_str.length == 0) // empty line
                 continue;
@@ -209,21 +218,34 @@ export class SellQuiz {
                 continue
             lineTokens.push(new SellToken('§EOL', i + 1, -1)); // end of line
             if (!code_block) {
-                if (!indent1 && indent1_last)
+                /*if (!indent1 && indent1_last)
                     this.tokens.push(new SellToken('§CODE_END', i + 1, -1));
-                //if(!indent2 && indent2_last)
-                //    this.tokens.push(new SellToken('§HINT_END', i+1, -1));
                 if (indent1 && !indent1_last)
+                    this.tokens.push(new SellToken('§CODE_START', i + 1, -1));*/
+                if(last_indent==0 && indent==1)
                     this.tokens.push(new SellToken('§CODE_START', i + 1, -1));
-                //if(indent2 && !indent2_last)
-                //    this.tokens.push(new SellToken('§HINT_START', i+1, -1));
+                else if(last_indent==0 && indent==2) {
+                    this.tokens.push(new SellToken('§CODE_START', i + 1, -1));
+                    this.tokens.push(new SellToken('§CODE2_START', i + 1, -1));
+                }
+                else if(last_indent==1 && indent==2)
+                    this.tokens.push(new SellToken('§CODE2_START', i + 1, -1));
+                else if(last_indent==2 && indent==1)
+                    this.tokens.push(new SellToken('§CODE2_END', i + 1, -1));
+                else if(last_indent==2 && indent==0) {
+                    this.tokens.push(new SellToken('§CODE2_END', i + 1, -1));
+                    this.tokens.push(new SellToken('§CODE_END', i + 1, -1));
+                }
+                else if(last_indent==1 && indent==0)
+                    this.tokens.push(new SellToken('§CODE_END', i + 1, -1));
             }
             for (let j = 0; j < lineTokens.length; j++) {
                 this.tokens.push(lineTokens[j]);
                 this.tokens[this.tokens.length - 1].line = codeStartRow + i + 1;
             }
-            indent1_last = indent1;
-            indent2_last = indent2;
+            //indent1_last = indent1;
+            //indent2_last = indent2;
+            last_indent = indent;
             if (code_block && lines[i].endsWith('```'))
                 code_block = false;
         }
@@ -487,15 +509,19 @@ export class SellQuiz {
             this.next();
     }
 
-    err(msg) {
+    err(msg : string) {
         throw 'Error:' + this.tk_line + ':' + this.tk_col + ': ' + msg;
     }
 
     terminal(t) {
         if (this.tk === t)
             this.next();
-        else
-            this.err(t == "§EOL" ? "expected linebreak, got '" + this.tk + "'" : "expected '" + t + "'");
+        else {
+            if(t == "§EOL")
+                this.err("expected linebreak, got '" + this.tk + "'");
+            else
+                this.err("expected '" + t + "', got '" + this.tk.replace('§EOL', 'linebreak') + "'");
+        }
     }
 
     ident() {
@@ -506,7 +532,9 @@ export class SellQuiz {
             this.err("expected identifier");
     }
 
-    isIdent() { return Lexer.isIdentifier(this.tk); }
+    isIdent() { 
+        return Lexer.isIdentifier(this.tk); 
+    }
 
     isNumber() {
         return !isNaN(this.tk as any);
@@ -528,7 +556,7 @@ export class SellQuiz {
         return Math.abs(v - Math.round(v)) < 1e-6;
     }
 
-    pushSym(type, value, precision = 1e-9) {
+    pushSym(type : symtype, value : any, precision = 1e-9) {
         this.q.stack.push(new SellSymbol(type, value, precision));
     }
 

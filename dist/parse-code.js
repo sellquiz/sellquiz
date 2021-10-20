@@ -34,17 +34,25 @@ export class ParseCode {
             'min', 'max'];
     }
     // code = 
-    //   "§CODE_START" { (code_prop | code_hint | assign) "\n" } "§CODE_END";
+    //   "§CODE_START" { (code_prop | code_hint | assign | prog) "\n" } "§CODE_END";
     parseCode() {
         this.p.terminal('§CODE_START');
         while (!this.p.is('§CODE_END') && !this.p.is('§END')) {
-            if (this.p.is("input"))
+            if (this.p.is("input")) {
                 this.parseCodeProp();
-            else if (this.p.is('?'))
+                this.p.terminal('§EOL');
+            }
+            else if (this.p.is('?')) {
                 this.parseCodeHint();
-            else
+                this.p.terminal('§EOL');
+            }
+            else if (this.p.is('JavaBlock') || this.p.is('JavaMethod')) {
+                this.p.progParser.parseProg();
+            }
+            else {
                 this.parseAssign();
-            this.p.terminal('§EOL');
+                this.p.terminal('§EOL');
+            }
         }
         if (!this.p.is("§END"))
             this.p.terminal('§CODE_END');
@@ -549,7 +557,7 @@ export class ParseCode {
         }
     }
     // unary = (
-    //     "-" unary;
+    //   | "-" unary;
     //   | INT [ "." INT ]
     //   | "true" | "false"
     //   | "not" unary

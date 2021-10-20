@@ -187,6 +187,17 @@ export class ParseIM_Input {
                     html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
                 break;
+            case symtype.T_PROG:
+                inputWidth += 10;
+                input.htmlElementInputType = SellInputElementType.TEXTFIELD;
+                if (this.p.generateInputFieldHtmlCode == false) {
+                    html += '$$' + input.htmlElementId;
+                }
+                else {
+                    html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    html += '<span id="' + input.htmlElementId_feedback + '"></span>';
+                }
+                break;
             default:
                 this.p.err("unimplemented solution type '" + sym.type + "'");
         }
