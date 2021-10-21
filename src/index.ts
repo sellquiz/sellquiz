@@ -253,7 +253,11 @@ function disableInputFields(questionID : number) : boolean {
  * @returns Success.
  */
 function refreshQuestion(questionID : number) : boolean {
-    return sellQuizInst.updateMatrixInputs(questionID);
+    if(sellQuizInst.updateMatrixInputs(questionID) == false)
+        return false;
+    if(sellQuizInst.createProgrammingTaskEditors(questionID) == false)
+        return false;
+    return true;
 }
 
 /**

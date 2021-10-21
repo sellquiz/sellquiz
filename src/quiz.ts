@@ -461,6 +461,18 @@ export class SellQuiz {
         return true;
     }
 
+    createProgrammingTaskEditors(questionID : number) : boolean {
+        /*let q = this.getQuestionByIdx(questionID);
+        if(q == null)
+            return false;
+        for(let i=0; i<q.inputs.length; i++) {
+            let input = q.inputs[i];
+            input.xxx  ohjksdhfkjsdhfkjh 
+        }*/
+        TODO
+        return true;
+    } 
+
     updateMatrixDims(questionID : number, htmlElementId : string, 
         deltaRows : number, deltaCols : number) : boolean {
         let q = this.getQuestionByIdx(questionID);

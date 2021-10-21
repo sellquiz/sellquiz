@@ -208,10 +208,9 @@ export class ParseIM_Input {
                 if(this.p.generateInputFieldHtmlCode == false) {
                     html += '$$' + input.htmlElementId;
                 } else {
-                    html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    html += '<textarea style="min-width: 100%" id="' + input.htmlElementId + '" + rows="5"></textarea><br/>';
                     html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
-                // TODO: USE CODE MIRROR!!!!!
                 break;
 
             default:

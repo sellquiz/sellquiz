@@ -194,9 +194,13 @@ export class ParseIM_Input {
                     html += '$$' + input.htmlElementId;
                 }
                 else {
-                    html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    //html += ' <input type="text" value="" id="' + input.htmlElementId + '" size="' + inputWidth + '" placeholder=""> ';
+                    //html += '<div class="container"><div class="row"><div class="col">';
+                    html += '<textarea style="min-width: 100%" id="' + input.htmlElementId + '" + rows="5"></textarea><br/>';
+                    //html += '</div></div></div>';
                     html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
+                // TODO: USE CODE MIRROR!!!!!
                 break;
             default:
                 this.p.err("unimplemented solution type '" + sym.type + "'");
