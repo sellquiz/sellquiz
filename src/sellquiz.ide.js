@@ -1,5 +1,6 @@
+// TODO: doc
 
-sellquiz.__ideCreationFuntion(function _(textarea, prog_lang, height) {
+sellquiz.__ideCreationFuntion(function _(sellinput, textarea, prog_lang, height) {
     let cmLang = "";
     switch(prog_lang) {
         case "java":
@@ -13,4 +14,5 @@ sellquiz.__ideCreationFuntion(function _(textarea, prog_lang, height) {
         mode: cmLang
     });
     cm.setSize(null, height);    
+    sellinput.codeMirror = cm;
 });

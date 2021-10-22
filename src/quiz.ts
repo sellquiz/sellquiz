@@ -16,8 +16,6 @@
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
 
-//import * as CodeMirror from 'codemirror';
-
 import { symtype, SellSymbol } from './symbol.js';
 import { SellToken, Lexer } from './lex.js';
 import { ParseText } from './parse-text.js';
@@ -56,6 +54,7 @@ export class SellInput {
     matrixInput: MatrixInput = null;
     // only used for vector based mathtypes
     vectorLength: number = 1;
+    codeMirror : any = null; // IDE instance; only used for programming tasks
 }
 
 export class SellQuestion {
@@ -149,7 +148,7 @@ export class SellQuiz {
     }
 
     // TODO:
-    createIDE(htmlElement : Element, lang="Java", height=75) {
+    createIDE(sellInput : SellInput, htmlElement : Element, lang="Java", height=75) {
         // dev info: the CodeMirror editor is not included here directly for two reasons:
         //  (a.) many users will use SELL without programming questions
         //  (b.) CodeMirror can not be used in combination with node.js (DOM-environment not present)
@@ -480,7 +479,7 @@ export class SellQuiz {
             let input = q.inputs[i];
             if(input.htmlElementInputType == SellInputElementType.JAVA_PROGRAMMING) {
                 let textarea = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
-                this.createIDE(textarea, 'java', 75);
+                this.createIDE(input, textarea, 'java', 75);
             }
         }
         return true;

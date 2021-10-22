@@ -113,8 +113,8 @@ export class Evaluate {
                     htmlElement = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
                     sellassert(htmlElement != null, "getStudentAnswers(): failed to get HTML child element: "
                         + input.htmlElementId);
-                    input.studentAnswer = [htmlElement.value];
-                    alert("TODO: need ");
+                    input.studentAnswer = [input.codeMirror.getValue()];
+                    alert(input.studentAnswer);
                     break;
                 default:
                     sellassert(false, "getStudentAnswers(..): UNIMPLEMENTED HTML element type '" + input.htmlElementInputType + "'");

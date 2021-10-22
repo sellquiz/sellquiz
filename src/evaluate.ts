@@ -137,8 +137,7 @@ export class Evaluate {
                     sellassert(htmlElement != null, 
                         "getStudentAnswers(): failed to get HTML child element: " 
                         + input.htmlElementId);
-                    input.studentAnswer = [ htmlElement.value ];
-                    alert("getStudentAnswers(..): TODO: need CodeMirror instance!!");
+                    input.studentAnswer = [ input.codeMirror.getValue() ];
                     break;
                 default:
                     sellassert(false, "getStudentAnswers(..): UNIMPLEMENTED HTML element type '" + input.htmlElementInputType + "'");
@@ -218,6 +217,9 @@ export class Evaluate {
                         v.type == symtype.T_MATRIX_OF_FUNCTIONS, 
                         q, input, v);
                     break;
+                /*case symtype.T_JAVA_PROGRAMMING:
+                    xx
+                    break;*/
                 default:
                     sellassert(false, "evaluate(): unimplemented math type: " + v.type.toString());
             }
