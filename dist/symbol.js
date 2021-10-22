@@ -32,7 +32,7 @@ export var symtype;
     symtype["T_MATRIX_OF_FUNCTIONS"] = "T_MATRIX_OF_FUNCTIONS";
     symtype["T_STRING"] = "T_STRING";
     symtype["T_STRING_LIST"] = "T_STRING_LIST";
-    symtype["T_PROG"] = "T_PROG";
+    symtype["T_JAVA_PROGRAMMING"] = "T_JAVA_PROGRAMMING";
 })(symtype || (symtype = {}));
 export class SellSymbol {
     constructor(type = symtype.T_UNKNOWN, value = null, precision = 1e-9) {

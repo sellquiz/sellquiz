@@ -15,6 +15,7 @@
  * This software is distributed on "AS IS" basis, WITHOUT WARRENTY OF ANY     *
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
+//import * as CodeMirror from 'codemirror';
 import { SellSymbol } from './symbol.js';
 import { SellToken, Lexer } from './lex.js';
 import { ParseText } from './parse-text.js';
@@ -31,10 +32,11 @@ export var SellInputElementType;
 (function (SellInputElementType) {
     SellInputElementType["UNKNOWN"] = "unknown";
     SellInputElementType["TEXTFIELD"] = "textfield";
-    SellInputElementType["COMPLEX_NUMBER"] = "textflield";
+    SellInputElementType["COMPLEX_NUMBER"] = "complex_number";
     SellInputElementType["CHECKBOX"] = "checkbox";
     SellInputElementType["VECTOR"] = "vector";
-    SellInputElementType["MATRIX"] = "matrix"; // matrix with m*n input boxes
+    SellInputElementType["MATRIX"] = "matrix";
+    SellInputElementType["JAVA_PROGRAMMING"] = "java_programming";
 })(SellInputElementType || (SellInputElementType = {}));
 export class SellInput {
     constructor() {
@@ -129,6 +131,13 @@ export class SellQuiz {
         this.imParser = new ParseIM(this);
         this.imInputParser = new ParseIM_Input(this);
         this.progParser = new ParseProg(this);
+    }
+    // TODO:
+    createIDE(htmlElement, lang = "Java", height = 75) {
+        // dev info: the CodeMirror editor is not included here directly for two reasons:
+        //  (a.) many users will use SELL without programming questions
+        //  (b.) CodeMirror can not be used in combination with node.js (DOM-environment not present)
+        console.log("ERROR: Obviously your quiz includes a programming task. Please also include sellquiz.ide.min.js in your HTML file");
     }
     importQuestions(sellCode) {
         sellCode = sellCode.split('STOP')[0];
@@ -428,8 +437,21 @@ export class SellQuiz {
             return false;
         for (let i = 0; i < q.inputs.length; i++) {
             let input = q.inputs[i];
-            if (input.matrixInput != null)
+            if (input.matrixInput != null) // TODO: better compare input.htmlElementInputType??
                 input.matrixInput.updateHTML();
+        }
+        return true;
+    }
+    createProgrammingTaskEditors(questionID) {
+        let q = this.getQuestionByIdx(questionID);
+        if (q == null)
+            return false;
+        for (let i = 0; i < q.inputs.length; i++) {
+            let input = q.inputs[i];
+            if (input.htmlElementInputType == SellInputElementType.JAVA_PROGRAMMING) {
+                let textarea = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
+                this.createIDE(textarea, 'java', 75);
+            }
         }
         return true;
     }

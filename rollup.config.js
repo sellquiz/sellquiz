@@ -1,4 +1,6 @@
 import { terser } from "rollup-plugin-terser";
+//import { nodeResolve } from "@rollup/plugin-node-resolve"
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
     input: 'dist/index.js',
@@ -7,13 +9,18 @@ export default {
         format: 'iife',
         name: 'sellquiz',
         globals: {
-            'mathjs': 'math'
-        } 
+            'mathjs': 'math',
+            'codemirror': 'CodeMirror'
+        }
     },
     external: [
-        'mathjs'
+        'mathjs',
+        'codemirror'
     ],
     plugins: [
+        //nodeResolve(),
+        //commonjs(),
         terser()
     ]
 };
+  

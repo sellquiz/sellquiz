@@ -227,7 +227,11 @@ function disableInputFields(questionID) {
  * @returns Success.
  */
 function refreshQuestion(questionID) {
-    return sellQuizInst.updateMatrixInputs(questionID);
+    if (sellQuizInst.updateMatrixInputs(questionID) == false)
+        return false;
+    if (sellQuizInst.createProgrammingTaskEditors(questionID) == false)
+        return false;
+    return true;
 }
 /**
  * Updates the number of rows and columns of a matrix input. Thes function is mainly called internally.
@@ -240,5 +244,9 @@ function refreshQuestion(questionID) {
 function refreshMatrixDimensions(questionID, matrixId, deltaRows, deltaCols) {
     return sellQuizInst.updateMatrixDims(questionID, matrixId, deltaRows, deltaCols);
 }
-export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions };
+// TODO:
+function __ideCreationFuntion(fct) {
+    sellQuizInst.createIDE = fct;
+}
+export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions, __ideCreationFuntion };
 //# sourceMappingURL=index.js.map

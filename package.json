@@ -30,6 +30,10 @@
     "mathjs": "^9.4.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@types/codemirror": "^5.60.5",
+    "@types/mathjs": "^9.4.2",
     "bootstrap": "^5.0.1",
     "child_process": "^1.0.2",
     "eslint": "^7.29.0",

@@ -202,13 +202,13 @@ export class ParseIM_Input {
                 }
                 break;
             
-            case symtype.T_PROG:
+            case symtype.T_JAVA_PROGRAMMING:
                 inputWidth += 10;
-                input.htmlElementInputType = SellInputElementType.TEXTFIELD;
+                input.htmlElementInputType = SellInputElementType.JAVA_PROGRAMMING;
                 if(this.p.generateInputFieldHtmlCode == false) {
                     html += '$$' + input.htmlElementId;
                 } else {
-                    html += '<textarea style="min-width: 100%" id="' + input.htmlElementId + '" + rows="5"></textarea><br/>';
+                    html += '<div class="border p-0 m-0"><textarea class="form-control p-0" style="min-width: 100%;" id="' + input.htmlElementId + '" + rows="5"></textarea></div>';
                     html += '<span id="' + input.htmlElementId_feedback + '"></span>';
                 }
                 break;

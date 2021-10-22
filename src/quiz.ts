@@ -16,6 +16,8 @@
  * KIND, either impressed or implied.                                         *
  ******************************************************************************/
 
+//import * as CodeMirror from 'codemirror';
+
 import { symtype, SellSymbol } from './symbol.js';
 import { SellToken, Lexer } from './lex.js';
 import { ParseText } from './parse-text.js';
@@ -33,10 +35,11 @@ import { sellassert } from './sellassert.js';
 export enum SellInputElementType {
     UNKNOWN = "unknown",
     TEXTFIELD = "textfield", // one input box
-    COMPLEX_NUMBER = "textflield", // two separate input boxes for real and imag
+    COMPLEX_NUMBER = "complex_number", // two separate input boxes for real and imag
     CHECKBOX = "checkbox", // boolean checkbox
     VECTOR = "vector", // vector with n input boxes (also used for sets)
-    MATRIX = "matrix" // matrix with m*n input boxes
+    MATRIX = "matrix", // matrix with m*n input boxes
+    JAVA_PROGRAMMING = "java_programming"
 }
 
 export class SellInput {
@@ -143,6 +146,14 @@ export class SellQuiz {
         this.imParser = new ParseIM(this);
         this.imInputParser = new ParseIM_Input(this);
         this.progParser = new ParseProg(this);
+    }
+
+    // TODO:
+    createIDE(htmlElement : Element, lang="Java", height=75) {
+        // dev info: the CodeMirror editor is not included here directly for two reasons:
+        //  (a.) many users will use SELL without programming questions
+        //  (b.) CodeMirror can not be used in combination with node.js (DOM-environment not present)
+        console.log("ERROR: Obviously your quiz includes a programming task. Please also include sellquiz.ide.min.js in your HTML file");
     }
 
     importQuestions(sellCode : string) : boolean {
@@ -455,21 +466,23 @@ export class SellQuiz {
             return false;
         for(let i=0; i<q.inputs.length; i++) {
             let input = q.inputs[i];
-            if(input.matrixInput != null)
+            if(input.matrixInput != null) // TODO: better compare input.htmlElementInputType??
                 input.matrixInput.updateHTML();
         }
         return true;
     }
 
     createProgrammingTaskEditors(questionID : number) : boolean {
-        /*let q = this.getQuestionByIdx(questionID);
+        let q = this.getQuestionByIdx(questionID);
         if(q == null)
             return false;
         for(let i=0; i<q.inputs.length; i++) {
             let input = q.inputs[i];
-            input.xxx  ohjksdhfkjsdhfkjh 
-        }*/
-        TODO
+            if(input.htmlElementInputType == SellInputElementType.JAVA_PROGRAMMING) {
+                let textarea = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
+                this.createIDE(textarea, 'java', 75);
+            }
+        }
         return true;
     } 
 

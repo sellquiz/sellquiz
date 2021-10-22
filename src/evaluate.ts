@@ -131,8 +131,17 @@ export class Evaluate {
                     input.matrixInput.setUnsetElementsToZero();
                     input.studentAnswer = input.matrixInput.getStudentAnswer();
                     break;
+                case SellInputElementType.JAVA_PROGRAMMING:
+                    htmlElement = getHtmlChildElementRecursive(
+                        q.bodyHtmlElement, input.htmlElementId);
+                    sellassert(htmlElement != null, 
+                        "getStudentAnswers(): failed to get HTML child element: " 
+                        + input.htmlElementId);
+                    input.studentAnswer = [ htmlElement.value ];
+                    alert("getStudentAnswers(..): TODO: need CodeMirror instance!!");
+                    break;
                 default:
-                    sellassert(false, "getStudentAnswers(..): UNIMPLEMENTED HTML element type");
+                    sellassert(false, "getStudentAnswers(..): UNIMPLEMENTED HTML element type '" + input.htmlElementInputType + "'");
             }
         }
         return true;

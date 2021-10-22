@@ -272,6 +272,11 @@ function refreshMatrixDimensions(questionID : number, matrixId : string, deltaRo
     return sellQuizInst.updateMatrixDims(questionID, matrixId, deltaRows, deltaCols);
 }
 
+// TODO:
+function __ideCreationFuntion(fct : any) {
+    sellQuizInst.createIDE = fct;
+}
+
 export { 
     reset,
     autoCreateQuiz,
@@ -295,5 +300,6 @@ export {
     enableInputFields,
     disableInputFields,
     refreshQuestion,
-    refreshMatrixDimensions
+    refreshMatrixDimensions,
+    __ideCreationFuntion
 };

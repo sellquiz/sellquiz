@@ -33,7 +33,7 @@ export class ParseProg {
         while (this.p.is("assert"))
             assert_list.push(this.parseProgAssert());
         this.p.terminal('§CODE2_END');
-        this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_PROG, assert_list);
+        this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_JAVA_PROGRAMMING, assert_list);
     }
     // prog_assert =
     //   "assert" "'" ANY "'" "\n";
