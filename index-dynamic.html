@@ -18,6 +18,7 @@
         <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
         <script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
 
+        <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
         <script src="node_modules/codemirror/lib/codemirror.js"></script>
         <script src="node_modules/codemirror/mode/clike/clike.js"></script>
 
@@ -59,7 +60,7 @@
                     let sellQuestionsDiv = document.getElementById("sellQuestions");
                     if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv) == false)
                         alert(sellquiz.getErrorLog());
-                    //setTimeout(function(){ MathJax.typeset(); }, 750);
+                    setTimeout(function(){ MathJax.typeset(); }, 750);
                 },
                 error: function(xhr, status, error) {
                     alert("ERROR: " + xhr.responseText);
