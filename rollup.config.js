@@ -1,6 +1,8 @@
+import resolve  from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
 import { terser } from "rollup-plugin-terser";
-//import { nodeResolve } from "@rollup/plugin-node-resolve"
-import commonjs from '@rollup/plugin-commonjs';
+
+// TODO: must configure babel!! e.g. "replaceAll" is still in output!
 
 export default {
     input: 'dist/index.js',
@@ -10,17 +12,19 @@ export default {
         name: 'sellquiz',
         globals: {
             'mathjs': 'math',
-            'codemirror': 'CodeMirror'
+            'codemirror': 'CodeMirror',
+            'jquery': '$'
         }
     },
     external: [
         'mathjs',
-        'codemirror'
+        'codemirror',
+        'jquery'
     ],
     plugins: [
-        //nodeResolve(),
-        //commonjs(),
-        terser()
+        resolve(),
+        babel({ babelHelpers: 'bundled' }),
+        //terser()
     ]
 };
   

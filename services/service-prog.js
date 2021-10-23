@@ -19,11 +19,12 @@
 /* This file implements a program evaluation service. Refer to "examples/ex1.json" as example input. (TODO: describe all JSON entries!!)
 */
 
+// TODO: support both "de" and "en" as languages! (JSON-input should have a "language" property!)
+
 import * as fs from "fs";
 import * as os from "os";
 
 import { execSync } from "child_process";
-import { assert } from "console";
 
 if(process.argv.length != 3) {
     console.log("usage: node service-prog.js JSON_INPUT_FILE");
@@ -58,7 +59,7 @@ let input = JSON.parse(inputJson);
 // create a temporary path for code execution:
 let tmp_path = fs.mkdtempSync(os.tmpdir()).toString();
 
-const JAVA_MAIN_TEMPLATE = `public class Main {
+const JAVA_MAIN_TEMPLATE = `import java.util.*;public class Main {
 /*__METHODS__*/
 public static void main(String[] args) {
 /*__MAIN__*/
@@ -68,6 +69,12 @@ public static void main(String[] args) {
 let cmd="", status="", stdout="", stderr="", java_src="", java_main_src="";
 
 let output = {"status": "ok", "msg": ""};
+
+// 0. empty code?
+if(input["source"].trim().length == 0) {
+    output["status"] = "error";
+    output["msg"] = "Sie haben ein leeres Programm abgegeben.";
+}
 
 // 1. try to compile code block without asserts
 if(output["status"] === "ok") {
@@ -96,14 +103,13 @@ if(output["status"] === "ok") {
         // adjust line numbers
         for(let i=0; i<errLines.length; i++) {
             if(errLines[i].startsWith("Main.java:")) {
-                let lineNo = parseInt(errLines[i].substr(10)) - 3; // TODO: constant 3 only valid for type "JavaBlock"
+                let lineNo = parseInt(errLines[i].substring(10)) - 3; // TODO: constant 3 only valid for type "JavaBlock"
                 let j = 10;
                 for(; j<errLines[i].length; j++) {
                     if(errLines[i][j] == ':')
                         break;
                 }
-                errLines[i] = errLines[i].substr(0, 10) + lineNo 
-                    + errLines[i].substr(j);
+                errLines[i] = "Line " + lineNo + errLines[i].substring(j);
             }
         }
         output.msg += errLines.join('\n');
@@ -125,21 +131,22 @@ if(output["status"] === "ok") {
     if(status != 0) {
         //console.log(stderr)
         output["status"] = "error";
-        output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler. Schauen Sie sich z.B. die Datentypen noch einmal an, oder ob Ihr Programm überhaupt terminiert.\n";
+        output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler. ";
+        output.msg += "Schauen Sie genau hin, ob Sie die vorgeschriebenen Datentypen und Bezeichner exakt übernommen haben.";
     }
 }
 
 // 3. run code (max 10 seconds!)
 if(output["status"] === "ok") {
-    cmd = JAVA_PATH + " " + tmp_path + "/Main.java";
+    cmd = "cd " + tmp_path + " && " + JAVA_PATH + " Main";
     [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
     if(status != 0) {
-        console.log(status);
+        //console.log(status);
         output["status"] = "error";
         if(status == 143)
-            output.msg += "Ihr Progamm terminiert nicht!\n";
+            output.msg += "Ihr Progamm terminiert nicht!";
         else
-            output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler.\n";
+            output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler.";
     }
 }
 

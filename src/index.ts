@@ -62,6 +62,19 @@ function autoEvaluateQuiz(questionID : number, htmlQuestionElementID : string) :
     readStudentAnswersFromHtmlElements(questionID);
     if(evaluateQuestion(questionID) == false)
         return false;
+    autoEvaluateQuiz2(questionID, htmlQuestionElement);
+    return true;
+}
+
+// TODO: doc (this is an internal function)
+function autoEvaluateQuiz2(questionID : number, htmlQuestionElement : HTMLElement) : boolean {
+    let evalReady = sellQuizInst.evaluate.isEvaluationReady(questionID);
+    if(!evalReady) {
+        setTimeout(function(){
+            autoEvaluateQuiz2(questionID, htmlQuestionElement); // TODO: process return value??
+        }, 100);
+        return true;
+    }
     writeFeedbackToHtmlElements(questionID);
     let htmlGeneralFeedbackElement = getHtmlChildElementRecursive(htmlQuestionElement, "general_feedback");
     sellassert(htmlGeneralFeedbackElement != null, "autoEvaluateQuiz(..): feedback HTML element is null");

@@ -2,26 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "mainClass": "services.tests.Main",
-            "projectName": "sellquiz_422b832f"
-        },
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Run service-prog.js test",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/services/service-prog.js",
-            "args": [
-                "services/examples/ex2.json"
-            ],
-            "console": "integratedTerminal"
-        },
-        {
             "type": "pwa-node",
             "request": "launch",
             "name": "Run test.js",
@@ -49,6 +29,19 @@
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Run service-prog.js test",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/services/service-prog.js",
+            "args": [
+                "services/examples/ex2.json"
+            ],
+            "console": "integratedTerminal"
+        },
     ]
 }

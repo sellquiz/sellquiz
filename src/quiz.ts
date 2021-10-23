@@ -54,6 +54,9 @@ export class SellInput {
     matrixInput: MatrixInput = null;
     // only used for vector based mathtypes
     vectorLength: number = 1;
+    // evaluation of e.g. programming tasks is done asynchronesouly.
+    // As long as the evaluation is ongoing, evaluationInProgress is set true.
+    evaluationInProgress: boolean = false;
     codeMirror : any = null; // IDE instance; only used for programming tasks
 }
 
@@ -479,7 +482,7 @@ export class SellQuiz {
             let input = q.inputs[i];
             if(input.htmlElementInputType == SellInputElementType.JAVA_PROGRAMMING) {
                 let textarea = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
-                this.createIDE(input, textarea, 'java', 75);
+                this.createIDE(input, textarea, 'java', 150); // TODO: make height adjustable
             }
         }
         return true;

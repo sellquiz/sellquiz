@@ -50,4 +50,7 @@ let timestamp = new Date().getTime();
 html = html.replaceAll('$NOW$', ''+timestamp);
 fs.writeFileSync('test-sell.html', html);
 
-console.log("--- OPEN FILE  'test-sell.html'  IN YOUR BROWSER ---");
+console.log("--- OPEN FILE  'test-sell.html'  IN YOUR WEB BROWSER ---");
+console.log("In case your quiz contains programming tasks, 'test-sell.html' must run on a webserver:");
+console.log("Run e.g. 'php -S localhost:8000' from the directory that contains 'test-sell.html'")
+console.log("  and then open 'localhost:8000/test-sell.html' in your web browser.")

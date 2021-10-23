@@ -1,34 +1,45 @@
 <!-- Minimum Working Example (MWE) to embed SELL questions into your website -->
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
-        <title>SELL-DEV Test Website</title>
         <meta charset="utf-8">
+        <title>SELL-DEV Test Website</title>
+        <!-- boostrap for layout -->
         <link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <!-- codemirror editor (only required for programming questions) -->
         <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+        <!-- mathjax for rendering math equations -->
         <script>MathJax = { loader: {load: ['input/asciimath', 'output/svg', 'ui/menu'] }, };</script>
         <script type="text/javascript" id="MathJax-script" async src="node_modules/mathjax/es5/startup.js"></script>
+        <!-- mathjs for math calculations -->
         <script src="node_modules/mathjs/lib/browser/math.js"></script>
+        <!-- codemirror editor (only required for programming questions) -->
         <script src="node_modules/codemirror/lib/codemirror.js"></script>
         <script src="node_modules/codemirror/mode/clike/clike.js"></script>
+        <!-- ajax (dependency of SELL) -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <!-- SELL core -->
         <script src="build/js/sellquiz.min.js?date=$NOW$"></script>
+        <!-- SELL programming editor support (only required for programming questions) -->
         <script src="build/js/sellquiz.ide.min.js?date=$NOW$"></script>
     </head>
     <body>
         <br/>
         <div id="container" class="container">
+            <!-- div to place questions -->
             <div id="sellQuestions"></div>
         </div>
     </body>
     <script>
-
+        // ===== SELL CODE (=QUESTIONS) =====
         let code = `$SELL_CODE$`;
-
         // ===== HIGH LEVEL API =====
+        // languagees { en := English, de := German (Deutsch) }
         sellquiz.setLanguage("en");
+        // get DIV from DOM that will contain questions
         let sellQuestionsDiv = document.getElementById("sellQuestions");
+        // create quiz from SELL code and write it to DOM element
         if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv) == false)
             alert(sellquiz.getErrorLog());
-        
     </script>
 </html>

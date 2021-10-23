@@ -17,6 +17,7 @@
  ******************************************************************************/
 
 import * as math from 'mathjs';
+import * as $ from 'jquery';
 
 import { SellInput, SellInputElementType, SellQuestion, SellQuiz } from './quiz.js';
 import { sellassert } from './sellassert.js';
@@ -191,6 +192,7 @@ export class Evaluate {
             let input = q.inputs[i];
             let v = q.solutionSymbols[input.solutionVariableId];
             sellassert(v != null, "evaluate(): unknown solution symbol " + input.solutionVariableId + " known solution symbols: " + JSON.stringify(q.solutionSymbols));
+            input.evaluationInProgress = false;
             switch(v.type) {
                 case symtype.T_BOOL:
                     this.evaluateBool(q, input, v);
@@ -217,9 +219,10 @@ export class Evaluate {
                         v.type == symtype.T_MATRIX_OF_FUNCTIONS, 
                         q, input, v);
                     break;
-                /*case symtype.T_JAVA_PROGRAMMING:
-                    xx
-                    break;*/
+                case symtype.T_JAVA_PROGRAMMING:
+                    input.evaluationInProgress = true;
+                    this.evaluateJavaProgramming(q, input, v);
+                    break;
                 default:
                     sellassert(false, "evaluate(): unimplemented math type: " + v.type.toString());
             }
@@ -229,6 +232,18 @@ export class Evaluate {
         }
         if(!this.allMultipleChoiceAnswersAreCorrect) {
             q.generalFeedbackStr += GET_STR("not_yet_correct", this.p.language);
+        }
+        return true;
+    }
+
+    isEvaluationReady(qidx : number) : boolean {
+        let q = this.p.questions[qidx];
+        if(q == null)
+            return true;
+        for(let i=0; i<q.inputs.length; i++) {
+            let input = q.inputs[i];
+            if(input.evaluationInProgress)
+                return false;
         }
         return true;
     }
@@ -475,6 +490,49 @@ export class Evaluate {
         }
         input.evaluationFeedbackStr = input.correct ? checkmark : crossmark;
         input.evaluationFeedbackStr += feedback;
+    }
+
+    evaluateJavaProgramming(question : SellQuestion, input : SellInput, solutionVariable : SellSymbol) {
+
+        //console.log(solutionVariable.value)
+
+        let task = {
+            "type": solutionVariable.value["type"],
+            "source": input.studentAnswer[0],
+            "asserts": solutionVariable.value["asserts"]
+        };
+        //let service_url = "http://localhost:8000/services/service-prog.php"; // TODO: MAKE URL CHANGABLE!!
+        let service_url = "./services/service-prog.php"; // TODO: MAKE URL CONFIGURABLE!!
+
+        // TODO: must forbid running twice!!!!!
+
+        let feedback_htmlElement = getHtmlChildElementRecursive(question.bodyHtmlElement, input.htmlElementId_feedback);
+        console.log(feedback_htmlElement);
+        console.log(feedback_htmlElement.innerHTML);
+        feedback_htmlElement.innerHTML = "<span class=\"text-danger\">bitte warten...</span>"; // TODO: use lang.ts!!!!
+        $.ajax({
+            type: "POST",
+            url: service_url,
+            data: {
+                input: JSON.stringify(task)
+            },
+            success: function(data) {
+                data = JSON.parse(data);
+                let status = data["status"];
+                let message = data["msg"];
+                input.correct = status === "ok";
+                input.evaluationFeedbackStr = input.correct ? checkmark + " korrekt!" : crossmark; // TODO: use lang.ts!!!!
+                //if(message.length > 0 && message[message.length-1] == "\n")
+                //    message = message.substring(0, message.length-1);
+                input.evaluationFeedbackStr += ' &nbsp; <code>' + message.replaceAll("\n", "<br/>") + '</code>';
+                if(input.correct == false)
+                    question.allAnswersCorrect = false;
+                input.evaluationInProgress = false;
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr); // TODO: error handling!
+            }
+        });
     }
 
 }
