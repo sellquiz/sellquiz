@@ -50,7 +50,7 @@ system($nodejs_path . " service-prog.js " . $path . " 2>&1");
 $output = ob_get_contents();
 ob_end_clean();
 
-system('rm -rf ' . $dir);
+//system('rm -rf ' . $dir);
 
 echo "$output";
 
