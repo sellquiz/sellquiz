@@ -11,7 +11,7 @@ _Hinweis: schreiben Sie nur die Deklarationen selbst: Geben Sie keine Klasse und
 
 	JavaBlock b
 		assert 'Math.abs(x-1.23) < 1e-3'
-		assert 'text.equals(\"hallo\")'
+		assert 'text.equals("hallo")'
     x in { 1, 2, 3 }   % TODO: remove this line!
 
 $ #b $

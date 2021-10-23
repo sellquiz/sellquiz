@@ -460,15 +460,13 @@ export class Evaluate {
         input.evaluationFeedbackStr += feedback;
     }
     evaluateJavaProgramming(question, input, solutionVariable) {
-        //console.log(solutionVariable.value)
         let task = {
             "type": solutionVariable.value["type"],
             "source": input.studentAnswer[0],
             "asserts": solutionVariable.value["asserts"]
         };
-        //let service_url = "http://localhost:8000/services/service-prog.php"; // TODO: MAKE URL CHANGABLE!!
         let service_url = "./services/service-prog.php"; // TODO: MAKE URL CONFIGURABLE!!
-        // TODO: must forbid running twice!!!!!
+        // TODO: must forbid running twice at the same time!!!!!
         let feedback_htmlElement = getHtmlChildElementRecursive(question.bodyHtmlElement, input.htmlElementId_feedback);
         console.log(feedback_htmlElement);
         console.log(feedback_htmlElement.innerHTML);

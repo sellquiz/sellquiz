@@ -22,6 +22,7 @@
 // TODO: support both "de" and "en" as languages! (JSON-input should have a "language" property!)
 
 import * as fs from "fs";
+import * as path from "path";
 import * as os from "os";
 
 import { execSync } from "child_process";
@@ -33,6 +34,7 @@ if(process.argv.length != 3) {
 }
 
 const inputPath = process.argv[2];
+const inputDirectory = path.dirname(inputPath);
 
 const JAVA_PATH = "/usr/bin/java";
 const JAVA_COMPILER_PATH = "/usr/bin/javac";
@@ -57,7 +59,8 @@ let inputJson = fs.readFileSync(inputPath);
 let input = JSON.parse(inputJson);
 
 // create a temporary path for code execution:
-let tmp_path = fs.mkdtempSync(os.tmpdir()).toString();
+// TODO: now using input dir!!
+let tmp_path = inputDirectory; // fs.mkdtempSync(os.tmpdir()).toString();
 
 const JAVA_MAIN_TEMPLATE = `import java.util.*;public class Main {
 /*__METHODS__*/
@@ -128,6 +131,7 @@ if(output["status"] === "ok") {
     fs.writeFileSync(tmp_path + "/Main.java", java_src);
     cmd = JAVA_COMPILER_PATH + " " + tmp_path + "/Main.java";
     [status, stderr, stdout] = runBashCommand(cmd);
+    fs.writeFileSync(tmp_path + "/log-compile-code.txt", stderr);
     if(status != 0) {
         //console.log(stderr)
         output["status"] = "error";
@@ -140,6 +144,7 @@ if(output["status"] === "ok") {
 if(output["status"] === "ok") {
     cmd = "cd " + tmp_path + " && " + JAVA_PATH + " Main";
     [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
+    fs.writeFileSync(tmp_path + "/log-run-code.txt", stderr);
     if(status != 0) {
         //console.log(status);
         output["status"] = "error";
@@ -151,6 +156,6 @@ if(output["status"] === "ok") {
 }
 
 // remove temporary path
-fs.rmSync(tmp_path, { recursive: true });
+//fs.rmSync(tmp_path, { recursive: true });
 
 console.log(JSON.stringify(output, null, 4));

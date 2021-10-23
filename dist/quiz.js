@@ -25,8 +25,9 @@ import { ParseIM_Input } from './parse-im-input.js';
 import { ParseProg } from './parse-prog.js';
 import { Evaluate } from './evaluate.js';
 import { getHtmlChildElementRecursive } from './help.js';
-import { check_symbol_svg } from './img.js';
+//import { check_symbol_svg } from './img.js'
 import { sellassert } from './sellassert.js';
+import { GET_STR } from './lang.js';
 export var SellInputElementType;
 (function (SellInputElementType) {
     SellInputElementType["UNKNOWN"] = "unknown";
@@ -577,7 +578,10 @@ export class SellQuiz {
         this.q.html += '<div class="card-footer bg-white pl-4 pt-2 pb-1 m-0">';
         this.q.html += '<span>';
         // submit button
-        this.q.html += '<input type="image" id="button-evaluate" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');" height="28px" src=\"' + check_symbol_svg + '\" title="evaluate"></input>';
+        //this.q.html += '<input type="image" id="button-evaluate" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');" height="28px" src=\"' + check_symbol_svg + '\" title="evaluate"></input>';
+        let evalStr = GET_STR('evaluate', this.language, false);
+        this.q.html += '<button type="button" class="btn btn-primary" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');">' + evalStr + '</button>';
+        //this.q.html += '<button type="button" class="btn btn-primary">' + evalStr +'</button>';
         // edit button
         if (this.editButton) {
             // TODO

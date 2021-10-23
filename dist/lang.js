@@ -17,6 +17,8 @@
  ******************************************************************************/
 import { sellassert } from "./sellassert.js";
 var LANG_STR = {
+    "evaluate_en": "Evaluate",
+    "evaluate_de": "Auswerten",
     "feedback_syntaxerror_en": "Syntax error in '$'.",
     "feedback_syntaxerror_de": "Syntaxfehler in '$'.",
     "feedback_syntaxerror_or_invalid_variables_en": "Syntax error or invalid variables in '$'.",
@@ -34,9 +36,12 @@ var LANG_STR = {
 };
 export const checkmark = ' &#x2705; ';
 export const crossmark = ' &#x274C; ';
-export function GET_STR(key, lang = "en") {
+export function GET_STR(key, lang = "en", redcolor = true) {
     let complete_key = key + '_' + lang;
     sellassert(complete_key in LANG_STR, "GET_STR(..): unknown key " + complete_key);
-    return '<span class="text-danger">' + LANG_STR[complete_key] + '</span>';
+    if (redcolor)
+        return '<span class="text-danger">' + LANG_STR[complete_key] + '</span>';
+    else
+        return LANG_STR[complete_key];
 }
 //# sourceMappingURL=lang.js.map

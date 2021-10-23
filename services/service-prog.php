@@ -24,7 +24,7 @@ error_reporting(E_ALL);
 
 $nodejs_path = "/usr/local/bin/node";
 
-// check if path is valid. If not, change it (yet only valid for Apple M1)
+// check if path is valid. If not, change it (yet only works for Apple M1)
 ob_start();
 $output = ob_get_contents();
 system("command -v " . $nodejs_path);
@@ -34,26 +34,23 @@ if(strlen($output) == 0)
 
 if(isset($_POST["input"]) == false) {
     echo "Error: POST 'input' is not set! You must provide a JSON-string containing entries 'type', 'source', 'asserts'!";
-    echo "Example: URL/service-prog.php?input={%22type%22:%22JavaBlock%22,%22source%22:%22double%20x%20=%201.23;\nString%20text%20=%20\%22hallo\%22;%22,%22asserts%22:[%22x%20==%201.23%22,%20%22text.equals(\%22hallo\%22)%22]}";
     exit();
 }
 
 $input_json = $_POST["input"];
 
-//var_dump($input_json);exit();
-
-$file = tmpfile();
-$path = stream_get_meta_data($file)['uri'];
-
-fwrite($file, $input_json);
+$dir = "cache/" . random_int(0, PHP_INT_MAX) . "/";
+$path = $dir . "input.json";
+system('mkdir -p ' . $dir);
+file_put_contents($path, $input_json);
 
 ob_start();
-
 // 2>&1 redirects stderr to stdout
 system($nodejs_path . " service-prog.js " . $path . " 2>&1");
 $output = ob_get_contents();
-
 ob_end_clean();
+
+system('rm -rf ' . $dir);
 
 echo "$output";
 
