@@ -516,7 +516,7 @@ export class Evaluate {
                 input.evaluationFeedbackStr = input.correct ? checkmark + " korrekt!" : crossmark; // TODO: use lang.ts!!!!
                 //if(message.length > 0 && message[message.length-1] == "\n")
                 //    message = message.substring(0, message.length-1);
-                input.evaluationFeedbackStr += ' &nbsp; <code>' + message.replaceAll("\n", "<br/>") + '</code>';
+                input.evaluationFeedbackStr += ' &nbsp; <code>' + message.replaceAll("\n", "<br/>").replaceAll(" ","&nbsp;") + '</code>';
                 if(input.correct == false)
                     question.allAnswersCorrect = false;
                 input.evaluationInProgress = false;
