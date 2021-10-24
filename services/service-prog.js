@@ -94,7 +94,7 @@ if(output["status"] === "ok") {
             console.log(JSON.stringify(output, null, 4));
             process.exit(-1);
     }
-    console.log(tmp_path + "/Main.java");
+    //console.log(tmp_path + "/Main.java");
     //console.log(java_src);
     fs.writeFileSync(tmp_path + "/Main.java", java_src);
     cmd = JAVA_COMPILER_PATH + " " + tmp_path + "/Main.java";
