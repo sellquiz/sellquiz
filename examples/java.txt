@@ -2,7 +2,7 @@
 %quiz MA1 meets PI1
 
 
-Deklarationen
+Java: Deklarationen
 
 Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
 * Eine Variable mit dem Namen "x" speichert eine Gleitkommazahl und weist dieser den Wert 1.23 zu.
@@ -20,7 +20,7 @@ $ #b $
 %%%
 
 
-Methoden
+Java: Methoden
 
 	a, b in { 3, 4, ..., 10 }
 	c := a + b
