@@ -27,8 +27,8 @@ $nodejs_paths = array("/usr/bin/node", "/usr/local/bin/node", "/opt/homebrew/bin
 $nodejs_path = "";
 foreach($nodejs_paths as $np) {
     ob_start();
-    $output = ob_get_contents();
     system("command -v " . $np);
+    $output = ob_get_contents();
     ob_end_clean();
     if(strlen($output) > 0) {
         $nodejs_path = $np;
