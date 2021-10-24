@@ -23,7 +23,9 @@ var sellQuizInst = new quiz.SellQuiz();
  * Remove all questions.
  */
 function reset() {
+    let createIDEBackup = sellQuizInst.createIDE;
     sellQuizInst = new quiz.SellQuiz();
+    sellQuizInst.createIDE = createIDEBackup;
 }
 /**
  * Creates a quiz including HTML control elements. This function can be used for a trivial integration of a stand-alone SELL quiz into a website. WARNING: do not mix using this high-level function and low-level functions.
@@ -80,6 +82,13 @@ function autoEvaluateQuiz2(questionID, htmlQuestionElement) {
  */
 function setLanguage(langID) {
     sellQuizInst.language = langID;
+}
+/**
+ * Sets the path for "services/" (only required, if programming tasks are used)
+ * @param path path to directory "service/"
+ */
+function setServicePath(path) {
+    sellQuizInst.servicePath = path;
 }
 /**
  * Enables (or disables) the generation of HTML code for input and feedback element.

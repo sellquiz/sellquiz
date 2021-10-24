@@ -26,7 +26,9 @@ var sellQuizInst : quiz.SellQuiz = new quiz.SellQuiz();
  * Remove all questions.
  */
 function reset() {
+    let createIDEBackup = sellQuizInst.createIDE;
     sellQuizInst = new quiz.SellQuiz();
+    sellQuizInst.createIDE = createIDEBackup;
 }
 
 /**
@@ -88,6 +90,14 @@ function autoEvaluateQuiz2(questionID : number, htmlQuestionElement : HTMLElemen
  */
 function setLanguage(langID : string) : void {
     sellQuizInst.language = langID;
+}
+
+/**
+ * Sets the path for "services/" (only required, if programming tasks are used)
+ * @param path path to directory "service/"
+ */
+function setServicePath(path : string) : void {
+    sellQuizInst.servicePath = path;
 }
 
 /**

@@ -100,6 +100,7 @@ export class SellQuiz {
     log: string = '';
     language: string = 'en';
     generateInputFieldHtmlCode: boolean = true;
+    servicePath: string = './services/';
 
     // questions
     questions: Array<SellQuestion> = [];

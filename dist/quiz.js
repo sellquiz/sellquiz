@@ -95,6 +95,7 @@ export class SellQuiz {
         this.log = '';
         this.language = 'en';
         this.generateInputFieldHtmlCode = true;
+        this.servicePath = './services/';
         // questions
         this.questions = [];
         this.q = null; // current question

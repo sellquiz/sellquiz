@@ -465,7 +465,7 @@ export class Evaluate {
             "source": input.studentAnswer[0],
             "asserts": solutionVariable.value["asserts"]
         };
-        let service_url = "./services/service-prog.php"; // TODO: MAKE URL CONFIGURABLE!!
+        let service_url = this.p.servicePath + "service-prog.php";
         // TODO: must forbid running twice at the same time!!!!!
         let feedback_htmlElement = getHtmlChildElementRecursive(question.bodyHtmlElement, input.htmlElementId_feedback);
         feedback_htmlElement.innerHTML = "<span class=\"text-danger\">bitte warten...</span>"; // TODO: use lang.ts!!!!
