@@ -511,6 +511,7 @@ export class Evaluate {
                 input: JSON.stringify(task)
             },
             success: function(data) {
+console.log("!!!!!test!!!!!");
 console.log(data);
                 data = JSON.parse(data);
                 let status = data["status"];
