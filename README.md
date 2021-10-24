@@ -53,14 +53,15 @@ Visit  https://github.com/sellquiz/sellquiz-standalone
 
 # Developers
 
-- Run `npm install --production=false` to install developer-dependencies.
-- Run `npm run build` to build the sellquiz-library.
-- Open `src/index-highlevel.html` for a demonstration of the high-level API in the browser.
+- Run `./install.sh` to install Node.js dependencies and check for other dependencies.
+- Run `./build.sh` to build SELL.
+- Open `index-highlevel.html` for a demonstration of the high-level API in the browser.
 - Open `src/index-lowlevel.html` for a demonstration of the low-level API in the browser.
-- You'll find a demonstration of the low-level API for Node.js in file `src/test-lowlevel-api.js`.
+- You'll find a demonstration of the low-level API for Node.js in file `index-lowlevel-api.ts`.
 
 (We provide a VS Code launch configuration in `.code/launch.json`.)
 
+- For debugging, you may use `src/test.ts` (a launch configuration for VS Code is available). This file parses imported SELL-questions with Node.js and writes also `test-sell.html`, which can be tested in a web browser. Refer to the information in the terminal output.
 
 ## Functions
 

@@ -29,6 +29,7 @@ src_paths = [
     "src/parse-text.ts",
     "src/parse-im.ts",
     "src/parse-im-input.ts",
+    "src/parse-prog.ts"
 ]
 
 grammar = ''
