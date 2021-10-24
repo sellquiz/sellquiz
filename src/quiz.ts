@@ -613,30 +613,26 @@ export class SellQuiz {
     createHighLevelHTML() {
         // create high-level HTML:
         this.q.html  = '<div id="sell_question_html_element_' + this.q.idx + '" class="card">\n';
-        this.q.html += '<div class="card-header">\n';
-        this.q.html += '    <h5 class="card-title m-0">' + this.q.titleHtml + '</h5>\n';
+        this.q.html += '<div class="card-body px-3 py-2">\n'; // ** begin body        
+        this.q.html += '    <span class="h2 py-1 my-1">' + this.q.titleHtml + '</span><br/>\n';
         this.q.html += '    <a name="question-' + (this.questions.length-1) + '"></a>\n';
-        this.q.html += '</div>\n';
-        this.q.html += '<div class="card-body p-4">\n'; // ** begin body        
+        this.q.html += '<div class="py-1">';
         this.q.html += this.q.bodyHtml;
-        this.q.html += '</div>\n'; // ** end body (begins in keyword 'TITLE')
-        // ** footer:
-        this.q.html += '<div class="card-footer bg-white pl-4 pt-2 pb-1 m-0">';
+        this.q.html += '</div>';
         this.q.html += '<span>';
         // submit button
         //this.q.html += '<input type="image" id="button-evaluate" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');" height="28px" src=\"' + check_symbol_svg + '\" title="evaluate"></input>';
         let evalStr = GET_STR('evaluate', this.language, false);
         this.q.html += '<button type="button" class="btn btn-primary" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');">' + evalStr + '</button>'
         // edit button
-        if (this.editButton) {
-            // TODO
+        /*TODO: if (this.editButton) {
             this.q.html += '&nbsp;&nbsp;<button type="button" class="btn btn-link" onclick="editSellQuestion(' + this.qidx + ')">edit</button>';
-        }
+        }*/
         // general feedback
         this.q.html += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="general_feedback"></span>';
         // end
         this.q.html += '</span>';
-        this.q.html += '</div>'; // *** end of card-footer
+        this.q.html += '</div>\n'; // ** end body (begins in keyword 'TITLE')
         this.q.html += '</div>\n'; // *** end of card
         this.q.html += '<br/>';
     }

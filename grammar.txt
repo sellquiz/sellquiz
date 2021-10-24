@@ -1,7 +1,7 @@
 sell =
   title { code | text };
 code =
-  "§CODE_START" { (code_prop | code_hint | assign) "\n" } "§CODE_END";
+  "§CODE_START" { (code_prop | code_hint | assign | prog) "\n" } "§CODE_END";
 code_prop =
   "input" ("rows"|"cols") ":=" ("resizeable"|"static");
 code_hint =
@@ -29,7 +29,7 @@ mul =
 pow =
   unary { ("^") unary };
 unary = (
-    "-" unary;
+  | "-" unary;
   | INT [ "." INT ]
   | "true" | "false"
   | "not" unary
@@ -67,7 +67,7 @@ symbolic_term_unary =
     "(" symbolic_term_expr ")"
   | INT ["!"]
   | FLOAT
-  | ("exp"|"sin"|"cos") "(" symbolic_term_expr ")"
+  | ("exp"|"sin"|"cos"|"sqrt") "(" symbolic_term_expr ")"
   | "diff" "(" symbolic_term_expr "," ID  ")"
   | ID
   | ID "(" [ expr { "," epxr } ] ")"
@@ -139,3 +139,7 @@ im_input =
       ID
     | "\"" (ID|INT) { "|" (ID|INT) } "\""    /* gap question text */
   );
+prog =
+  ("JavaBlock"|"JavaMethod") ID "\n" "§CODE2_START" prog_assert "§CODE2_END";
+prog_assert =
+  "assert" "'" ANY "'" "\n";
