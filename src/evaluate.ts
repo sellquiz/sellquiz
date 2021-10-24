@@ -511,8 +511,8 @@ export class Evaluate {
                 input: JSON.stringify(task)
             },
             success: function(data) {
-console.log("!!!!!test!!!!!");
-console.log(data);
+console.log("!!!!!test!!!!!");// TODO: remove this
+console.log(data);// TODO: remove this
                 data = JSON.parse(data);
                 let status = data["status"];
                 let message = data["msg"];
