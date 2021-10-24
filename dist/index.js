@@ -269,5 +269,5 @@ function refreshMatrixDimensions(questionID, matrixId, deltaRows, deltaCols) {
 function __ideCreationFuntion(fct) {
     sellQuizInst.createIDE = fct;
 }
-export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions, __ideCreationFuntion };
+export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setServicePath, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions, __ideCreationFuntion };
 //# sourceMappingURL=index.js.map
