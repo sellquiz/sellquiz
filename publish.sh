@@ -1,7 +1,7 @@
 #!/bin/bash
-node_modules/typedoc/bin/typedoc src/index.ts
-npm run build
+./build.sh
 npm pack
+node_modules/typedoc/bin/typedoc src/index.ts
 
 git add --all
 git commit -m "sync"

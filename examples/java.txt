@@ -1,5 +1,5 @@
-%course Beispielkurs
-%quiz 1: Beispielquiz
+%course Mathematik 1
+%quiz MA1 meets PI1
 
 
 Deklarationen
