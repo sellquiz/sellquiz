@@ -468,8 +468,6 @@ export class Evaluate {
         let service_url = "./services/service-prog.php"; // TODO: MAKE URL CONFIGURABLE!!
         // TODO: must forbid running twice at the same time!!!!!
         let feedback_htmlElement = getHtmlChildElementRecursive(question.bodyHtmlElement, input.htmlElementId_feedback);
-        console.log(feedback_htmlElement);
-        console.log(feedback_htmlElement.innerHTML);
         feedback_htmlElement.innerHTML = "<span class=\"text-danger\">bitte warten...</span>"; // TODO: use lang.ts!!!!
         $.ajax({
             type: "POST",
@@ -478,8 +476,6 @@ export class Evaluate {
                 input: JSON.stringify(task)
             },
             success: function (data) {
-                console.log("!!!!!test!!!!!");
-                console.log(data);
                 data = JSON.parse(data);
                 let status = data["status"];
                 let message = data["msg"];
