@@ -581,7 +581,6 @@ export class SellQuiz {
         //this.q.html += '<input type="image" id="button-evaluate" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');" height="28px" src=\"' + check_symbol_svg + '\" title="evaluate"></input>';
         let evalStr = GET_STR('evaluate', this.language, false);
         this.q.html += '<button type="button" class="btn btn-primary" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');">' + evalStr + '</button>';
-        //this.q.html += '<button type="button" class="btn btn-primary">' + evalStr +'</button>';
         // edit button
         if (this.editButton) {
             // TODO
