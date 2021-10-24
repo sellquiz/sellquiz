@@ -566,7 +566,7 @@ export class SellQuiz {
     }
     createHighLevelHTML() {
         // create high-level HTML:
-        this.q.html = '<div id="sell_question_html_element_' + this.q.idx + '" class="card">\n';
+        this.q.html = '<div id="sell_question_html_element_' + this.q.idx + '" class="card border-dark">\n';
         this.q.html += '<div class="card-body px-3 py-2">\n'; // ** begin body        
         this.q.html += '    <span class="h2 py-1 my-1">' + this.q.titleHtml + '</span><br/>\n';
         this.q.html += '    <a name="question-' + (this.questions.length - 1) + '"></a>\n';
