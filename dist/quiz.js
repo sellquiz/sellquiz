@@ -580,9 +580,9 @@ export class SellQuiz {
         let evalStr = GET_STR('evaluate', this.language, false);
         this.q.html += '<button type="button" class="btn btn-primary" onclick="sellquiz.autoEvaluateQuiz(' + this.qidx + ', \'sell_question_html_element_' + this.q.idx + '\');">' + evalStr + '</button>';
         // edit button
-        /*TODO: if (this.editButton) {
-            this.q.html += '&nbsp;&nbsp;<button type="button" class="btn btn-link" onclick="editSellQuestion(' + this.qidx + ')">edit</button>';
-        }*/
+        if (this.editButton) {
+            this.q.html += '&nbsp;<button type="button" class="btn btn-primary" onclick="editSellQuestion(' + this.qidx + ')">Edit</button>';
+        }
         // general feedback
         this.q.html += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="general_feedback"></span>';
         // end

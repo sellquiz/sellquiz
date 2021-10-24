@@ -29,13 +29,15 @@ function reset() {
 }
 /**
  * Creates a quiz including HTML control elements. This function can be used for a trivial integration of a stand-alone SELL quiz into a website. WARNING: do not mix using this high-level function and low-level functions.
- * @param sellCode SELL source code of one or multiple questions (divided by a line equal to %%%)
+ * @param sellCode SELL source code of one or multiple questions (divided by a line equal to %%%).
  * @param htmlDivElement HTML element that will contain all questions.
+ * @param editButton Renders a button with label "Edit" right to the "Evaluate" button.
  * @returns Success.
  */
-function autoCreateQuiz(sellCode, htmlDivElement) {
+function autoCreateQuiz(sellCode, htmlDivElement, editButton = false) {
     if (sellQuizInst.importQuestions(sellCode) == false)
         return false;
+    sellQuizInst.editButton = editButton;
     htmlDivElement.innerHTML = sellQuizInst.html;
     for (let i = 0; i < sellQuizInst.questions.length; i++) {
         let q = sellQuizInst.questions[i];
