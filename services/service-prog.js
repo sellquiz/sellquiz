@@ -89,7 +89,7 @@ let output = {"status": "ok", "msg": ""};
 // 0. empty code?
 if(input["source"].trim().length == 0) {
     output["status"] = "error";
-    output["msg"] = getText["empty_program"];
+    output["msg"] = getText("empty_program");
 }
 
 // 1. try to compile code block without asserts

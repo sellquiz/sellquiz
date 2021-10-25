@@ -500,9 +500,11 @@ export class Evaluate {
             "language": this.p.language
         };
         let service_url = this.p.servicePath + "service-prog.php";
-        // TODO: must forbid running twice at the same time!!!!!
+        // TODO: should forbid running twice at the same time!!!!!
         let feedback_htmlElement = getHtmlChildElementRecursive(question.bodyHtmlElement, input.htmlElementId_feedback);
-        feedback_htmlElement.innerHTML = "<span class=\"text-danger\">bitte warten...</span>"; // TODO: use lang.ts!!!!
+        let wait_text = GET_STR("please_wait", this.p.language, false);
+        feedback_htmlElement.innerHTML = "<span class=\"text-danger\">" + wait_text + "</span>";
+        let correct_str = GET_STR("correct", this.p.language, false);
         $.ajax({
             type: "POST",
             url: service_url,
@@ -514,9 +516,7 @@ export class Evaluate {
                 let status = data["status"];
                 let message = data["msg"];
                 input.correct = status === "ok";
-                input.evaluationFeedbackStr = input.correct ? checkmark + " korrekt!" : crossmark; // TODO: use lang.ts!!!!
-                //if(message.length > 0 && message[message.length-1] == "\n")
-                //    message = message.substring(0, message.length-1);
+                input.evaluationFeedbackStr = input.correct ? checkmark + correct_str : crossmark;
                 input.evaluationFeedbackStr += ' &nbsp; <code>' + message.replaceAll("\n", "<br/>").replaceAll(" ","&nbsp;") + '</code>';
                 if(input.correct == false)
                     question.allAnswersCorrect = false;

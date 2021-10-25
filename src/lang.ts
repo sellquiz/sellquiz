@@ -34,7 +34,11 @@ var LANG_STR = {
     "hint_matrix_element_en": "Hint: Element ($i,$j) is incorrect!",
     "hint_matrix_element_de": "Tipp: Element ($i,$j) ist noch fehlerhaft!",
     "i_out_of_n_correct_en": "$i out of $n answers are correct",
-    "i_out_of_n_correct_de": "$i von $n Antworten sind korrekt"
+    "i_out_of_n_correct_de": "$i von $n Antworten sind korrekt",
+    "please_wait_en": "please wait...",
+    "please_wait_de": "bitte warten...",
+    "correct_en": "well done!",
+    "correct_de": "korrekt!"
 }
 
 export const checkmark = ' &#x2705; ';
