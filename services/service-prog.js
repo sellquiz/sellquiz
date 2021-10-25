@@ -39,6 +39,19 @@ const inputDirectory = path.dirname(inputPath);
 const JAVA_PATH = "/usr/bin/java";
 const JAVA_COMPILER_PATH = "/usr/bin/javac";
 
+const text = {
+    "empty_program_en": "You have submitted an empty program.",
+    "empty_program_de": "Sie haben ein leeres Programm abgegeben.",
+    "syntax_error_en": "Your code contains syntax errors. Hints:",
+    "syntax_error_de": "Der Code enthält Syntaxfehler. Hinweise:",
+    "semantic_errors_en": "Although the code can be compiled, it still contains errors in terms of content.",
+    "semantic_errors_de": "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler.",
+    "look_on_datatypes_en": "Take a close look to see whether you have exactly adopted the prescribed data types and identifiers.",
+    "look_on_datatypes_de": "Schauen Sie genau hin, ob Sie die vorgeschriebenen Datentypen und Bezeichner exakt übernommen haben.",
+    "not_terminating_en": "Your program does not terminate!",
+    "not_terminating_de": "Ihr Progamm terminiert nicht!"
+};
+
 function runBashCommand(cmd, timeoutMilliseconds=100000000) {
     let res_status=0, res_stdout="", res_stderr="";
     try {
@@ -58,9 +71,9 @@ function runBashCommand(cmd, timeoutMilliseconds=100000000) {
 let inputJson = fs.readFileSync(inputPath);
 let input = JSON.parse(inputJson);
 
-// create a temporary path for code execution:
-// TODO: now using input dir!!
-let tmp_path = inputDirectory; // fs.mkdtempSync(os.tmpdir()).toString();
+function getText(desc) {
+    return text[desc+"_"+input["language"]];
+}
 
 const JAVA_MAIN_TEMPLATE = `import java.util.*;public class Main {
 /*__METHODS__*/
@@ -76,7 +89,7 @@ let output = {"status": "ok", "msg": ""};
 // 0. empty code?
 if(input["source"].trim().length == 0) {
     output["status"] = "error";
-    output["msg"] = "Sie haben ein leeres Programm abgegeben.";
+    output["msg"] = getText["empty_program"];
 }
 
 // 1. try to compile code block without asserts
@@ -94,16 +107,16 @@ if(output["status"] === "ok") {
             console.log(JSON.stringify(output, null, 4));
             process.exit(-1);
     }
-    //console.log(tmp_path + "/Main.java");
+    //console.log(inputDirectory + "/Main.java");
     //console.log(java_src);
-    fs.writeFileSync(tmp_path + "/Main.java", java_src);
-    cmd = JAVA_COMPILER_PATH + " " + tmp_path + "/Main.java";
+    fs.writeFileSync(inputDirectory + "/Main.java", java_src);
+    cmd = JAVA_COMPILER_PATH + " " + inputDirectory + "/Main.java";
     [status, stderr, stdout] = runBashCommand(cmd);
     if(status != 0) {
         output["status"] = "error";
-        output.msg += "Der Code enthält Syntaxfehler. Hinweise:\n";
+        output.msg += getText("syntax_error") + "\n";
         output.msg += "----------------------------------------\n";
-        let errLines = stderr.replaceAll(tmp_path+"/","").split("\n");
+        let errLines = stderr.replaceAll(inputDirectory+"/","").split("\n");
         // adjust line numbers
         for(let i=0; i<errLines.length; i++) {
             if(errLines[i].startsWith("Main.java:")) {
@@ -129,34 +142,30 @@ if(output["status"] === "ok") {
     }
     java_src = java_src.replace("/*__ASSERTS__*/", asserts);
     //console.log(java_src);
-    fs.writeFileSync(tmp_path + "/Main.java", java_src);
-    cmd = JAVA_COMPILER_PATH + " " + tmp_path + "/Main.java";
+    fs.writeFileSync(inputDirectory + "/Main.java", java_src);
+    cmd = JAVA_COMPILER_PATH + " " + inputDirectory + "/Main.java";
     [status, stderr, stdout] = runBashCommand(cmd);
-    fs.writeFileSync(tmp_path + "/log-compile-code.txt", stderr);
+    fs.writeFileSync(inputDirectory + "/log-compile-code.txt", stderr);
     if(status != 0) {
         //console.log(stderr)
         output["status"] = "error";
-        output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler. ";
-        output.msg += "Schauen Sie genau hin, ob Sie die vorgeschriebenen Datentypen und Bezeichner exakt übernommen haben.";
+        output.msg += getText("semantic_errors") + " " + getText("look_on_datatypes");
     }
 }
 
 // 3. run code (max 10 seconds!)
 if(output["status"] === "ok") {
-    cmd = "cd " + tmp_path + " && " + JAVA_PATH + " Main";
+    cmd = "cd " + inputDirectory + " && " + JAVA_PATH + " Main";
     [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
-    fs.writeFileSync(tmp_path + "/log-run-code.txt", stderr);
+    fs.writeFileSync(inputDirectory + "/log-run-code.txt", stderr);
     if(status != 0) {
         //console.log(status);
         output["status"] = "error";
         if(status == 143)
-            output.msg += "Ihr Progamm terminiert nicht!";
+            output.msg += getText("not_terminating");
         else
-            output.msg += "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler.";
+            output.msg += getText("semantic_errors");
     }
 }
-
-// remove temporary path
-//fs.rmSync(tmp_path, { recursive: true });
 
 console.log(JSON.stringify(output, null, 4));

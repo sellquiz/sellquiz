@@ -18,7 +18,9 @@
 - [getErrorLog](modules.md#geterrorlog)
 - [getFeedbackText](modules.md#getfeedbacktext)
 - [getQuestionBody](modules.md#getquestionbody)
+- [getQuestionHighLevelHTML](modules.md#getquestionhighlevelhtml)
 - [getQuestionInputFields](modules.md#getquestioninputfields)
+- [getQuestionSource](modules.md#getquestionsource)
 - [getQuestionTitle](modules.md#getquestiontitle)
 - [getScore](modules.md#getscore)
 - [readStudentAnswersFromHtmlElements](modules.md#readstudentanswersfromhtmlelements)
@@ -50,7 +52,7 @@
 
 #### Defined in
 
-[index.ts:301](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L301)
+[index.ts:326](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L326)
 
 ___
 
@@ -76,7 +78,7 @@ Success.
 
 #### Defined in
 
-[index.ts:41](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L41)
+[index.ts:41](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L41)
 
 ___
 
@@ -101,7 +103,7 @@ Success.
 
 #### Defined in
 
-[index.ts:63](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L63)
+[index.ts:63](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L63)
 
 ___
 
@@ -125,7 +127,7 @@ Creates a backup of a question which includes internal states (for example rando
 
 #### Defined in
 
-[index.ts:138](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L138)
+[index.ts:151](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L151)
 
 ___
 
@@ -149,7 +151,7 @@ Question index or -1 in case of errors.
 
 #### Defined in
 
-[index.ts:118](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L118)
+[index.ts:130](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L130)
 
 ___
 
@@ -173,7 +175,7 @@ Question index or -1 in case of errors.
 
 #### Defined in
 
-[index.ts:129](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L129)
+[index.ts:142](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L142)
 
 ___
 
@@ -197,7 +199,7 @@ Success.
 
 #### Defined in
 
-[index.ts:271](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L271)
+[index.ts:296](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L296)
 
 ___
 
@@ -221,7 +223,7 @@ Success.
 
 #### Defined in
 
-[index.ts:262](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L262)
+[index.ts:287](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L287)
 
 ___
 
@@ -245,7 +247,7 @@ Success.
 
 #### Defined in
 
-[index.ts:202](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L202)
+[index.ts:227](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L227)
 
 ___
 
@@ -263,7 +265,7 @@ Error log.
 
 #### Defined in
 
-[index.ts:155](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L155)
+[index.ts:168](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L168)
 
 ___
 
@@ -287,7 +289,7 @@ Success.
 
 #### Defined in
 
-[index.ts:241](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L241)
+[index.ts:266](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L266)
 
 ___
 
@@ -311,7 +313,31 @@ Body as HTML code or an empty string, if the question does not exist.
 
 #### Defined in
 
-[index.ts:176](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L176)
+[index.ts:189](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L189)
+
+___
+
+### getQuestionHighLevelHTML
+
+▸ **getQuestionHighLevelHTML**(`questionID`): `string`
+
+Gets question high-level HTML, i.e. question-title and qustion-body in a Boostrap-Card element with evaluation button.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `questionID` | `number` | Question index. |
+
+#### Returns
+
+`string`
+
+Qustion HTML code or an empty string, if the question does not exist.
+
+#### Defined in
+
+[index.ts:201](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L201)
 
 ___
 
@@ -335,7 +361,31 @@ Array of dictionaries with entries "element_id" for the HTML element identifier,
 
 #### Defined in
 
-[index.ts:147](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L147)
+[index.ts:160](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L160)
+
+___
+
+### getQuestionSource
+
+▸ **getQuestionSource**(`questionID`): `string`
+
+Returns the SELL code of a given question ID.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `questionID` | `number` | Question index. |
+
+#### Returns
+
+`string`
+
+SELL code of question given by ID, or empty string in case that the question is invalid.
+
+#### Defined in
+
+[index.ts:94](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L94)
 
 ___
 
@@ -359,7 +409,7 @@ Title as HTML code or an empty string, if the question does not exist.
 
 #### Defined in
 
-[index.ts:164](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L164)
+[index.ts:177](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L177)
 
 ___
 
@@ -383,7 +433,7 @@ Score in range [0, 1]
 
 #### Defined in
 
-[index.ts:253](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L253)
+[index.ts:278](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L278)
 
 ___
 
@@ -407,7 +457,7 @@ Success.
 
 #### Defined in
 
-[index.ts:211](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L211)
+[index.ts:236](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L236)
 
 ___
 
@@ -434,7 +484,7 @@ Success.
 
 #### Defined in
 
-[index.ts:296](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L296)
+[index.ts:321](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L321)
 
 ___
 
@@ -458,7 +508,7 @@ Success.
 
 #### Defined in
 
-[index.ts:280](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L280)
+[index.ts:305](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L305)
 
 ___
 
@@ -474,7 +524,7 @@ Remove all questions.
 
 #### Defined in
 
-[index.ts:28](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L28)
+[index.ts:28](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L28)
 
 ___
 
@@ -496,7 +546,7 @@ Enables (or disables) the generation of HTML code for input and feedback element
 
 #### Defined in
 
-[index.ts:109](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L109)
+[index.ts:121](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L121)
 
 ___
 
@@ -518,7 +568,7 @@ Sets the language for text outputs. Default is "en" := English.
 
 #### Defined in
 
-[index.ts:93](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L93)
+[index.ts:105](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L105)
 
 ___
 
@@ -543,7 +593,7 @@ Success.
 
 #### Defined in
 
-[index.ts:189](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L189)
+[index.ts:214](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L214)
 
 ___
 
@@ -565,7 +615,7 @@ Sets the path for "services/" (only required, if programming tasks are used)
 
 #### Defined in
 
-[index.ts:101](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L101)
+[index.ts:113](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L113)
 
 ___
 
@@ -591,7 +641,7 @@ Success.
 
 #### Defined in
 
-[index.ts:222](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L222)
+[index.ts:247](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L247)
 
 ___
 
@@ -615,4 +665,4 @@ Success.
 
 #### Defined in
 
-[index.ts:231](https://github.com/sellquiz/sellquiz/blob/af22e64/src/index.ts#L231)
+[index.ts:256](https://github.com/sellquiz/sellquiz/blob/c1edb8d/src/index.ts#L256)

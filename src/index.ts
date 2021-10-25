@@ -39,9 +39,9 @@ function reset() {
  * @returns Success.
  */
 function autoCreateQuiz(sellCode : string, htmlDivElement : HTMLElement, editButton = false) : boolean {
+    sellQuizInst.editButton = editButton;
     if(sellQuizInst.importQuestions(sellCode) == false)
         return false;
-    sellQuizInst.editButton = editButton;
     htmlDivElement.innerHTML = sellQuizInst.html;
     for(let i=0; i<sellQuizInst.questions.length; i++) {
         let q = sellQuizInst.questions[i];
@@ -87,6 +87,18 @@ function autoEvaluateQuiz2(questionID : number, htmlQuestionElement : HTMLElemen
 }
 
 /**
+ * Returns the SELL code of a given question ID.
+ * @param questionID Question index.
+ * @returns SELL code of question given by ID, or empty string in case that the question is invalid.
+ */
+function getQuestionSource(questionID : number) : string {
+    let q = sellQuizInst.getQuestionByIdx(questionID);
+    if(q == null)
+        return null;
+    return q.src;
+}
+
+/**
  * Sets the language for text outputs. Default is "en" := English.
  * @param langID Language identifier (one of {"en", "de"}).
  */
@@ -116,6 +128,7 @@ function setGenerateInputFieldHtmlCode(enable : boolean = true) : void {
  * @returns Question index or -1 in case of errors.
  */
 function createQuestion(sellCode : string) : number {
+    sellQuizInst.editButton = false;
     if(sellQuizInst.importQuestion(sellCode) == false)
         return -1;
     return sellQuizInst.qidx;
@@ -178,6 +191,18 @@ function getQuestionBody(questionID : number) : string {
     if(q == null)
         return "";
     return q.bodyHtml;
+}
+
+/**
+ * Gets question high-level HTML, i.e. question-title and qustion-body in a Boostrap-Card element with evaluation button.
+ * @param questionID Question index.
+ * @returns Qustion HTML code or an empty string, if the question does not exist.
+ */
+function getQuestionHighLevelHTML(questionID : number) : string {
+    let q = sellQuizInst.getQuestionByIdx(questionID);
+    if(q == null)
+        return "";
+    return q.html;
 }
 
 /**
@@ -306,6 +331,7 @@ export {
     reset,
     autoCreateQuiz,
     autoEvaluateQuiz,
+    getQuestionSource,
     setLanguage,
     setServicePath,
     setGenerateInputFieldHtmlCode,
@@ -316,6 +342,7 @@ export {
     getErrorLog, 
     getQuestionTitle, 
     getQuestionBody, 
+    getQuestionHighLevelHTML,
     setQuestionHtmlElement,
     evaluateQuestion,
     readStudentAnswersFromHtmlElements,

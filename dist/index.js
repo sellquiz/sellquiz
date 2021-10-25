@@ -35,9 +35,9 @@ function reset() {
  * @returns Success.
  */
 function autoCreateQuiz(sellCode, htmlDivElement, editButton = false) {
+    sellQuizInst.editButton = editButton;
     if (sellQuizInst.importQuestions(sellCode) == false)
         return false;
-    sellQuizInst.editButton = editButton;
     htmlDivElement.innerHTML = sellQuizInst.html;
     for (let i = 0; i < sellQuizInst.questions.length; i++) {
         let q = sellQuizInst.questions[i];
@@ -79,6 +79,17 @@ function autoEvaluateQuiz2(questionID, htmlQuestionElement) {
     return true;
 }
 /**
+ * Returns the SELL code of a given question ID.
+ * @param questionID Question index.
+ * @returns SELL code of question given by ID, or empty string in case that the question is invalid.
+ */
+function getQuestionSource(questionID) {
+    let q = sellQuizInst.getQuestionByIdx(questionID);
+    if (q == null)
+        return null;
+    return q.src;
+}
+/**
  * Sets the language for text outputs. Default is "en" := English.
  * @param langID Language identifier (one of {"en", "de"}).
  */
@@ -105,6 +116,7 @@ function setGenerateInputFieldHtmlCode(enable = true) {
  * @returns Question index or -1 in case of errors.
  */
 function createQuestion(sellCode) {
+    sellQuizInst.editButton = false;
     if (sellQuizInst.importQuestion(sellCode) == false)
         return -1;
     return sellQuizInst.qidx;
@@ -161,6 +173,17 @@ function getQuestionBody(questionID) {
     if (q == null)
         return "";
     return q.bodyHtml;
+}
+/**
+ * Gets question high-level HTML, i.e. question-title and qustion-body in a Boostrap-Card element with evaluation button.
+ * @param questionID Question index.
+ * @returns Qustion HTML code or an empty string, if the question does not exist.
+ */
+function getQuestionHighLevelHTML(questionID) {
+    let q = sellQuizInst.getQuestionByIdx(questionID);
+    if (q == null)
+        return "";
+    return q.html;
 }
 /**
  * Sets the HTML element that contains the question body (Alternatively, the element can also be a parent element of the question body). This function must be called once before calling "readStudentAnswersFromHtmlElements" or "writeFeedbackToHtmlElements".
@@ -271,5 +294,5 @@ function refreshMatrixDimensions(questionID, matrixId, deltaRows, deltaCols) {
 function __ideCreationFuntion(fct) {
     sellQuizInst.createIDE = fct;
 }
-export { reset, autoCreateQuiz, autoEvaluateQuiz, setLanguage, setServicePath, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions, __ideCreationFuntion };
+export { reset, autoCreateQuiz, autoEvaluateQuiz, getQuestionSource, setLanguage, setServicePath, setGenerateInputFieldHtmlCode, createQuestion, createQuestionFromBackup, backupQuestion, getQuestionInputFields, getErrorLog, getQuestionTitle, getQuestionBody, getQuestionHighLevelHTML, setQuestionHtmlElement, evaluateQuestion, readStudentAnswersFromHtmlElements, setStudentAnswerManually, writeFeedbackToHtmlElements, getFeedbackText, getScore, enableInputFields, disableInputFields, refreshQuestion, refreshMatrixDimensions, __ideCreationFuntion };
 //# sourceMappingURL=index.js.map

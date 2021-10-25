@@ -1,5 +1,6 @@
 {
     "type": "JavaBlock",
+    "language": "en",
     "source": "double x = 1.23;\nString text = \"hallo\";",
     "asserts": ["x == 1.23", "text.equals(\"hallo\")"]
 }

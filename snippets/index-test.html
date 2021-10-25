@@ -39,7 +39,8 @@
         // get DIV from DOM that will contain questions
         let sellQuestionsDiv = document.getElementById("sellQuestions");
         // create quiz from SELL code and write it to DOM element
-        if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv) == false)
+        let showWditButton = false;
+        if(sellquiz.autoCreateQuiz(code, sellQuestionsDiv, showWditButton) == false)
             alert(sellquiz.getErrorLog());
     </script>
 </html>

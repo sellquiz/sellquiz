@@ -1,5 +1,6 @@
 {
     "type": "JavaMethod",
+    "language": "en",
     "source": "public static int add(int x, int y) { return x + y; }",
     "asserts": ["add(2, 3) == 5"]
 }

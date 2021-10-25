@@ -463,7 +463,8 @@ export class Evaluate {
         let task = {
             "type": solutionVariable.value["type"],
             "source": input.studentAnswer[0],
-            "asserts": solutionVariable.value["asserts"]
+            "asserts": solutionVariable.value["asserts"],
+            "language": this.p.language
         };
         let service_url = this.p.servicePath + "service-prog.php";
         // TODO: must forbid running twice at the same time!!!!!
