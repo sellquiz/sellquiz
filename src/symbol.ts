@@ -34,7 +34,7 @@ export enum symtype {
     T_MATRIX_OF_FUNCTIONS = "T_MATRIX_OF_FUNCTIONS",
     T_STRING = "T_STRING", 
     T_STRING_LIST = "T_STRING_LIST",
-    T_JAVA_PROGRAMMING = "T_JAVA_PROGRAMMING"
+    T_PROGRAMMING = "T_PROGRAMMING"
 }
 
 export class SellSymbol {

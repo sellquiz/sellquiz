@@ -110,7 +110,7 @@ export class Evaluate {
                     input.matrixInput.setUnsetElementsToZero();
                     input.studentAnswer = input.matrixInput.getStudentAnswer();
                     break;
-                case SellInputElementType.JAVA_PROGRAMMING:
+                case SellInputElementType.PROGRAMMING:
                     htmlElement = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
                     sellassert(htmlElement != null, "getStudentAnswers(): failed to get HTML child element: "
                         + input.htmlElementId);
@@ -202,9 +202,9 @@ export class Evaluate {
                 case symtype.T_MATRIX_OF_FUNCTIONS:
                     this.evaluateMatrix(v.type == symtype.T_MATRIX_OF_FUNCTIONS, q, input, v);
                     break;
-                case symtype.T_JAVA_PROGRAMMING:
+                case symtype.T_PROGRAMMING:
                     input.evaluationInProgress = true;
-                    this.evaluateJavaProgramming(q, input, v);
+                    this.evaluateProgramming(q, input, v);
                     break;
                 default:
                     sellassert(false, "evaluate(): unimplemented math type: " + v.type.toString());
@@ -471,7 +471,7 @@ export class Evaluate {
         input.evaluationFeedbackStr = input.correct ? checkmark : crossmark;
         input.evaluationFeedbackStr += feedback;
     }
-    evaluateJavaProgramming(question, input, solutionVariable) {
+    evaluateProgramming(question, input, solutionVariable) {
         let task = {
             "type": solutionVariable.value["type"],
             "source": input.studentAnswer[0],

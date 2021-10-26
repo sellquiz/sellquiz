@@ -56,7 +56,8 @@ export class ParseCode {
                 this.parseCodeHint();
                 this.p.terminal('§EOL');
             }
-            else if(this.p.is('JavaBlock') || this.p.is('JavaMethod')) {
+            else if(this.p.is('JavaBlock') || this.p.is('JavaMethod') 
+                    || this.p.is('Python')) {
                 this.p.progParser.parseProg();
             }
             else {

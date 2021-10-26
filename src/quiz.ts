@@ -38,7 +38,7 @@ export enum SellInputElementType {
     CHECKBOX = "checkbox", // boolean checkbox
     VECTOR = "vector", // vector with n input boxes (also used for sets)
     MATRIX = "matrix", // matrix with m*n input boxes
-    JAVA_PROGRAMMING = "java_programming"
+    PROGRAMMING = "programming"
 }
 
 export class SellInput {
@@ -483,8 +483,16 @@ export class SellQuiz {
             return false;
         for(let i=0; i<q.inputs.length; i++) {
             let input = q.inputs[i];
-            if(input.htmlElementInputType == SellInputElementType.JAVA_PROGRAMMING) {
+            if(input.htmlElementInputType == SellInputElementType.PROGRAMMING) {
                 let textarea = getHtmlChildElementRecursive(q.bodyHtmlElement, input.htmlElementId);
+                let proglang = '';
+                if(input.solutionVariableRef.value.type.startsWith("Java"))
+                    proglang = 'java';
+                else if(input.solutionVariableRef.value.type.startsWith("Python"))
+                    proglang = 'python';
+                else
+                    alert('UNIMPLMENTED: createProgrammingTaskEditors: unimplemented type '
+                        + input.solutionVariableRef.value.type);
                 this.createIDE(input, textarea, 'java', 150); // TODO: make height adjustable
             }
         }

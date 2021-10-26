@@ -203,9 +203,9 @@ export class ParseIM_Input {
                 }
                 break;
             
-            case symtype.T_JAVA_PROGRAMMING:
+            case symtype.T_PROGRAMMING:
                 inputWidth += 10;
-                input.htmlElementInputType = SellInputElementType.JAVA_PROGRAMMING;
+                input.htmlElementInputType = SellInputElementType.PROGRAMMING;
                 if(this.p.generateInputFieldHtmlCode == false) {
                     html += '$$' + input.htmlElementId;
                 } else {

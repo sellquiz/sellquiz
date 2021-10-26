@@ -1,7 +1,7 @@
 {
   "name": "sellquiz",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "An open source domain-specific language for online assessment",
   "main": "src/index.js",
   "scripts": {
@@ -36,7 +36,6 @@
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/codemirror": "^5.60.5",
     "@types/jquery": "^3.5.8",
-    "@types/mathjs": "^9.4.2",
     "bootstrap": "^5.0.1",
     "child_process": "^1.0.2",
     "eslint": "^7.29.0",

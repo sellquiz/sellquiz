@@ -1,0 +1,6 @@
+{
+    "type": "Python",
+    "language": "en",
+    "source": "sdf sdfx = 1.23\ntext = \"hallo\"",
+    "asserts": ["x == 1.23", "text == \"hallo\""]
+}

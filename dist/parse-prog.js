@@ -22,7 +22,7 @@ export class ParseProg {
         this.p = parent;
     }
     // prog =
-    //   ("JavaBlock"|"JavaMethod") ID "\n"
+    //   ("JavaBlock"|"JavaMethod"|"Python") ID "\n"
     //      "§CODE2_START" 
     //          (prog_given|prog_assert) 
     //      "§CODE2_END";
@@ -32,6 +32,8 @@ export class ParseProg {
             type = "JavaBlock";
         else if (this.p.is("JavaMethod"))
             type = "JavaMethod";
+        else if (this.p.is("Python"))
+            type = "Python";
         else
             this.p.err("unknown programming type " + this.p.tk);
         this.p.next();
@@ -48,7 +50,7 @@ export class ParseProg {
                 assert_list.push(this.parseProgAssert());
         }
         this.p.terminal('§CODE2_END');
-        this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_JAVA_PROGRAMMING, {
+        this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_PROGRAMMING, {
             type: type,
             given: code_given,
             asserts: assert_list
