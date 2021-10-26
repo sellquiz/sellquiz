@@ -48,6 +48,8 @@ const text = {
     "python_error_de": "Der Code enthält Fehler. Hinweise:",
     "semantic_errors_en": "Although the code can be compiled, it still contains errors in terms of content.",
     "semantic_errors_de": "Der Code lässt sich zwar kompilieren, enthält aber noch inhaltliche Fehler.",
+    "semantic_errors_python_en": "Although the code can be executed, it still contains errors in terms of content.",
+    "semantic_errors_python_de": "Der Code lässt sich zwar ausführen, enthält aber noch inhaltliche Fehler.",
     "look_on_datatypes_en": "Take a close look to see whether you have exactly adopted the prescribed data types and identifiers.",
     "look_on_datatypes_de": "Schauen Sie genau hin, ob Sie die vorgeschriebenen Datentypen und Bezeichner exakt übernommen haben.",
     "look_on_identifiers_en": "Take a close look to see whether you have exactly adopted the prescribed identifiers.",
@@ -231,7 +233,7 @@ if(input["type"].startsWith("Python")) {
             if(status == 143)
                 output.msg += getText("not_terminating");
             else
-                output.msg += getText("semantic_errors") + " " + getText("look_on_identifiers");
+                output.msg += getText("semantic_errors_python") + " " + getText("look_on_identifiers");
         }
     }
 }
