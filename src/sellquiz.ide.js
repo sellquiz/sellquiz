@@ -38,7 +38,7 @@ sellquiz.__ideCreationFuntion(function _(sellinput, textarea, prog_lang, height)
     // show predefined source
     let givenSrc = sellinput.solutionVariableRef.value["given"];
     // hide everything between '§' and '§'
-    givenSrc = givenSrc.replace(/§\d*§/g, "...");
+    givenSrc = givenSrc.replace(/§\d*§/g, "?");
 
     cm.setValue(givenSrc);
     cm.on('beforeChange',function(cm,change) {

@@ -5,7 +5,7 @@
 Java: Summe
 
 Schreiben Sie einen Codeausschnitt, in dem die Summe $s=sum_(i=0)^n i$ berechnet wird.
-* Variable `n` ist bereits deklariert worden. Der konkrete Wert ist jedoch unbekannt.
+* Variable `n` ist bereits deklariert worden. Der konkrete Wert ist jedoch unbekannt und wird hier durch ein Fragezeichen dargestellt.
 * Das ganzzahlige Ergebnis soll in Variable `s` stehen.
 
 	JavaBlock b
