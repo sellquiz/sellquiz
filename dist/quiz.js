@@ -44,6 +44,7 @@ export class SellInput {
         this.htmlElementInputType = SellInputElementType.UNKNOWN;
         this.htmlElementId_feedback = "";
         this.solutionVariableId = "";
+        this.solutionVariableRef = null;
         //solutionVariableMathtype: symtype = symtype.T_UNKNOWN;
         // linearized input: one element for scalars, n elemens for vectors, m*n elements for matrices (row-major)
         this.studentAnswer = [];

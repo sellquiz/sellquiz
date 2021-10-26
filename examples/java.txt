@@ -2,17 +2,32 @@
 %quiz MA1 meets PI1
 
 
+Java: Summe
+
+Schreiben Sie einen Codeausschnitt, in dem die Summe $s=sum_(i=0)^n i$ berechnet wird.
+* Variable `n` ist bereits deklariert worden. Der konkrete Wert ist jedoch unbekannt.
+* Das Ergebnis soll in Variable `s` stehen.
+
+	JavaBlock b
+        given 'int n = §23§;'
+		assert 's == 276'
+
+$ #b $
+
+
+%%%
+
+
 Java: Deklarationen
 
 Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
 * Eine Variable mit dem Namen "x" speichert eine Gleitkommazahl und weist dieser den Wert 1.23 zu.
 * Eine weitere Variable mit dem Namen "text" soll die Zeichenkette "hallo" beinhalten.
-_Hinweis: schreiben Sie nur die Deklarationen selbst: Geben Sie keine Klasse und keinen Methodenkopf an!_
+%_Hinweis: schreiben Sie nur die Deklarationen selbst: Geben Sie keine Klasse und keinen Methodenkopf an!_
 
 	JavaBlock b
 		assert 'Math.abs(x-1.23) < 1e-3'
 		assert 'text.equals("hallo")'
-    x in { 1, 2, 3 }   % TODO: remove this line!
 
 $ #b $
 

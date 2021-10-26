@@ -45,7 +45,8 @@ export class SellInput {
     htmlElementId: string = "";
     htmlElementInputType: SellInputElementType = SellInputElementType.UNKNOWN;
     htmlElementId_feedback: string = "";
-    solutionVariableId: string = "";    
+    solutionVariableId: string = "";
+    solutionVariableRef: SellSymbol = null;
     //solutionVariableMathtype: symtype = symtype.T_UNKNOWN;
     // linearized input: one element for scalars, n elemens for vectors, m*n elements for matrices (row-major)
     studentAnswer: Array<string> = [];

@@ -22,7 +22,10 @@ export class ParseProg {
         this.p = parent;
     }
     // prog =
-    //   ("JavaBlock"|"JavaMethod") ID "\n" "§CODE2_START" prog_assert "§CODE2_END";
+    //   ("JavaBlock"|"JavaMethod") ID "\n"
+    //      "§CODE2_START" 
+    //          (prog_given|prog_assert) 
+    //      "§CODE2_END";
     parseProg() {
         let type = "";
         if (this.p.is("JavaBlock"))
@@ -36,14 +39,36 @@ export class ParseProg {
         let sym_id = this.p.id;
         this.p.terminal('§EOL');
         this.p.terminal('§CODE2_START');
+        let code_given = "";
         let assert_list = [];
-        while (this.p.is("assert"))
-            assert_list.push(this.parseProgAssert());
+        while (this.p.is("given") || this.p.is("assert")) {
+            if (this.p.is("given"))
+                code_given += this.parseProgGiven();
+            else
+                assert_list.push(this.parseProgAssert());
+        }
         this.p.terminal('§CODE2_END');
         this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_JAVA_PROGRAMMING, {
             type: type,
+            given: code_given,
             asserts: assert_list
         });
+    }
+    // prog_given =
+    //   "given" "'" ANY "'" "\n";
+    parseProgGiven() {
+        this.p.terminal("given");
+        this.p.terminal("'");
+        this.p.parseWhitespaces = true;
+        let given_str = '';
+        while (!this.p.is("'") && !this.p.is('§END')) {
+            given_str += this.p.tk;
+            this.p.next();
+        }
+        this.p.terminal("'");
+        this.p.parseWhitespaces = false;
+        this.p.terminal('§EOL');
+        return given_str + "\n";
     }
     // prog_assert =
     //   "assert" "'" ANY "'" "\n";

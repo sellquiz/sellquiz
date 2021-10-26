@@ -22,9 +22,9 @@
         <script src="node_modules/codemirror/mode/clike/clike.js"></script>
 
         <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
-
-        <script src="build/js/sellquiz.min.js?v=3.0.0"></script>
-        <script src="build/js/sellquiz.ide.min.js?v=123"></script>
+        
+        <script src="build/js/sellquiz.min.js?version=<?php $date = date_create(); echo date_timestamp_get($date); ?>"></script>
+        <script src="build/js/sellquiz.ide.min.js?version=<?php $date = date_create(); echo date_timestamp_get($date); ?>"></script>
 
     </head>
     <body>

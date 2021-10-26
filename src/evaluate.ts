@@ -138,7 +138,19 @@ export class Evaluate {
                     sellassert(htmlElement != null, 
                         "getStudentAnswers(): failed to get HTML child element: " 
                         + input.htmlElementId);
-                    input.studentAnswer = [ input.codeMirror.getValue() ];
+                    let src = input.codeMirror.getValue().split("\n");
+                    // restore given source code:
+                    let givenSrc = input.solutionVariableRef.value["given"].split("\n");
+                    let restored_src = '';
+                    for(let i=0; i<src.length; i++) {
+                        if(i < givenSrc.length - 1)
+                            restored_src += givenSrc[i] + "\n";
+                        else
+                            restored_src += src[i] + "\n";
+                    }
+                    restored_src = restored_src.replaceAll("§","");
+                    // set answer to input element
+                    input.studentAnswer = [ restored_src ];
                     break;
                 default:
                     sellassert(false, "getStudentAnswers(..): UNIMPLEMENTED HTML element type '" + input.htmlElementInputType + "'");

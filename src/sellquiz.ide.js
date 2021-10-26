@@ -32,6 +32,19 @@ sellquiz.__ideCreationFuntion(function _(sellinput, textarea, prog_lang, height)
         lineNumbers: true,
         mode: cmLang
     });
-    cm.setSize(null, height);    
+    cm.setSize(null, height);
     sellinput.codeMirror = cm;
+
+    // show predefined source
+    let givenSrc = sellinput.solutionVariableRef.value["given"];
+    // hide everything between '§' and '§'
+    givenSrc = givenSrc.replace(/§\d*§/g, "...");
+
+    cm.setValue(givenSrc);
+    cm.on('beforeChange',function(cm,change) {
+        if(change.from.line < givenSrc.split("\n").length-1) {
+            change.cancel();
+        }
+    });
+
 });

@@ -40,7 +40,8 @@ sellassert(ok);
 // ----- test in browser -----
 
 // rebuild package
-exec("npm run build");
+//exec("npm run build");
+exec("./build.sh");
 
 // create HTML document
 let html = fs.readFileSync('snippets/index-test.html', 'utf8');
