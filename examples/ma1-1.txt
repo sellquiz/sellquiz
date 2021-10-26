@@ -211,7 +211,7 @@ Wählen Sie die richtigen Antworten aus:
 
 Aussagenlogik
 
-Seien $A$ und $B$ Aussagen. Die __Konjugation__ von $A$ und $B$ wird dargestellt durch:
+Seien $A$ und $B$ Aussagen. Die __Konjunktion__ von $A$ und $B$ wird dargestellt durch:
 (x) $A ^^ B$
 ( ) $A vv B$
 
