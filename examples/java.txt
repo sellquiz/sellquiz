@@ -21,8 +21,8 @@ $ #b $
 Java: Deklarationen
 
 Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
-* Eine Variable mit dem Namen "x" speichert eine Gleitkommazahl. Weisen Sie ihr den Wert 1.23 zu.
-* Einer weiteren Variable mit dem Namen "text" soll die Zeichenkette "hallo" zugewiesen werden.
+* Eine Variable mit dem Namen `x` speichert eine Gleitkommazahl. Weisen Sie ihr den Wert `1.23` zu.
+* Einer weiteren Variable mit dem Namen `text` soll die Zeichenkette `"hallo"` zugewiesen werden.
 
 	JavaBlock b
 		assert 'Math.abs(x-1.23) < 1e-3'
@@ -42,7 +42,7 @@ Java: Methoden
 		% assert 'add($a, $b) == $c'   TODO!!!!!
         assert 'add(2, 3) == 5'
 
-Definieren Sie eine Java-Methode mit dem Namen __add__.
+Definieren Sie eine Java-Methode mit dem Namen `add`.
 * Die Methode hat zwei ganzzahlige Parameter.
 * Der Rückgabetyp soll ebenfalls ganzzahlig sein.
 * Die Methode gibt die Summe der beiden Parameterwerte zurück.
