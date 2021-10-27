@@ -49,7 +49,7 @@ if(isset($_POST["input"]) == false) {
 // create a temporary directory and store the input as JSON-file
 $dir = "cache/" . random_int(0, PHP_INT_MAX) . "/";
 $path = $dir . "input.json";
-system('mkdir -p ' . $dir);
+system('mkdir -p ' . $dir);    // TODO: output dev-error not writeable
 file_put_contents($path, $_POST["input"]);
 
 // run service-prog.js with input as argument

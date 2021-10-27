@@ -33,15 +33,19 @@ if(process.argv.length != 3) {
 const inputPath = process.argv[2];
 const inputDirectory = path.dirname(inputPath);
 
+const MAX_RUNTIME_SECONDS = 5;
+
 const JAVA_PATH = "/usr/bin/java";
 const JAVA_COMPILER_PATH = "/usr/bin/javac";
 const PYTHON_PATH = "/usr/bin/python3";
 
+const PYTHON_UNALLOWED = ["import", "read", "write"];
+
 const text = {
     "empty_program_en": "You have submitted an empty program.",
     "empty_program_de": "Sie haben ein leeres Programm abgegeben.",
-    "python_imports_not_allowed_en": "'import' is not allowed!",
-    "python_imports_not_allowed_de": "'import' nicht erlaubt!",
+    "python_keyword_not_allowed_en": "'$' is not allowed!",
+    "python_keyword_not_allowed_de": "'$' nicht erlaubt!",
     "syntax_error_en": "Your code contains syntax errors. Hints:",
     "syntax_error_de": "Der Code enthält Syntaxfehler. Hinweise:",
     "python_error_en": "Your code contains errors. Hints:",
@@ -88,8 +92,8 @@ public static void main(String[] args) {
 /*__ASSERTS__*/
 }}`;
 
-const PYTHON_TEMPLATE = `import sys
-#__MAIN__
+const PYTHON_TEMPLATE = `#__MAIN__
+import sys
 #__ASSERTS__
 `;
 
@@ -103,10 +107,19 @@ if(input["source"].trim().length == 0) {
     output["msg"] = getText("empty_program");
 }
 
-// unallowed imports?
-if(input["type"].startsWith("Python") && input["source"].includes("import")) {
-    output["status"] = "error";
-    output["msg"] = getText("python_imports_not_allowed");
+// unallowed keywords?
+if(input["type"].startsWith("Python")) {
+    let keyword = "";
+    for(let kw of PYTHON_UNALLOWED) {
+        if(input["source"].includes(kw)) {
+            keyword = kw;
+            break;
+        }
+    }
+    if(keyword.length > 0) {
+        output["status"] = "error";
+        output["msg"] = getText("python_keyword_not_allowed").replace('$', keyword);
+    }
 }
 
 // try to compile code block without asserts
@@ -157,7 +170,7 @@ if(output["status"] === "ok") {
     else if(input["type"].startsWith("Python")) {
         fs.writeFileSync(inputDirectory + "/main.py", python_src);
         cmd = PYTHON_PATH + " " + inputDirectory + "/main.py";
-        [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
+        [status, stderr, stdout] = runBashCommand(cmd, MAX_RUNTIME_SECONDS*1000);
         if(status != 0) {
             output["status"] = "error";
             if(status == 143)
@@ -169,7 +182,7 @@ if(output["status"] === "ok") {
                 for(let i=0; i<errLines.length; i++) {
                     if(errLines[i].includes("File \"main.py\", line")) {
                         let tokens = errLines[i].split(" ");
-                        let lineNo = parseInt(tokens[tokens.length-1]) - 1;
+                        let lineNo = parseInt(tokens[tokens.length-1]) /*- 1*/;
                         errLines[i] = "  File \"main.py\", line " + lineNo + "\n";
                     }
                 }
@@ -202,7 +215,7 @@ if(input["type"].startsWith("Java")) {
     // run code (max 10 seconds!)
     if(output["status"] === "ok") {
         cmd = "cd " + inputDirectory + " && " + JAVA_PATH + " Main";
-        [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
+        [status, stderr, stdout] = runBashCommand(cmd, MAX_RUNTIME_SECONDS*1000);
         fs.writeFileSync(inputDirectory + "/log-run-code.txt", stderr);
         if(status != 0) {
             //console.log(status);
@@ -225,7 +238,7 @@ if(input["type"].startsWith("Python")) {
         //console.log(python_src);
         fs.writeFileSync(inputDirectory + "/main.py", python_src);
         cmd = PYTHON_PATH + " " + inputDirectory + "/main.py";
-        [status, stderr, stdout] = runBashCommand(cmd, 10*1000); // run max 10 seconds
+        [status, stderr, stdout] = runBashCommand(cmd, MAX_RUNTIME_SECONDS*1000);
         fs.writeFileSync(inputDirectory + "/log-run-code-with-asserts.txt", stderr);
         if(status != 0) {
             //console.log(stderr)
