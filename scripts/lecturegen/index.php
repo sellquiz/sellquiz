@@ -24,15 +24,17 @@
         <script src="node_modules/mathjs/lib/browser/math.js" type="text/javascript"></script>
         
         <!-- TODO: path!! -->
+        <!--
         <script src="../../build/js/sellquiz.min.js?version=<?php $date = date_create(); echo date_timestamp_get($date); ?>"></script>
         <script src="../../build/js/sellquiz.ide.min.js?version=<?php $date = date_create(); echo date_timestamp_get($date); ?>"></script>
+        -->
 
     </head>
     <body>
 
         <nav class="navbar fixed-top navbar-light bg-light border-bottom">
             <div class="container-fluid my-0 py-0">
-                <button type="button" class="btn btn-primary btn-sm">Primary</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="convert(editor.getValue())">run</button>
             </div>
         </nav>
 
@@ -51,7 +53,7 @@
         <div id="container" class="container">
             <br/>
             <p class="text-center">
-                <span class="display-1">Lecture Test</span>
+                <span id="rendered-title" class="display-1"></span>
             </p>
             <p class="text-center lead">
                 
@@ -59,7 +61,8 @@
         </div>
         <div id="container" class="container">
             <div class="row">
-                <div class="col-sm">
+                <div id="rendered-content" class="col-sm">
+<!--
 <p></p>
 <p></p>
 <h1>1. Chapter</h1>
@@ -80,7 +83,7 @@
 <p></p>
 <div id="quiz-1"></div>
 <p></p>
-
+-->
                 </div>
             </div>
         </div>
@@ -92,43 +95,6 @@
 
     </body>
 
-    <script>
+    <script src="index.js"></script>
 
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        lineNumbers: true,
-        lineWrapping: true
-    });
-    editor.setSize(null,"100%");
-
-let quizzes_src=[
-`First Quiz
-    x, y in {1, 2, 3}
-    z := x + y
-$x+y=#z$
-`
-,
-`Sellquiz
-    x := 5
-The solution is 5: $ #x $
-`
-];
-        sellquiz.reset();
-        sellquiz.setLanguage("de");
-        //sellquiz.setServicePath(TODO);
-        const n = quizzes_src.length;
-        for(let i=0; i<n; i++) {
-            let domElement = document.getElementById("quiz-" + i);
-            let qIdx = sellquiz.createQuestion(quizzes_src[i]);
-            sellquiz.setQuestionHtmlElement(qIdx, domElement);
-            if(qIdx < 0) {
-                let err = sellquiz.getErrorLog().replaceAll("\n","<br/>");
-                domElement.innerHTML = '<p class="text-danger"><b>' + err + '</b></p>';
-            } else {
-                let quizHtml = sellquiz.getQuestionHighLevelHTML(qIdx);
-                domElement.innerHTML = quizHtml;
-                sellquiz.refreshQuestion(qIdx);
-            }
-        }
-        setTimeout(function(){MathJax.typeset();},350);
-    </script>
 </html>

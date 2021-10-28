@@ -28,4 +28,3 @@ Sellquiz
     x := 5
 The solution is 5: $ #x $
 >>>
-
