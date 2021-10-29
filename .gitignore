@@ -5,7 +5,8 @@ test-sell.html
 
 sellquiz-*.tgz
 
-
+authoring/build
+authoring/node_modules
 
 
 # ----- macos -----
