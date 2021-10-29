@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/sellquiz/sellquiz#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "codemirror": "^5.63.3",
     "jquery": "^3.6.0",
     "mathjs": "^9.4.2"

@@ -1,0 +1,54 @@
+##### Lecture Test
+
+# Chapter
+
+This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.
+
+    $x^2 + y^2$
+
+---
+Def. Sind alle Elemente ...
+---
+
+---
+Theorem. Sind alle Elemente ...
+---
+
+* item 1
+* item 2
+* item 3
+
+---
+Remark. Sind alle Elemente ...
+---
+
+- first
+- second
+- third
+
+---
+Theorem. Sind alle Elemente ...
+---
+
+>>>
+First Quiz
+    x, y in {1, 2, 3}
+    z := x + y
+$x+y=#z$
+>>>
+
+## Section
+
+Some text here $a^2 + b^2 = c^2$.
+
+## Another Section
+
+And more text here.
+
+# Another Chapter
+
+>>>
+Sellquiz
+    x := 5
+The solution is 5: $ #x $
+>>>
