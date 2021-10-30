@@ -1,15 +1,33 @@
 let language = "de";
 
+// TODO: activate / deactivate option
+/*CodeMirrorSpellChecker({
+    codeMirrorInstance: CodeMirror,
+});*/
+
 var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+    //mode: "spell-checker",  // TODO: activate / deactivate option
     lineNumbers: true,
     lineWrapping: true,
     styleActiveLine: { nonEmpty: true },
     extraKeys: {
         "Ctrl-S": function(cm) {
-            // TODO: save
+            alert("saving is unimplemented!");
+        },
+        "Cmd-S": function(cm) {
+            alert("saving is unimplemented!");
+        },
+        "Ctrl-F": function(cm) {
+            alert("searching text is unimplemented!");
+        },
+        "Cmd-F": function(cm) {
+            alert("searching text is unimplemented!");
         },
         "F1": function(cm) {
             update();
+        },
+        "F2": function(cm) {
+            document.getElementById("insertCodeButton").click();
         }
     }
 });
@@ -31,26 +49,25 @@ function redo() {
 
 
 let code_templates = [
-    "Definition", "\\n---\\nDef.\\n---\\n\\n",
-    "Theorem", "\\n---\\nTheorem.\\n---\\n\\n",
-    "Quiz", "\\n>>>\\nMy Quiz\\n\\tx, y in {1,2,3}\\n\\tz := x + y\\n$ x + y = #z $\\n>>>\\n\\n"
+    "Document Title", "\n##### My Title\n",
+    "Section", "\n# My Section\n",
+    "Subsection", "\n## My Subsection\n",
+    "Subsubsection", "\n### My Subsubsection\n",
+    "Definition", "\n---\nDef.\n---\n\n",
+    "Theorem", "\n---\nTheorem.\n---\n\n",
+    "SELL-Quiz", "\n---\nSell. My Quiz\n\tx, y in {1,2,3}\n\\tz := x + y\n$ x + y = #z $\n---\n\n",
+    "STACK-Quiz", "\n---\nStack. My Quiz\n\n@code\nx:rand(10)\ny:rand(10)\nz:x+y;\n\n@text\n$x+y=#z$\n\n@solution\nJust add both numbers!\n---\n\n",
 ];
 let html = '';
 for(let i=0; i<code_templates.length/2; i++) {
     let id = code_templates[i*2+0];
-    let code = code_templates[i*2+1];
+    let code = code_templates[i*2+1].replaceAll("\n","\\n").replaceAll("\t","\\t");
     html += `<a class="list-group-item list-group-item-action"
-                onclick="insertCode('` + code + `');">` + id + `</a>`;   
+                onclick="insertCode('` + code + `');"
+                style="cursor:pointer;"
+                >` + id + `</a>`;   
 }
 document.getElementById("insertCodeList").innerHTML = html;
-
-
-var docsEditor = CodeMirror.fromTextArea(document.getElementById("docs-editor"), {
-    lineNumbers: true,
-    lineWrapping: true,
-    autoRefresh: true
-});
-//docsEditor.setSize(500,300);
 
 
 $.ajax({
@@ -81,35 +98,16 @@ function text(id) {
     return lang_str[id + "_" + language];
 }
 
-let template = `
-<div id="container" class="container">
-    <br/>
-    <p class="text-center">
-        <span class="display-1">$TITLE$</span>
-    </p>
-    <p class="text-center lead">
-        $LEADTEXT$
-    </p>
-</div>
-<div id="container" class="container">
-    <div class="row">
-        <div class="col-sm">
-            $CONTENT$
-        </div>
-    </div>
-</div>
-`;
-
 function update() {
     let co = compile(editor.getValue());
     document.getElementById("rendered-content").innerHTML = co.html;
     sellquiz.reset();
     sellquiz.setLanguage(language);
     //sellquiz.setServicePath(TODO);
-    const n = co.quizzes.length;
+    const n = co.sellQuizzes.length;
     for(let i=0; i<n; i++) {
-        let domElement = document.getElementById("quiz-" + i);
-        let qIdx = sellquiz.createQuestion(co.quizzes[i].src);
+        let domElement = document.getElementById("sellquiz-" + i);
+        let qIdx = sellquiz.createQuestion(co.sellQuizzes[i].src);
         sellquiz.setQuestionHtmlElement(qIdx, domElement);
         if(qIdx < 0) {
             let err = sellquiz.getErrorLog().replaceAll("\n","<br/>");

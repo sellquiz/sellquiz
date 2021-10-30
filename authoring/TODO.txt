@@ -1,0 +1,63 @@
+
+---
+Stack. Grundintegrale (bestimmt)
+
+@variables
+A : 2 + rand(30)
+B : 2 + rand(30)
+ls1 : integrate(x^5 + sqrt(x), x, 0, A)
+ls2 : integrate(e^x + B*sin(x), x, 3, 5)
+
+@text
+Bestimmen Sie die folgenden bestimmten Integrale:
+- $ int_0^A (x^5 + sqrt(x)) dx = #ls1 $
+- $ int_3^5 (e^x + B * sin(x)) dx = #ls2 $
+
+@solution
+- $ int_0^7 x^5 + sqrt(x) x $
+    = $ [ 1/6 x^6 + 2/3 x^(3/2) ]_0^A $
+    = $ 1/6 A^6 + 2/3 7^(3/2) $
+- $ int_3^5 (e^x + B * sin(x)) dx $
+    = $ [ e^x - B cos(x) ]_3^5 $
+    = $ e^5 - B cos(x) - e^3 + 17 cos(3) $
+---
+
+{
+	"title": "Grundintegrale (bestimmt)",
+	"maxima": "A: 2 + random(30); ...",
+	"text-html": "Bestimmen Sie die folgenden bestimmten Integrale:<br/>
+		<ul>
+			<li>`int_0^A (x^5 + sqrt(x)) dx = #ls1`</li>
+			<li>`int_3^5 (e^x + B * sin(x)) dx = #ls2`</li>
+		</ul>",
+	"inputs": [
+		{ "id": "ls1", "type": "textfield" },
+		{ "id": "ls2", "type": "textfield" }
+	],
+    "solution-html": "TODO"
+}
+
+-----
+
+/* RUN: maxima -q -b test.txt */
+
+/* properties */
+display2d:false;
+stardisp:true;
+
+/* user code */
+a:random(30);
+b:a+4;
+f:x^2*y^3;
+A:matrix([1,2],[2,3])*2;
+B:set(a, set(b));
+s:"hello, world";
+/*
+syntaxerror:sin(x;
+*/
+
+/* get variables */
+values;
+ev(values);
+
+/* is(equal(x^2,x*x)); */
