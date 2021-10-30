@@ -284,17 +284,26 @@ function compile(input_str, rootCall=true) {
                     content += "<div class=\"card-body\">\n";
                     content += "<span class=\"h2 py-1 my-1\">" + 
                         quiz.title + "</span><br/>\n";
-                    content += quiz.text.replaceAll("$","`");
-                    content += "<p id=\"stackquiz-" + quiz.id + "-variables\" class=\"my-1 font-monospace text-info\">" + "</p>";
+
+                    let inputwidth = 5;
+                    let inputfield = '` <input type="text" value="" id="" size="' + inputwidth + '" placeholder="">` ';
+
+                    content += quiz.text.replaceAll("$","`").replaceAll("#", inputfield);
 
                     content += '<span>';
                     let evalStr = "Auswerten"; // TODO: language!
                     content += '<button type="button" class="btn btn-primary" onclick="">' + evalStr + '</button>';
                     content += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="general_feedback"></span>';
 
+                    content += "<div class=\"card border-dark py-0 my-2\">";
+                    content += "<div class=\"card-body py-0 my-0\">\n";
+                    content += "<p id=\"stackquiz-" + quiz.id + "-variables\" class=\"my-1 font-monospace text-info\">" + "</p>";
+                    content += "</div>\n"; // end of card body
+                    content += "</div>\n"; // end of card
 
                     content += "</div>\n"; // end of card body
                     content += "</div>\n"; // end of card
+
 
                 } else {
                     content += "<div class=\"card border-dark\">";

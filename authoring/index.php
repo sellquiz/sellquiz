@@ -211,6 +211,18 @@
                                 <i class="fas fa-user"></i>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a id="tab-bugs" class="nav-link" 
+                            data-bs-toggle="tooltip" 
+                                data-bs-placement="bottom" 
+                                title="report bugs" 
+                                style="cursor:pointer;"
+                                onclick="openTab('bugs');">
+                                <i class="fas fa-bug"></i>
+                            </a>
+                        </li>
+
+                        
                     </ul>
 
                     <div id="rendered-content" 

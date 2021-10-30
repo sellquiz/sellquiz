@@ -1,4 +1,34 @@
 
+% pdflatex --shell-escape test.tex
+% pdf2svg test.pdf test.svg
+
+\documentclass[class=minimal,border=0pt]{standalone}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{tikzpicture}[domain=0:4]
+    \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+    \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+    \draw[color=red] plot[id=x] function{20*x} 
+        node[right] {$f(x) =20 x$};
+    \draw[color=blue] plot[id=cos] function{cos(x)} 
+        node[right] {$f(x) = \cos x$};
+    \draw[color=orange] plot[id=exp] function{0.05*exp(x)} 
+        node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+\end{tikzpicture}
+
+\end{document}
+
+
+
+
+
 ---
 Stack. Grundintegrale (bestimmt)
 
