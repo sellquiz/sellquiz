@@ -1,0 +1,158 @@
+%course Mathematik 1
+%quiz MA1 meets PI1
+
+
+Java: Summe
+
+Schreiben Sie einen Codeausschnitt, in dem die Summe $s=sum_(i=0)^n i$ berechnet wird.
+* Variable `n` ist bereits deklariert worden. Der initiale Wert ist jedoch unbekannt und wird hier durch ein Fragezeichen dargestellt.
+* Das ganzzahlige Ergebnis soll in Variable `s` stehen.
+
+	JavaBlock b
+        given 'int n = §23§;'
+		assert 's == 276'
+
+$ #b $
+
+
+%%%
+
+
+Java: Reihen
+
+	JavaMethod reihe
+        assert 'reihe(100) == 5.1873775176'
+
+Definieren Sie eine Java-Methode mit dem Namen `reihe` zur Annährung der _harmonischen Reihe_:
+
+$sum_(k=1)^(oo) 1/k$
+
+* Die Methode hat einen ganzzahligen Parameter $n$ für den Folgenindex.
+* Die Methode soll das gibt das $n$-te Glied berechnn und zurückgeben.
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+$ #reihe $
+
+
+%%%
+
+
+Java: Newtonverfahren (1/3)
+
+In dieser Aufgabe implementieren Sie das _Newtonverfahren_ zur näherungsweisen Bestimmung von Nullstellen.
+* Die Aufgabe ist insgesamt in drei Teilaufgaben gegliedert.
+* Ziel ist es, die Nullstelle von $f(x)=x^2+2-e^x$ zu finden. Diese Aufgabe finden Sie auch im Mathematik 1 Skript auf den Seiten 102 und 103.
+* Sie können alle drei Aufgabenteile unabhängig voneinander bearbeiten und auswerten lassen.
+
+__Im ersten Aufgabenteil implementiern Sie eine Java-Methode für $f(x)$.__
+* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
+* Schreiben Sie eine JavaMethode mit dem Namen `f`, und einem Parameter `x` (Gleitkommazahlen).
+* Berechnen Sie $e^x$ durch `math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
+
+_Hinweis: definieren Sie hier ausschließlich die Methode `f`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
+
+    JavaMethod f
+        assert 'f(2) = -1.3890560989306504'
+        assert 'f(1) = 0.2817181715409549'
+
+$ #f $
+
+
+%%%
+
+
+Java: Newtonverfahren (2/3)
+
+__Im zweiten Aufgabenteil implementiern Sie eine Java-Methode für $f'(x)$.__
+* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
+* Schreiben Sie eine JavaMethode mit dem Namen `fd`, und einem Parameter `x` (Gleitkommazahlen).
+* Berechnen Sie $e^x$ durch `math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
+
+_Hinweis: definieren Sie hier ausschließlich die Methode `fd`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
+
+    JavaMethod fd
+        assert 'fd(2) = -1.3890560989306504 TODO'
+        assert 'fd(1) = 0.2817181715409549 TODO'
+
+$ #fd $
+
+
+%%%
+
+
+Java: Newtonverfahren (3/3)
+
+__Im dritten Aufgabenteil setzen Sie das Newtonverfahren um, und verwenden dabei die Methoden aus den letzten beiden Aufgabenteilen.__
+* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
+* Schreiben Sie eine Java-Methode mit dem Namen `newton`. Der erste Parameter `n` ist ganzzahlig. Der zweite Parameter `x0` ist eine Gleitkommazahl und gibt den Startwert an.
+* Die Methode berechnet die Newtonfolge $x_{n+1} = x_n - (f(x_n))/(f'(x_n))$.
+* Rufen Sie die Methoden der beiden letzten Teilaufgaben an den geeigneten Stellen auf.
+* Sie geben $x_n$ zurück.
+
+_Hinweis: definieren Sie hier ausschließlich die Methode `newton`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
+
+    JavaMethod newton
+        assert 'newton(1.0, 2) = 00000'
+
+$ #newton $
+
+
+%%%
+
+
+Java: Einfache Approximation eines Integrals
+
+Für manche Integrale kann keine Stammfunktion angegeben werden. Ein Beispiel ist $int e^(-x^2) dx$.
+In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt es verschiedene Verfahren. In dieser Aufgaben nurzten wir die __Mittelpunktsregel__, da diese eher einfach implementiert werden kann.
+
+Schreiben Sie eine Methode mit dem Namen `mpr`:
+* Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h * sum_(k=1)^n f(a - h/2 + k*h)$ mit $h = (b-a)/n$
+* Die Parameter der Methode sind `a`, `b` und `n`. Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
+* Sie können eine bereits vorhandene Methode `double f(double x)` aufrufen.
+
+    JavaMethod mbr
+        assert 'mbr(1.0, 2) = 00000'
+
+$ #mbr $
+
+
+
+STOP
+%%%
+
+
+Java: Deklarationen
+
+Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
+* Eine Variable mit dem Namen `x` speichert eine Gleitkommazahl. Weisen Sie ihr den Wert `1.23` zu.
+* Einer weiteren Variable mit dem Namen `text` soll die Zeichenkette `"hallo"` zugewiesen werden.
+
+	JavaBlock b
+		assert 'Math.abs(x-1.23) < 1e-3'
+		assert 'text.equals("hallo")'
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+$ #f $
+
+
+%%%
+
+
+Java: Methoden
+
+	a, b in { 3, 4, ..., 10 }
+	c := a + b
+	JavaMethod add
+		% assert 'add($a, $b) == $c'   TODO!!!!!
+        assert 'add(2, 3) == 5'
+
+Definieren Sie eine Java-Methode mit dem Namen `add`.
+* Die Methode hat zwei ganzzahlige Parameter.
+* Der Rückgabetyp soll ebenfalls ganzzahlig sein.
+* Die Methode gibt die Summe der beiden Parameterwerte zurück.
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+$ #add $

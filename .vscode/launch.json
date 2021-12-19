@@ -12,7 +12,7 @@
             "args": [
                 //"examples/ma2-4.txt"
                 //"examples/java.txt"
-                "examples/python.txt"
+                "examples/java-ma1.txt"
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"
