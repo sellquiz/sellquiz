@@ -2,6 +2,7 @@
 %quiz MA1 meets PI1
 
 
+
 Java: Summe
 
 Schreiben Sie einen Codeausschnitt, in dem die Summe $s=sum_(i=0)^n i$ berechnet wird.
@@ -20,19 +21,54 @@ $ #b $
 
 Java: Reihen
 
-	JavaMethod reihe
-        assert 'reihe(100) == 5.1873775176'
+	JavaMethod exp_reihe
+        assert 'exp_reihe(8, 1.0) == 2.71827876984127'
 
-Definieren Sie eine Java-Methode mit dem Namen `reihe` zur Annährung der _harmonischen Reihe_:
+Definieren Sie eine Java-Methode mit dem Namen `exp_reihe` zur Annährung der _Exponentialreihe_ für $e^x$:
 
-$sum_(k=1)^(oo) 1/k$
+$ sum_(k=0)^(oo) 1/(k!) x^k$
 
-* Die Methode hat einen ganzzahligen Parameter $n$ für den Folgenindex.
-* Die Methode soll das gibt das $n$-te Glied berechnn und zurückgeben.
+* Die Methode erhält einen ganzzahligen Parameter $n$ für das maximale $k$ (einschließlich).
+* Die Methode soll das gibt das $n$-te Glied berechnen und zurückgeben.
 
 _Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
 
-$ #reihe $
+$ #exp_reihe $
+
+
+%%%
+
+Java: Polynom
+
+Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$ mit $a_0,...,a_n \in RR$ und $a_n$ falls $n>1$.
+
+Schreiben Sie eine Java-Methode:
+* Bezeichner: `polynom`
+* Parameter: ein Array `a` für die Koeffizienten $a_i$.
+* Rückgabe: $f(x)$.
+
+    JavaMethod polynom
+        assert 'polynom(XXX) = XXX'
+
+$ #polynom $
+
+
+%%%
+
+
+Java: Polynom ableiten
+
+Schreiben Sie eine Java-Mehtode `polynom_ableiten` 
+
+* achten Sie darauf, dass das Ergebnisarray ein Element weniger enthält.
+
+
+%%%
+
+
+Java: Polynom integrieren
+
+TODO
 
 
 %%%
@@ -108,51 +144,10 @@ In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt e
 
 Schreiben Sie eine Methode mit dem Namen `mpr`:
 * Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h * sum_(k=1)^n f(a - h/2 + k*h)$ mit $h = (b-a)/n$
-* Die Parameter der Methode sind `a`, `b` und `n`. Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
+* Die Parameter der Methode sind `a`, `b` und `n` (in dieser Reihenfolge). Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
 * Sie können eine bereits vorhandene Methode `double f(double x)` aufrufen.
 
-    JavaMethod mbr
-        assert 'mbr(1.0, 2) = 00000'
+    JavaMethod mpr
+        assert 'mpr(1.0, 2) = 00000'
 
-$ #mbr $
-
-
-
-STOP
-%%%
-
-
-Java: Deklarationen
-
-Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
-* Eine Variable mit dem Namen `x` speichert eine Gleitkommazahl. Weisen Sie ihr den Wert `1.23` zu.
-* Einer weiteren Variable mit dem Namen `text` soll die Zeichenkette `"hallo"` zugewiesen werden.
-
-	JavaBlock b
-		assert 'Math.abs(x-1.23) < 1e-3'
-		assert 'text.equals("hallo")'
-
-_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
-
-$ #f $
-
-
-%%%
-
-
-Java: Methoden
-
-	a, b in { 3, 4, ..., 10 }
-	c := a + b
-	JavaMethod add
-		% assert 'add($a, $b) == $c'   TODO!!!!!
-        assert 'add(2, 3) == 5'
-
-Definieren Sie eine Java-Methode mit dem Namen `add`.
-* Die Methode hat zwei ganzzahlige Parameter.
-* Der Rückgabetyp soll ebenfalls ganzzahlig sein.
-* Die Methode gibt die Summe der beiden Parameterwerte zurück.
-
-_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
-
-$ #add $
+$ #mpr $

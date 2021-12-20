@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch MA1_meets_PI1",
+            "request": "launch",
+            "mainClass": "examples.MA1_meets_PI1",
+            "projectName": "sellquiz_422b832f"
+        },
+        {
             "type": "pwa-node",
             "request": "launch",
             "name": "Run test.js",
@@ -10,8 +17,6 @@
             ],
             "program": "${workspaceFolder}/src/test.ts",
             "args": [
-                //"examples/ma2-4.txt"
-                //"examples/java.txt"
                 "examples/java-ma1.txt"
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
@@ -44,5 +49,11 @@
             ],
             "console": "integratedTerminal"
         },
+        {
+            "type": "java",
+            "name": "Launch Current Java File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
     ]
 }
