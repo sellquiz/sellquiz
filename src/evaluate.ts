@@ -509,6 +509,7 @@ export class Evaluate {
             "type": solutionVariable.value["type"],
             "source": input.studentAnswer[0],
             "asserts": solutionVariable.value["asserts"],
+            "hiddenMethods": solutionVariable.value["hiddenMethods"],
             "language": this.p.language
         };
         let service_url = this.p.servicePath + "service-prog.php";

@@ -94,7 +94,7 @@ export class SellSymbol {
                 s = s.replaceAll("]", ")"); // TODO: must be configurable
                 return s;
             default:
-                sellassert(false, "unimplemented SellSymbol::toAsciiMath(..)");
+                sellassert(false, "unimplemented SellSymbol::toAsciiMath(..) for " + this.type);
         }
     }
 }

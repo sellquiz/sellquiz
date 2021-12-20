@@ -87,6 +87,14 @@ function getText(desc) {
 
 const JAVA_TEMPLATE = `import java.util.*;public class Main {
 /*__METHODS__*/
+public static boolean compare_arrays__double(double[] a, double[] b, double eps) {
+    if(a.length != b.length) return false;
+    for(int i=0; i<a.length; i++) {
+        if(Math.abs(a[i]-b[i]) > eps)
+            return false;
+    }  
+    return true;
+}
 public static void main(String[] args) {
 /*__MAIN__*/
 /*__ASSERTS__*/
@@ -129,7 +137,7 @@ if(output["status"] === "ok") {
             java_src = JAVA_TEMPLATE.replace("/*__MAIN__*/", input["source"] + "\n");
             break;
         case "JavaMethod":
-            java_src = JAVA_TEMPLATE.replace("/*__METHODS__*/", input["source"] + "\n");
+            java_src = JAVA_TEMPLATE.replace("/*__METHODS__*/", input["source"] + "\n" + input["hiddenMethods"].join("\n") + "\n");
             break;
         case "Python":
             python_src = PYTHON_TEMPLATE.replace("#__MAIN__", input["source"] + "\n");
@@ -154,7 +162,11 @@ if(output["status"] === "ok") {
             // adjust line numbers
             for(let i=0; i<errLines.length; i++) {
                 if(errLines[i].startsWith("Main.java:")) {
-                    let lineNo = parseInt(errLines[i].substring(10)) - 3;
+                    let lineNo = parseInt(errLines[i].substring(10));
+                    if(input["type"].startsWith("JavaMethod"))
+                        lineNo -= 1; // refer to JAVA_TEMPLATE
+                    else
+                        lineNo -= 11; // refer to JAVA_TEMPLATE
                     let j = 10;
                     for(; j<errLines[i].length; j++) {
                         if(errLines[i][j] == ':')

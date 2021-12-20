@@ -19,36 +19,40 @@ $ #b $
 %%%
 
 
-Java: Reihen
+Java: Potenzreihen
 
-	JavaMethod exp_reihe
-        assert 'exp_reihe(8, 1.0) == 2.71827876984127'
+	JavaMethod exp
+        assert 'Math.abs(exp(8, 1.0) - 2.71827876984127) < 1e-6'
+        assert 'Math.abs(exp(10, 0.5) - 1.6487212706873655) < 1e-6'
 
-Definieren Sie eine Java-Methode mit dem Namen `exp_reihe` zur Annährung der _Exponentialreihe_ für $e^x$:
+Definieren Sie eine Java-Methode mit dem Namen `exp` zur Annährung der _Potenzreihe_ für $f(x)=e^x="exp"(x)=sum_(k=0)^(oo) 1/(k!) x^k$.
 
-$ sum_(k=0)^(oo) 1/(k!) x^k$
+* Die Methode erhält einen ganzzahligen Parameter `n`.
+* Die Methode berechnet $"exp"(x) approx sum_(k=0)^n 1/(k!) x^k$.
+* Berechnen Sie $x^k$ mit `Math.pow(x, k)` .
+* Für die Berechnung der Fakultät $k!$ steht Ihnen keine vorhandene Methode zur Verfügung. Berechnen Sie diese selbst innerhalb der Methode `exp` (Tipp: Ihre Methode besteht aus zwei geschachtelten Schleifen).
 
-* Die Methode erhält einen ganzzahligen Parameter $n$ für das maximale $k$ (einschließlich).
-* Die Methode soll das gibt das $n$-te Glied berechnen und zurückgeben.
+%_Tipp: Schreiben Sie zwei geschachtelte Schleifen. Die äußere Schleife berechent die Summe; die innere Schleife berechnet die Fakultät._
 
 _Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
 
-$ #exp_reihe $
+$ #exp $
 
 
 %%%
 
-Java: Polynom
+Java: Polynome (1/3): Funktionswert bestimmen
 
-Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$ mit $a_0,...,a_n \in RR$ und $a_n$ falls $n>1$.
+Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$ mit $a_0,...,a_n \in RR$ und $a_n != 0$ falls $n>1$.
 
-Schreiben Sie eine Java-Methode:
-* Bezeichner: `polynom`
-* Parameter: ein Array `a` für die Koeffizienten $a_i$.
+Schreiben Sie eine Java-Methode mit dem Namen `polynom`.
+* Parameter: ein Array `a` vom Typ `double` für die Koeffizienten $a_i$.
 * Rückgabe: $f(x)$.
 
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
     JavaMethod polynom
-        assert 'polynom(XXX) = XXX'
+        assert 'Math.abs(polynom(new double[] {4, -3, 0, 2}, 2.1) - 16.222) < 1e-6'
 
 $ #polynom $
 
@@ -56,19 +60,45 @@ $ #polynom $
 %%%
 
 
-Java: Polynom ableiten
+Java: Polynome (2/3): Ableitung
 
-Schreiben Sie eine Java-Mehtode `polynom_ableiten` 
+Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$ mit $a_0,...,a_n \in RR$ und $a_n != 0$ falls $n>1$.
 
-* achten Sie darauf, dass das Ergebnisarray ein Element weniger enthält.
+Schreiben Sie eine Java-Mehtode `polynom_ableiten`.
+* Parameter (genau wie in der letzten Aufgabe): ein Array `a` vom Typ `double` für die Koeffizienten $a_i$.
+* Zurückgegeben werden soll ein Array, welches das Polynom $f'(x)$, also das abgeleitete Eingabepolynom beschreibt.
+
+_Tipp: Achten Sie darauf, dass das Ergebnisarray um genau ein Element kürzer ist, als das Eingabearray._
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+    JavaMethod polynom_ableiten
+        assert 'compare_arrays__double(polynom_ableiten(new double[] {4, -3, 0, 2}), new double[] {-3, 0, 6}, 1e-6)'
+
+$ #polynom_ableiten $
+
 
 
 %%%
 
 
-Java: Polynom integrieren
+Java: Polynome (3/3): Integration
 
-TODO
+Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$ mit $a_0,...,a_n \in RR$ und $a_n != 0$ falls $n>1$.
+
+Schreiben Sie eine Java-Mehtode `polynom_integrieren`.
+* Parameter (genau wie in den letzten Aufgaben): ein Array `a` vom Typ `double` für die Koeffizienten $a_i$.
+* Zurückgegeben werden soll ein Array, welches das Polynom $int f(x) dx$, also das integrierte Eingabepolynom beschreibt.
+
+_Tipp: Achten Sie darauf, dass das Ergebnisarray um genau ein Element länger ist, als das Eingabearray._
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+    JavaMethod polynom_integrieren
+        assert 'compare_arrays__double(polynom_integrieren(new double[] {4, -3, 0, 2}), new double[] {0, 4, -1.5, 0, 0.5}, 1e-6)'
+
+$ #polynom_integrieren $
+
 
 
 %%%
@@ -81,16 +111,16 @@ In dieser Aufgabe implementieren Sie das _Newtonverfahren_ zur näherungsweisen 
 * Ziel ist es, die Nullstelle von $f(x)=x^2+2-e^x$ zu finden. Diese Aufgabe finden Sie auch im Mathematik 1 Skript auf den Seiten 102 und 103.
 * Sie können alle drei Aufgabenteile unabhängig voneinander bearbeiten und auswerten lassen.
 
-__Im ersten Aufgabenteil implementiern Sie eine Java-Methode für $f(x)$.__
-* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
-* Schreiben Sie eine JavaMethode mit dem Namen `f`, und einem Parameter `x` (Gleitkommazahlen).
-* Berechnen Sie $e^x$ durch `math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
+__Im ersten Aufgabenteil implementiern Sie eine Java-Methode mit dem Namen `f`.__
+* Parameter: `x` (Gleitkommazahl).
+* Geben Sie $y=f(x)=x^2+2-e^x$ zurück.
+* Berechnen Sie $e^x$ durch `Math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
 
 _Hinweis: definieren Sie hier ausschließlich die Methode `f`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
 
     JavaMethod f
-        assert 'f(2) = -1.3890560989306504'
-        assert 'f(1) = 0.2817181715409549'
+        assert 'Math.abs(f(1.23) - 0.09167046371032672) < 1e-6'
+        assert 'Math.abs(f(-0.53) - 1.6922950303216449) < 1e-6'
 
 $ #f $
 
@@ -100,16 +130,17 @@ $ #f $
 
 Java: Newtonverfahren (2/3)
 
-__Im zweiten Aufgabenteil implementiern Sie eine Java-Methode für $f'(x)$.__
-* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
-* Schreiben Sie eine JavaMethode mit dem Namen `fd`, und einem Parameter `x` (Gleitkommazahlen).
-* Berechnen Sie $e^x$ durch `math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
+__Im zweiten Aufgabenteil implementieren Sie eine Java-Methode mit dem Namen `fd` zur Bestimmung von $f'(x)$.__
+
+* Parameter: `x` (Gleitkommazahl).
+* Geben Sie $y=f'(x)$ zurück (bestimmen Sie die Ableitung von Hand).
+* Berechnen Sie $e^x$ durch `Math.exp(x)` (den Import für die Mathematik-Bibliothek geben Sie selbst nicht an).
 
 _Hinweis: definieren Sie hier ausschließlich die Methode `fd`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
 
     JavaMethod fd
-        assert 'fd(2) = -1.3890560989306504 TODO'
-        assert 'fd(1) = 0.2817181715409549 TODO'
+        assert 'Math.abs(fd(-1.5) - (-3.22313016014843)) < 1e-6'
+        assert 'Math.abs(fd(0.5) - (-0.6487212707001282)) < 1e-6'
 
 $ #fd $
 
@@ -120,8 +151,8 @@ $ #fd $
 Java: Newtonverfahren (3/3)
 
 __Im dritten Aufgabenteil setzen Sie das Newtonverfahren um, und verwenden dabei die Methoden aus den letzten beiden Aufgabenteilen.__
-* Nutzen Sie `double` als Datentyp für Gleitkommazahlen.
-* Schreiben Sie eine Java-Methode mit dem Namen `newton`. Der erste Parameter `n` ist ganzzahlig. Der zweite Parameter `x0` ist eine Gleitkommazahl und gibt den Startwert an.
+
+* Schreiben Sie eine Java-Methode mit dem Namen `newton`. Der erste Parameter `n` ist ganzzahlig. Der zweite Parameter `x0` gibt den Startwert an (welcher Datentyp passt hier?).
 * Die Methode berechnet die Newtonfolge $x_{n+1} = x_n - (f(x_n))/(f'(x_n))$.
 * Rufen Sie die Methoden der beiden letzten Teilaufgaben an den geeigneten Stellen auf.
 * Sie geben $x_n$ zurück.
@@ -129,7 +160,9 @@ __Im dritten Aufgabenteil setzen Sie das Newtonverfahren um, und verwenden dabei
 _Hinweis: definieren Sie hier ausschließlich die Methode `newton`. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse und keine `main`-Methode an._
 
     JavaMethod newton
-        assert 'newton(1.0, 2) = 00000'
+        hidden_method 'public static double f(double x) { return x*x + 2 - Math.exp(x); }'
+        hidden_method 'public static double fd(double x) { return 2*x - Math.exp(x); }'
+        assert 'Math.abs(newton(100, 1.0) - 1.3190736768573652) < 1e6'
 
 $ #newton $
 
@@ -139,15 +172,19 @@ $ #newton $
 
 Java: Einfache Approximation eines Integrals
 
-Für manche Integrale kann keine Stammfunktion angegeben werden. Ein Beispiel ist $int e^(-x^2) dx$.
-In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt es verschiedene Verfahren. In dieser Aufgaben nurzten wir die __Mittelpunktsregel__, da diese eher einfach implementiert werden kann.
+Für manche Integrale kann keine Stammfunktion angegeben werden.
+* Ein Beispiel ist $int e^(-x^2) dx$.
+* In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt es verschiedene Verfahren. 
 
-Schreiben Sie eine Methode mit dem Namen `mpr`:
-* Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h * sum_(k=1)^n f(a - h/2 + k*h)$ mit $h = (b-a)/n$
+In dieser Aufgaben nutzen wir die __Mittelpunktsregel__, da diese eher einfach implementiert werden kann.
+Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h * sum_(k=1)^n f(a - h/2 + k*h)$ mit $h = (b-a)/n$
+
+* Schreiben Sie eine Methode mit dem Namen `mpr`.
 * Die Parameter der Methode sind `a`, `b` und `n` (in dieser Reihenfolge). Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
-* Sie können eine bereits vorhandene Methode `double f(double x)` aufrufen.
+* Sie können eine bereits vorhandene Methode `double f(double x) { ... }` zur Berechnung von $f(x)$ aufrufen.
 
     JavaMethod mpr
-        assert 'mpr(1.0, 2) = 00000'
+        hidden_method 'public static double f(double x) { return Math.exp(-x*x); }'
+        assert 'Math.abs(mpr(0.0, 1.0, 1000) - 0.746824163469049) < 1e-6'
 
 $ #mpr $

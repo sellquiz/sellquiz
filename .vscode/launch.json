@@ -17,7 +17,7 @@
             ],
             "program": "${workspaceFolder}/src/test.ts",
             "args": [
-                "examples/java-ma1.txt"
+                "examples/ma1-java-1.txt"
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"

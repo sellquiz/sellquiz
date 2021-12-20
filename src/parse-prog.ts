@@ -51,17 +51,21 @@ export class ParseProg {
         this.p.terminal('§CODE2_START');
         let code_given = "";
         let assert_list = [];
-        while(this.p.is("given") || this.p.is("assert")) {
+        let hidden_method_list = [];
+        while(this.p.is("given") || this.p.is("assert") || this.p.is("hidden_method")) {
             if(this.p.is("given"))
                 code_given += this.parseProgGiven();
-            else
+            else if(this.p.is("assert"))
                 assert_list.push(this.parseProgAssert());
+            else
+                hidden_method_list.push(this.parseProgHiddenMethod());
         }
         this.p.terminal('§CODE2_END');
         this.p.q.symbols[sym_id] = new SellSymbol(symtype.T_PROGRAMMING, {
             type: type,
             given: code_given,
-            asserts: assert_list
+            asserts: assert_list,
+            hiddenMethods: hidden_method_list
         });
     }
 
@@ -97,6 +101,23 @@ export class ParseProg {
         this.p.parseWhitespaces = false;
         this.p.terminal('§EOL');
         return assert_str;
+    }
+
+    // prog_hidden_method =
+    //   "hidden_method" "'" ANY "'" "/n";
+    parseProgHiddenMethod() : string {
+        this.p.terminal("hidden_method");
+        this.p.terminal("'");
+        this.p.parseWhitespaces = true;
+        let hidden_method_str = '';
+        while(!this.p.is("'") && !this.p.is('§END')) {
+            hidden_method_str += this.p.tk;
+            this.p.next();
+        }
+        this.p.terminal("'");
+        this.p.parseWhitespaces = false;
+        this.p.terminal('§EOL');
+        return hidden_method_str;
     }
 
 }

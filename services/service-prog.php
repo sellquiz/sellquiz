@@ -42,7 +42,7 @@ if(strlen($nodejs_path)==0) {
 
 // check, if input is given
 if(isset($_POST["input"]) == false) {
-    echo "Error: POST 'input' is not set! You must provide a JSON-string containing entries 'type', 'source', 'asserts'!";
+    echo "Error: POST 'input' is not set! You must provide a JSON-string containing entries 'type', 'source', 'asserts', 'hiddenMethods!";
     exit();
 }
 

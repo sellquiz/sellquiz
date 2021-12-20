@@ -464,7 +464,7 @@ export class SellQuiz {
                 else
                     alert('UNIMPLMENTED: createProgrammingTaskEditors: unimplemented type '
                         + input.solutionVariableRef.value.type);
-                this.createIDE(input, textarea, 'java', 150); // TODO: make height adjustable
+                this.createIDE(input, textarea, 'java', 250); // TODO: make height adjustable
             }
         }
         return true;

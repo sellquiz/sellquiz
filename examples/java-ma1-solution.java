@@ -5,6 +5,15 @@ import java.util.Arrays;
 
 class MA1_meets_PI1 {
 
+    public static boolean compare_arrays__double(double[] a, double[] b, double eps) {
+        if(a.length != b.length) return false;
+        for(int i=0; i<a.length; i++) {
+            if(Math.abs(a[i]-b[i]) > eps)
+                return false;
+        }  
+        return true;
+    }
+
     public static void main(String[] args) {
         {
             // Summe
@@ -16,25 +25,31 @@ class MA1_meets_PI1 {
             System.out.println(s);
         }
         System.out.println("Exponentialreihe");
-        System.out.println(exp_reihe(8, 1.0));
+        System.out.println(exp(8, 1.0));
+        System.out.println(exp(10, 0.5));
         System.out.println("Polynom");
         double[] p = {4, -3, 0, 2};
         System.out.println(polynom(p, 2.1));
+
+        System.out.println(polynom(new double[] {4, -3, 0, 2}, 2.1));
+
         System.out.println("Polynom ableiten");
         System.out.println(Arrays.toString(polynom_ableiten(p)));
         System.out.println("Polynom integrieren");
         System.out.println(Arrays.toString(polynom_integrieren(p)));
         System.out.println("Newton 1: f(x)");
         System.out.println(f(1.23));
+        System.out.println(f(-0.53));
         System.out.println("Newton 2: f'(x)");
         System.out.println(fd(-1.5));
+        System.out.println(fd(0.5));
         System.out.println("Newton 3: newton(..)");
         System.out.println(newton(100, 1.0));
         System.out.println("Mittelpunktregel");
         System.out.println(mpr(0.0, 1.0, 1000));
     }
 
-    public static double exp_reihe(int n, double x) {
+    public static double exp(int n, double x) {
         double y = 0;
         for(int k=0; k<=n; k++) {
             int fak = 1;
