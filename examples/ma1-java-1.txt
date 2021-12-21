@@ -176,12 +176,36 @@ Für manche Integrale kann keine Stammfunktion angegeben werden.
 * Ein Beispiel ist $int e^(-x^2) dx$.
 * In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt es verschiedene Verfahren. 
 
+In dieser Aufgaben nutzen wir die __Sehnentrapezformel__, da diese eher einfach implementiert werden kann.
+Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h( f(a)/2 + f(x_1) + ... + f(x_(n-1)) + f(b)/2)$ mit $h = (b-a)/n$ und $x_i=a+i*h$
+
+* Schreiben Sie eine Methode mit dem Namen `stf`.
+* Die Parameter der Methode sind `a`, `b` und `n` (in dieser Reihenfolge). Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
+* Sie können eine bereits vorhandene Methode `double f(double x) { ... }` zur Berechnung von $f(x)$ aufrufen.
+
+    JavaMethod stf
+        hidden_method 'public static double f(double x) { return Math.exp(-x*x); }'
+        assert 'Math.abs(stf(0.0, 1.0, 1000) - 0.746824163469049) < 1e-6'
+
+$ #stf $
+
+
+STOP
+%%%
+
+=== OLD ===
+Java: Einfache Approximation eines Integrals
+
+Für manche Integrale kann keine Stammfunktion angegeben werden.
+* Ein Beispiel ist $int e^(-x^2) dx$.
+* In solchen Fällen kann man das Integral _näherungsweise_ lösen. Hierzu gibt es verschiedene Verfahren. 
+
 In dieser Aufgaben nutzen wir die __Mittelpunktsregel__, da diese eher einfach implementiert werden kann.
 Die Näherung wird wie folgt berechnet: $int_a^b f(x) approx h * sum_(k=1)^n f(a - h/2 + k*h)$ mit $h = (b-a)/n$
 
 * Schreiben Sie eine Methode mit dem Namen `mpr`.
 * Die Parameter der Methode sind `a`, `b` und `n` (in dieser Reihenfolge). Entscheiden Sie, welche der Parameter vom Typ `double`, und welche vom Typ `int` sind.
-* Sie können eine bereits vorhandene Methode `double f(double x) { ... }` zur Berechnung von $f(x)$ aufrufen.
+* Sie können eine bereits vorhandene (aber hier nicht sichtbare) Methode `public static double f(double x) { ... }` zur Berechnung von $f(x)$ aufrufen.
 
     JavaMethod mpr
         hidden_method 'public static double f(double x) { return Math.exp(-x*x); }'

@@ -114,4 +114,15 @@ class MA1_meets_PI1 {
         return y;
     }
 
+    public static double stf(double a, double b, int n) {
+        double y = (f_mpr(a) + f_mpr(b)) / 2.0;
+        double h = (b - a) / (double)n;
+        for(int i=1; i<n; i++) {
+            double xi = a + (double)i * h;
+            y += f_mpr(xi);
+        }
+        y = h * y;
+        return y;
+    }
+
 }
