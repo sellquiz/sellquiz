@@ -1,5 +1,5 @@
 %course Praktische Informatik 1
-%quiz Methoden
+%quiz Arrays
 
 
 Arrays
