@@ -47,6 +47,7 @@ Sei $f : RR -> RR$ ein Polynom $n$-ten Grades, also $f(x) = sum_(i=0)^n a_i x^i$
 
 Schreiben Sie eine Java-Methode mit dem Namen `polynom`.
 * Parameter: ein Array `a` vom Typ `double` für die Koeffizienten $a_i$.
+* Berechnen Sie $x^i$ mit `Math.pow(x, i)` .
 * Rückgabe: $f(x)$.
 
 _Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
