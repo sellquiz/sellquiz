@@ -40,11 +40,11 @@ export class ParseIM {
         return this.parseIM_List();
     }
     // im_list =
-    //   im_assign { (","|":"|"->"|"|->") } im_assign;
+    //   im_assign { (","|"."|":"|"->"|"|->") } im_assign;
     parseIM_List() {
         let html = this.parseIM_Assign();
-        //    comma           colon           right arrow      maps to
-        while (this.p.is(',') || this.p.is(':') || this.p.is('->') || this.p.is('|->')) {
+        //    comma             dot               colon           right arrow      maps to
+        while (this.p.is(',') || this.p.is('.') || this.p.is(':') || this.p.is('->') || this.p.is('|->')) {
             let op = this.p.tk;
             this.p.next();
             html += ' ' + op + ' ' + this.parseIM_Assign();
