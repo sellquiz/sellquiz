@@ -17,7 +17,7 @@
             ],
             "program": "${workspaceFolder}/src/test.ts",
             "args": [
-                "examples/hello.txt"
+                "examples/pi1-prog.txt"
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
             "console": "integratedTerminal"

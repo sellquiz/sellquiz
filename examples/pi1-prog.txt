@@ -1,0 +1,99 @@
+%course Praktische Informatik 1
+%quiz Programmieraufgaben
+
+
+Java: Deklarationen
+
+Schreiben Sie einen Codeausschnitt, in dem zwei Variablen wie folgt definiert werden:
+* Eine Variable mit dem Namen `x` speichert eine Gleitkommazahl. Weisen Sie ihr den Wert `1.23` zu.
+* Einer weiteren Variable mit dem Namen `text` soll die Zeichenkette `"hallo"` zugewiesen werden.
+
+	JavaBlock b
+		assert 'Math.abs(x-1.23) < 1e-3'
+		assert 'text.equals("hallo")'
+
+_Hinweis: Schreiben Sie nur den geforderten Ausschnitt. Geben Sie keine Klasse und keinen Methodenkopf an._
+
+$ #b $
+
+
+%%%
+
+
+Java: Methoden
+
+	JavaMethod add
+        assert 'add(12, 13) == 25'
+
+Definieren Sie eine Java-Methode mit dem Namen `add`.
+* Die Methode hat zwei ganzzahlige Parameter.
+* Der Rückgabetyp soll ebenfalls ganzzahlig sein.
+* Die Methode gibt die Summe der beiden Parameterwerte zurück.
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+$ #add $
+
+
+%%%
+
+
+Java: Arrays
+
+Schreiben Sie einen Codeausschnitt, in dem das folgende Array definiert wird:
+* Variablenname `x`
+* Datentyp `int`
+* Unmittelbare Initialisierung mit den Werte `3, 4, 5`;
+
+    JavaBlock b
+        assert 'x.length == 3'
+        assert 'x[0] == 3'
+        assert 'x[1] == 4'
+        assert 'x[2] == 5'
+
+_Hinweis: definieren Sie nur die Methode selbst. Vergessen Sie nicht die Methode als öffentlich und statisch zu deklarieren. Geben Sie keine Klasse an._
+
+$ #b $
+
+
+%%%
+
+
+Java: Arrays
+
+Schreiben Sie einen Codeausschnitt, in dem ein Array mit dem Bezeichner `arr` für Ganzzahlen erzeugt wird.
+* Das Arrays speichert 100 Werte. Der Inhalt im Index `k` speichert jeweils $k^2$.
+
+    JavaBlock b
+        assert 'arr.length == 100'
+        assert 'arr[0] == 0'
+        assert 'arr[1] == 1'
+        assert 'arr[3] == 9'
+        assert 'arr[10] == 100'
+        assert 'arr[13] == 169'
+        assert 'arr[23] == 529'
+        assert 'arr[53] == 2809'
+        assert 'arr[99] == 9801'
+
+_Hinweis: Schreiben Sie nur den geforderten Ausschnitt. Geben Sie keine Klasse und keinen Methodenkopf an._
+
+$ #b $
+
+
+
+STOP
+
+%%%    TODO
+
+
+Java: Klassen
+
+Schreiben Sie eine Klasse `Vektor` mit den folgenden Eigenschaften:
+* Ganzzahlige Attribute mit den Bezeichnern `x`, `y` und `z`.
+* Eine Methode `eins` setzt alle drei Attribute auf den Wert `1`.
+* Eine Methode `toArray` gibt eine Array vom Typ `int` zurück. Das Array enthält die Werte der Attribute `x`, `y` und `z` (in dieser Reihenfolge).
+
+    JavaClass c
+        TODO
+
+_Hinweis: Definieren Sie nur die geforderte Klasse. Eine weiter Klasse inklusive `main`-Methode ist NICHT gefordert._
