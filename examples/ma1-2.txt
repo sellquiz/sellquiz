@@ -73,7 +73,7 @@ Exponentialfunktion und Logarithmus
 
 Seien $a,b in RR$ und $a>0$.
 
-Wähle die richtige Anwort:
+Wähle die richtige Antwort:
 (x) $ a^b = e^(b ln(a)) $
 ( ) $ a^b = e^(a ln(b)) $
 ( ) $ a^b = ln(b * e^a) $
