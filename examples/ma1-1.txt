@@ -276,7 +276,7 @@ Wählen Sie die richtige Antwort aus:
 
 Gerade und ungerade Funktionen
 
-Welche der nachfolgenen Funktionen sind __gerade__?
+Welche der nachfolgenden Funktionen sind __gerade__?
 
 [x] $ f(x) = x^2 $
 [ ] $ f(x) = x^3 $
