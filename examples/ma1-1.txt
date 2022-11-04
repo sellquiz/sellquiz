@@ -201,7 +201,6 @@ $ |a| = #b $
 
 Wählen Sie die richtigen Antworten aus:
 [x]   $ |xy| = |x| |y| $
-[ ]   $ |xy| = |x * y| $
 [x]   $ |x+y| <= |x| + |y| $
 [ ]   $ |x+y| >= |x + y| $
 
