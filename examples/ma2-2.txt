@@ -1,0 +1,148 @@
+%course Mathematik 2 - Knospe, Randerath
+%quiz 2: Differentialgleichungen
+
+
+DGL erster Ordnung mit trennbaren Variablen
+
+	a in { 2, 3, ..., 5 }
+	y(x) := ode( diff(y,x), - a * x^2/y )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = pm #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C, sowie die Wurzel von $x$ mit `sqrt(x)` an._
+
+
+%%%
+
+
+DGL erster Ordnung mit konstanten Koeffizienten
+
+	a in { 2, 3, ..., 8 }
+	y(x) := ode( diff(y,x), a*y )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C an._
+
+
+%%%
+
+
+DGL erster Ordnung mit konstanten Koeffizienten
+
+	a, b in { 2, 3, ..., 5 }
+	y(x) := ode( diff(y,x), a*y + b*x )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C an._
+
+
+%%%
+
+
+DGL erster Ordnung mit konstanten Koeffizienten
+
+	a, b, c in { 2, 3, ..., 5 }
+	y(x) := ode( diff(y,x), a*y + b*x + c*x^2 )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C an._
+
+
+%%%
+
+
+DGL erster Ordnung mit konstanten Koeffizienten
+
+	a, b, c in { 2, 3, ..., 5 }
+	y(x) := ode( diff(y,x), a*y + b * exp(c*x) )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C an._
+
+
+%%%
+
+
+DGL erster Ordnung mit konstanten Koeffizienten
+
+	a, b, c in { 2, 3, ..., 5 }
+	y(x) := ode( diff(y,x), a*y + b * cos(c*x) )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstante $C in RR$ mit einem großen C an._
+
+
+%%%
+
+
+Lineare DGL zweiter Ordnung mit konstanten Koeffizienten
+
+	a, b in { -3, -2, -1, 1, 2, 3 }
+	p := -(a+b)
+	q := a*b
+	y(x) := ode( diff2(y,x) + p*diff(y,x) +q*y, 0 )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstanten $C_1, C_2 in RR$ mit `C1` und `C2`, sowie die Exponentialfunktion mit `exp(..)` an._
+
+
+%%%
+
+
+Lineare DGL zweiter Ordnung mit konstanten Koeffizienten
+
+	a in { 2, 3, ..., 8 }
+	b := a^2
+	y(x) := ode( diff2(y,x) + b*y, 0 )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstanten $C_1, C_2 in RR$ mit `C1` und `C2`, sowie die Exponentialfunktion mit `exp(..)` an._
+
+
+%%%
+
+
+Lineare DGL zweiter Ordnung mit konstanten Koeffizienten
+
+	a, b in { -3, -2, -1, 1, 2, 3 }
+	c in { 2, 3, 4 }
+	p := -(a+b)
+	q := a*b
+	y(x) := ode( diff2(y,x) + p*diff(y,x) + q*y, x*exp(-c*x) )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstanten $C_1, C_2 in RR$ mit `C1` und `C2`, sowie die Exponentialfunktion mit `exp(..)` an._
+
+
+%%%
+
+
+Lineare DGL zweiter Ordnung mit konstanten Koeffizienten
+
+	a, b in { -3, -2, -1, 1, 2, 3 }
+	c in { 2, 4, 6, 8 }
+	p := -(a+b)
+	q := a*b
+	y(x) := ode( diff2(y,x) + p*diff(y,x) + q*y, c*sin(2*x) )
+
+Lösen Sie die folgende DGL: $ y $:
+* $ "y"(x) = #y:: $
+
+_Hinweis: Geben Sie die Konstanten $C_1, C_2 in RR$ mit `C1` und `C2`, sowie die Exponentialfunktion mit `exp(..)` an._
