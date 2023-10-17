@@ -302,10 +302,10 @@ Wählen Sie die richtigen Antworten aus:
 
 Monotonie
 
-	a, b, c, d in { 2, 3, 4, 5 }
+        a, b, c, d in { 2, 3, 4, 5 }
 
 Wählen Sie die richtigen Antworten aus:
-[ ] $ f : RR -> RR, f(x)=a $ ist __monoton wachsend__.
+[x] $ f : RR -> RR, f(x)=a $ ist __monoton wachsend__.
 [x] $ f : RR -> RR, f(x)=b x + c $ ist __streng monoton wachsend__.
 [ ] $ f : RR -> RR, f(x)=|x| $ ist __streng monoton wachsend__.
 [x] $ f : RR -> RR, f(x)=-x^3-x-d $ ist __streng monoton fallend__.
@@ -317,6 +317,6 @@ Wählen Sie die richtigen Antworten aus:
 Umkehrabbildung
 
 Eine Funktion $f$ besitzt genau dann eine Umkehrfunktion, wenn folgendes gilt:
-[x] $f$ ist injektiv.
-[x] $f$ ist surjektiv.
+[ ] $f$ ist surjektiv oder injektiv.
+[x] $f$ is surjektiv und injektiv.
 [x] $f$ ist bijektiv.
